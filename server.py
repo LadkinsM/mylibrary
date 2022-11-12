@@ -1,6 +1,6 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
-from model import connect_to_db, db
+from static.python.model import connect_to_db, db
 # from secrets.sh import secret_key
 
 app = Flask(__name__)
