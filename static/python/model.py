@@ -13,14 +13,14 @@ class Book(db.Model):
 
     __tablename__="books"
 
-    book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    book_id = db.Column(db.Integer, primary_key=True)
     google_books_id = db.Column(db.String, nullable=False, unique=True)
-    isbn_10 = db.Column(db.BigInteger, nullable=False)
-    isbn_13 = db.Column(db.BigInteger, nullable=False)
+    isbn_10 = db.Column(db.String, nullable=True)
+    isbn_13 = db.Column(db.String, nullable=True)
     title = db.Column(db.String, nullable=False)
-    overview = db.Column(db.String)
-    cover = db.Column(db.String)
-    publish_date = db.Column(db.Date)
+    overview = db.Column(db.String, nullable=True)
+    cover = db.Column(db.String, nullable=True)
+    publish_date = db.Column(db.String, nullable=True)
 
     #Association Table Relationships
     authors = db.relationship("Author", secondary="authors_books", back_populates="books")
@@ -232,7 +232,7 @@ class Faved_Book(db.Model):
 
 # Helper functions
 
-def connect_to_db(app, db_uri="postgresql:///mylibrary", echo=True):
+def connect_to_db(app, db_uri="postgresql:///mylibrary", echo=False):
     """Connect to database."""
 
     # Configure to use our Postgres database

@@ -11,6 +11,11 @@ def get_book_by_googleid(google_books_id):
 
     return Book.query.filter(Book.google_books_id == google_books_id).first()
 
+def get_book_by_author(author_id):
+    """Return all books by author via author_id."""
+
+    return Book.query.filter(Book.authors.author_id == author_id).all()
+
 
 def get_author_by_name(name):
     """Return author info by name."""
@@ -38,6 +43,50 @@ def get_genre_book_map_by_id(genre_id, book_id):
     gbmap = Genre_book_map
 
     return gbmap.query.filter(gbmap.genre_id == genre_id, gbmap.book_id == book_id).first()
+
+
+def get_shelf_book_map_by_id(shelf_id, book_id):
+    """Return shelf_book_id by shelf_id & book_id."""
+
+    sbmap = Shelf_book_map
+
+    return sbmap.query.filter(sbmap.shelf_id == shelf_id, sbmap.book_id == book_id).first()
+
+
+def get_user_by_email(email):
+    """Return user info by user email"""
+
+    return User.query.filter(User.email == email).first()
+
+
+def get_current_read_by_user(user_id):
+    """Return a user's current read."""
+
+    return Current_Read.query.filter(Current_Read.user_id == user_id).first()
+
+
+def get_faved_books_by_user(user_id):
+    """Return a user's faved books."""
+
+    return Faved_Book.query.filter(Faved_Book.user_id == user_id).all()
+
+
+def get_bookshelves_by_user(user_id):
+    """Return a list of all bookshelves created by user."""
+
+    return Bookshelf.query.filter(Bookshelf.user_id == user_id).all()
+
+
+def get_all_users():
+    """
+    Return all user info in database.
+    Only to be used when seeding database & statistics.
+
+    """
+    return User.query.all()
+
+    
+
 
 
 #BOOK RELATED
@@ -89,6 +138,14 @@ def create_language_book_relationship(language_id, book_id):
     return lbmap(language_id=language_id, book_id=book_id)
 
 
+def create_shelf_book_relationship(shelf_id, book_id):
+    """Creates relationship between book & bookshelf"""
+
+    sbmap = Shelf_book_map
+
+    return sbmap(shelf_id=shelf_id, book_id=book_id)
+
+
 def create_book(google_books_id, 
                 isbn_10,
                 isbn_13,
@@ -107,8 +164,30 @@ def create_book(google_books_id,
                 cover = cover,
                 publish_date = publish_date)
 
+#USER RELATED
+
+def create_user(email, password, personal_description):
+    """Creates a user"""
+
+    return User(email=email, password=password, personal_description=personal_description)
 
 
+def create_bookshelf(shelf_name, user_id, private):
+    """Creates a Bookshelf"""
+
+    return Bookshelf(shelf_name=shelf_name, user_id=user_id, private=private)
+
+
+def create_fav_book(user_id, book_id):
+    """Creates a Faved Book"""
+
+    return Faved_Book(user_id=user_id, book_id=book_id)
+
+
+def create_current_read(user_id, book_id, is_active=True):
+    """Creates a users current read."""
+
+    return Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
 
 
 if __name__ == '__main__':

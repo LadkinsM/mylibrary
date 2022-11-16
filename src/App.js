@@ -1,24 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import Navigation from "./components/navigation";
+import Login from "./components/login";
+import Search from "./components/search";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello World!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navigation />
+
+      <Routes>
+          <Route path="/login" element={ <Login /> } />
+          <Route path="/search" element={ <Search /> } />
+      </Routes>
+    </Router>
   );
 }
 
