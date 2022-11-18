@@ -11,10 +11,17 @@ def get_book_by_googleid(google_books_id):
 
     return Book.query.filter(Book.google_books_id == google_books_id).first()
 
+
 def get_book_by_author(author_id):
     """Return all books by author via author_id."""
 
     return Book.query.filter(Book.authors.author_id == author_id).all()
+
+
+def get_book_by_genre(genre_id):
+    """Return all books by genre via genre_id."""
+
+    return Book.query.filter(Book.genres.genre_id == genre_id).all()
 
 
 def get_author_by_name(name):
@@ -106,6 +113,20 @@ def create_author_book_relationship(author_id, book_id):
     return abmap(author_id=author_id, book_id=book_id)
 
 
+def handle_authors(author_list, book_id):
+    """Handles API Author Data, Checks for presence in DB, and Adds to DB."""
+
+    for author in author_list: 
+        if not get_author_by_name(author):
+            db.session.add(create_author(author))
+            db.session.commit()
+
+    for author in author_list:
+        author_id = get_author_by_name(author).author_id
+        db.session.add(create_author_book_relationship(author_id, book_id))
+        db.session.commit()
+
+
 def create_genre(genre):
     """Create Genre in database.
     
@@ -164,6 +185,61 @@ def create_book(google_books_id,
                 cover = cover,
                 publish_date = publish_date)
 
+
+def handle_book(book):
+    """
+    Handles API Book Data, Checks for Field presence in Response,
+    Checks for Book presence in DB, and Adds Book object to List.
+    """
+
+    if not get_book_by_googleid(book['id']).book_id:
+        google_books_id = book['id']
+        title = book['volumeInfo']['title']
+
+        #Assign ISBN variables
+        isbn_list = book['volumeInfo']['industryIdentifiers']
+
+        for info in isbn_list:
+            if info['type'] == 'ISBN_13':
+                isbn_13 = info['identifier']
+            else:
+                isbn_13 = None
+
+            if info['type'] == 'ISBN_10':
+                isbn_10 = info['identifier']
+            else: 
+                isbn_10 = None
+
+        #Check Description Presence
+        if 'description' in book['volumeInfo']:
+            overview = book['volumeInfo']['description']
+        else:
+            overview = None
+
+        #Check ImageLinks Presence
+        if 'imageLinks' in book['volumeInfo']:
+            cover = book['volumeInfo']['imageLinks']['thumbnail']
+        else:
+            cover = None
+
+        #Check PublishedDate Presence
+        if 'publishedDate' in book['volumeInfo']:
+            publish_date = book['volumeInfo']['publishedDate']
+        else:
+            publish_date = None
+
+        book_to_add = create_book(
+                        google_books_id=google_books_id,
+                        isbn_10 = isbn_10,
+                        isbn_13 = isbn_13,
+                        title = title,
+                        overview = overview,
+                        cover = cover,
+                        publish_date = publish_date
+                        )
+        
+
+
 #USER RELATED
 
 def create_user(email, password, personal_description):
@@ -188,6 +264,10 @@ def create_current_read(user_id, book_id, is_active=True):
     """Creates a users current read."""
 
     return Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
+
+
+#HELPER FUNCTIONS
+
 
 
 if __name__ == '__main__':

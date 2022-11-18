@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-function Search() {
+function Search({setBook}) {
   const[searchInput, setSearchInput] = React.useState("");
   const[searchCriteria, setSearchCriteria] = React.useState("");
   const[results, setResults] = React.useState([]);
@@ -18,36 +18,17 @@ function Search() {
   const handleSubmit = evt => {
     evt.preventDefault()
 
-    const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
-    const searchApi = `${apiUrl}${searchCriteria}${searchInput}`;
-
     const searchData = {};
+
     if (searchInput === "") {
       alert("Please enter text into the search field.")
     } else {
-      fetch(`${searchApi}`)
+      fetch(`/api/${searchCriteria}${searchInput}`)
           .then((response) => response.json() )
-          .then((searchData) => setResults(searchData.items));
-  }};
+          .then((searchData) => {setResults(searchData)});
+  }
+};
 
-  // const renderResults = results => {
-  //   results.map(result => {
-  //     if (typeof result.volumeInfo.imageLinks === 'undefined'){
-  //       <ul key={result.id}>
-  //         <li>No Thumbnail Provided</li>
-  //         <li>Title: {result.volumeInfo.title}</li>
-  //         <li>Author: {result.volumeInfo.authors[0]}</li>
-  //         <li>Published Date: {result.volumeInfo.publishedDate}</li>
-  //       </ul>
-  //     } else {
-  //       <ul key={result.id}>
-  //         <li><img src={result.volumeInfo.imageLinks.thumbnail} /></li>
-  //         <li>Title: {result.volumeInfo.title}</li>
-  //         <li>Author: {result.volumeInfo.authors[0]}</li>
-  //         <li>Published Date: {result.volumeInfo.publishedDate}</li>
-  //       </ul>
-  //     }})
-  // };
 
   return (
     <section id="search_results">
@@ -80,39 +61,17 @@ function Search() {
       </div>
       <div>
         <h2>Results</h2>
-          {results.map(result => {
-            if (result.volumeInfo.imageLinks.thumbnail === 'undefined'){
-              <ul key={result.id}>
-                <li>No Thumbnail Provided</li>
-                <li>Title: {result.volumeInfo.title}</li>
-                <li>Author: {result.volumeInfo.authors[0]}</li>
-                <li>Published Date: {result.volumeInfo.publishedDate}</li>
-              </ul>
-            } else {
-              <ul key={result.id}>
-                <li><img src={result.volumeInfo.imageLinks.thumbnail} /></li>
-                <li>Title: {result.volumeInfo.title}</li>
-                <li>Author: {result.volumeInfo.authors[0]}</li>
-                <li>Published Date: {result.volumeInfo.publishedDate}</li>
-              </ul> }})}
+          {results && results.map(result => {
+              return <ul key={result.id}>
+                      {result.volumeInfo.imageLinks ? <li><img src={result.volumeInfo.imageLinks.thumbnail} /></li>:<p>Image Not Available</p>};
+                      <li>Title: {result.volumeInfo.title}</li>
+                      <li>Author: {result.volumeInfo.authors[0]}</li>
+                      <li>Published Date: {result.volumeInfo.publishedDate}</li>
+                    </ul>
+          })};
       </div>
     </section>
   );
 }
-
-// const GoogleBooksSearch = (searchInput, searchCriteria) => {
-//     ///Makes fetch request to Google Books Api.///
-
-//     const apiUrl = 'https://www.googleapis.com/books/v1/volumes?q=';
-//     const searchApi = `${apiUrl}${searchCriteria}${searchInput}`;
-
-//     const searchData = {};
-
-//     fetch(`${searchApi}`)
-//         .then((response) => response.json() )
-//         .then((searchData) => setResults(searchData));
-
-//     return results
-// };
 
 export default Search;
