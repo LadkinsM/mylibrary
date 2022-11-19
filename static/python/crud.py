@@ -3,6 +3,8 @@
 from model import (db, Book, Author, Genre, Language, User, Current_Read,
 Bookshelf, Review, Author_book_map, Genre_book_map, Language_book_map,
 Shelf_book_map, Faved_Book, connect_to_db)
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
 #QUERIES
 
@@ -11,6 +13,10 @@ def get_book_by_googleid(google_books_id):
 
     return Book.query.filter(Book.google_books_id == google_books_id).first()
 
+def get_book_by_bookid(book_id):
+    """Return book info by book_id"""
+
+    return Book.query.filter(Book.book_id == book_id).first()
 
 def get_book_by_author(author_id):
     """Return all books by author via author_id."""
@@ -92,6 +98,22 @@ def get_all_users():
     """
     return User.query.all()
 
+
+def handle_search(search_criteria, search_input):
+    """Search Book Table by search input and return result list."""
+
+    if search_criteria == "+intitle:":
+        return Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+    elif search_criteria == "+inauthor:":
+        return Book.query.filter(Book.authors.name.ilike(f"%{search_input}%")).all()
+    elif search_criteria == "+subject:":
+        return Book.query.filter(Book.genres.name.ilike(f"%{search_input}%")).all()
+    else:
+        return Book.query.filter(or_(
+                                    Book.title.ilike(f"%{search_input}%"),
+                                    Book.authors.name.ilike(f"%{search_input}%"),
+                                    Book.genres.name.ilike(f"%{search_input}%")
+                                    )).all()
     
 
 
@@ -115,7 +137,7 @@ def create_author_book_relationship(author_id, book_id):
 
 def handle_authors(author_list, book_id):
     """Handles API Author Data, Checks for presence in DB, and Adds to DB."""
-
+    
     for author in author_list: 
         if not get_author_by_name(author):
             db.session.add(create_author(author))
@@ -123,8 +145,10 @@ def handle_authors(author_list, book_id):
 
     for author in author_list:
         author_id = get_author_by_name(author).author_id
-        db.session.add(create_author_book_relationship(author_id, book_id))
-        db.session.commit()
+
+        if not get_author_book_map_by_id(author_id, book_id):
+            db.session.add(create_author_book_relationship(author_id, book_id))
+            db.session.commit()
 
 
 def create_genre(genre):
@@ -141,6 +165,22 @@ def create_genre_book_relationship(genre_id, book_id):
     gbmap = Genre_book_map
 
     return gbmap(genre_id=genre_id, book_id=book_id)
+
+
+def handle_genres(genre_list, book_id):
+    """Handles API Genre Data, Checks for presence in DB, and Adds to DB."""
+    
+    for genre in genre_list: 
+        if not get_genre_by_name(genre):
+            db.session.add(create_genre(genre))
+            db.session.commit()
+
+    for genre in genre_list:
+        genre_id = get_genre_by_name(genre).genre_id
+
+        if not get_genre_book_map_by_id(genre_id, book_id):
+            db.session.add(create_genre_book_relationship(genre_id, book_id))
+            db.session.commit()
 
 
 def create_language(language):
@@ -189,7 +229,7 @@ def create_book(google_books_id,
 def handle_book(book):
     """
     Handles API Book Data, Checks for Field presence in Response,
-    Checks for Book presence in DB, and Adds Book object to List.
+    Checks for Book presence in DB, and Creates Book Object.
     """
 
     if not get_book_by_googleid(book['id']).book_id:
@@ -210,23 +250,9 @@ def handle_book(book):
             else: 
                 isbn_10 = None
 
-        #Check Description Presence
-        if 'description' in book['volumeInfo']:
-            overview = book['volumeInfo']['description']
-        else:
-            overview = None
-
-        #Check ImageLinks Presence
-        if 'imageLinks' in book['volumeInfo']:
-            cover = book['volumeInfo']['imageLinks']['thumbnail']
-        else:
-            cover = None
-
-        #Check PublishedDate Presence
-        if 'publishedDate' in book['volumeInfo']:
-            publish_date = book['volumeInfo']['publishedDate']
-        else:
-            publish_date = None
+        overview = book['volumeInfo'].get('description', None)
+        cover = book['volumeInfo'].get('imageLinks', None)['thumbnail']
+        publish_date = book['volumeInfo'].get('publishedDate', None)
 
         book_to_add = create_book(
                         google_books_id=google_books_id,
@@ -238,7 +264,7 @@ def handle_book(book):
                         publish_date = publish_date
                         )
         
-
+        return book_to_add
 
 #USER RELATED
 
