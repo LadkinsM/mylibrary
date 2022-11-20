@@ -30,13 +30,8 @@ for book in book_data:
     for info in isbn_list:
         if info['type'] == 'ISBN_13':
             isbn_13 = info['identifier']
-        else:
-            isbn_13 = None
-
-        if info['type'] == 'ISBN_10':
+        elif info['type'] == 'ISBN_10':
             isbn_10 = info['identifier']
-        else: 
-            isbn_10 = None
 
     title = book['volumeInfo']['title']
     

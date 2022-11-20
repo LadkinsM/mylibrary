@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-function Search({setBook}) {
+function Search() {
   const[searchInput, setSearchInput] = React.useState("");
   const[searchCriteria, setSearchCriteria] = React.useState("");
   const[results, setResults] = React.useState([]);
@@ -18,14 +18,13 @@ function Search({setBook}) {
   const handleSubmit = evt => {
     evt.preventDefault()
 
-    const searchData = {};
-
     if (searchInput === "") {
       alert("Please enter text into the search field.")
     } else {
-      fetch(`/api/${searchCriteria}${searchInput}`)
-          .then((response) => response.json() )
-          .then((searchData) => {setResults(searchData)});
+      fetch(`/api/${searchInput}/${searchCriteria}`)
+          .then((response) => response.json())
+          .then((searchData) => {setResults(searchData);
+          console.log(results)});
   }
 };
 
@@ -62,11 +61,11 @@ function Search({setBook}) {
       <div>
         <h2>Results</h2>
           {results && results.map(result => {
-              return <ul key={result.id}>
-                      {result.volumeInfo.imageLinks ? <li><img src={result.volumeInfo.imageLinks.thumbnail} /></li>:<p>Image Not Available</p>};
-                      <li>Title: {result.volumeInfo.title}</li>
-                      <li>Author: {result.volumeInfo.authors[0]}</li>
-                      <li>Published Date: {result.volumeInfo.publishedDate}</li>
+              return <ul key={result.book_id}>
+                      {result.cover ? <li><img src={result.cover} /></li>:<p>Image Not Available</p>};
+                      <li>Title: {result.title}</li>
+                      <li>Author: {result.authors}</li>
+                      <li>Published Date: {result.publish_date}</li>
                     </ul>
           })};
       </div>

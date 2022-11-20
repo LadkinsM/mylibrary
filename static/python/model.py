@@ -6,6 +6,60 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
+#ASSOCIATION TABLES
+
+class Author_book_map(db.Model):
+    """Data model for authors for each book."""
+
+    __tablename__="authors_books"
+
+    author_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('authors.author_id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
+
+    def __repr__(self):
+        return f"<Book Author author_id={self.author_id}, book_id={self.book_id}>"
+
+
+class Genre_book_map(db.Model):
+    """Data model for genre/subgenre for each book."""
+
+    __tablename__="genres_books"
+
+    book_genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
+
+    def __repr__(self):
+        return f"<Book Genre genre_id={self.genre_id}, book_id={self.book_id}>"
+
+
+class Language_book_map(db.Model):
+    """Data model for each language per book."""
+
+    __tablename__="languages_books"
+
+    language_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    language_id = db.Column(db.Integer, db.ForeignKey('languages.language_id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
+
+    def __repr__(self):
+        return f"<Book Language language_id={self.language_id}, book_id={self.book_id}>"
+
+
+class Shelf_book_map(db.Model):
+    """Data model for each book per shelf."""
+
+    __tablename__="shelves_books"
+
+    shelf_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    shelf_id = db.Column(db.Integer, db.ForeignKey('bookshelves.shelf_id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
+
+    def __repr__(self):
+        return f"<Book on Shelf shelf_id={self.shelf_id}, book_id={self.book_id}>"
+
+
 #BOOKS
 
 class Book(db.Model):
@@ -158,60 +212,6 @@ class Review(db.Model):
 
     def __repr__(self):
         return f"<Review id={self.review_id}, score={self.score}>"
-
-
-#ASSOCIATION TABLES
-
-class Author_book_map(db.Model):
-    """Data model for authors for each book."""
-
-    __tablename__="authors_books"
-
-    author_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    author_id = db.Column(db.Integer, db.ForeignKey('authors.author_id'), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
-
-    def __repr__(self):
-        return f"<Book Author author_id={self.author_id}, book_id={self.book_id}>"
-
-
-class Genre_book_map(db.Model):
-    """Data model for genre/subgenre for each book."""
-
-    __tablename__="genres_books"
-
-    book_genre_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
-
-    def __repr__(self):
-        return f"<Book Genre genre_id={self.genre_id}, book_id={self.book_id}>"
-
-
-class Language_book_map(db.Model):
-    """Data model for each language per book."""
-
-    __tablename__="languages_books"
-
-    language_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    language_id = db.Column(db.Integer, db.ForeignKey('languages.language_id'), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
-
-    def __repr__(self):
-        return f"<Book Language language_id={self.language_id}, book_id={self.book_id}>"
-
-
-class Shelf_book_map(db.Model):
-    """Data model for each book per shelf."""
-
-    __tablename__="shelves_books"
-
-    shelf_book_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    shelf_id = db.Column(db.Integer, db.ForeignKey('bookshelves.shelf_id'), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('books.book_id'), nullable=False)
-
-    def __repr__(self):
-        return f"<Book on Shelf shelf_id={self.shelf_id}, book_id={self.book_id}>"
 
 
 class Faved_Book(db.Model):

@@ -16,12 +16,23 @@ def get_book_by_googleid(google_books_id):
 def get_book_by_bookid(book_id):
     """Return book info by book_id"""
 
-    return Book.query.filter(Book.book_id == book_id).first()
+    book = Book.query.filter(Book.book_id == book_id).first()
+
+    return {
+            'book_id' : book.book_id,
+            'title' : book.title,
+            'overview' : book.overview,
+            'cover' : book.cover,
+            'publish_date' : book.publish_date,
+            'isbn_10' : book.isbn_10,
+            'isbn_13' : book.isbn_13,
+            }
 
 def get_book_by_author(author_id):
     """Return all books by author via author_id."""
 
     return Book.query.filter(Book.authors.author_id == author_id).all()
+
 
 
 def get_book_by_genre(genre_id):
@@ -35,11 +46,33 @@ def get_author_by_name(name):
 
     return Author.query.filter(Author.name == name).first()
 
+def get_authors_by_book(book_id):
+    """Return all authors by book via book_id."""
+
+    book = Book.query.filter(Book.book_id == book_id).first()
+    authors_list = []
+
+    for author in book.authors:
+        authors_list.append({'author_id':author.author_id, 'name':author.name})
+
+    return authors_list
+
 
 def get_genre_by_name(name):
     """Return genre info by name."""
 
     return Genre.query.filter(Genre.name == name).first()
+
+
+def get_genres_by_book(book_id):
+
+    book = Book.query.filter(Book.book_id == book_id).first()
+    genres_list = []
+
+    for genre in book.genres:
+        genres_list.append({'genre_id':genre.genre_id, 'name':genre.name})
+
+    return genres_list
 
 
 def get_author_book_map_by_id(author_id, book_id):
@@ -103,22 +136,41 @@ def handle_search(search_criteria, search_input):
     """Search Book Table by search input and return result list."""
 
     if search_criteria == "+intitle:":
-        return Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+        books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+            
     elif search_criteria == "+inauthor:":
-        return Book.query.filter(Book.authors.name.ilike(f"%{search_input}%")).all()
-    elif search_criteria == "+subject:":
-        return Book.query.filter(Book.genres.name.ilike(f"%{search_input}%")).all()
-    else:
-        return Book.query.filter(or_(
-                                    Book.title.ilike(f"%{search_input}%"),
-                                    Book.authors.name.ilike(f"%{search_input}%"),
-                                    Book.genres.name.ilike(f"%{search_input}%")
-                                    )).all()
-    
+        books = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
 
+    elif search_criteria == "+subject:":
+        books = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
+    
+    else:
+        books = Book.query.filter(db.or_(
+                                    Book.title.ilike(f"%{search_input}%"),
+                                    Book.authors(Author.name.ilike(f"%{search_input}%")),
+                                    Book.genres(Genre.name.like(f"%{search_input}%")
+                                    )).all())
+
+    book_results = []
+    
+    for book in books: 
+        book_results.append({
+            'book_id' : book.book_id,
+            'title' : book.title,
+            'overview' : book.overview,
+            'cover' : book.cover,
+            'publish_date' : book.publish_date,
+            'isbn_10' : book.isbn_10,
+            'isbn_13' : book.isbn_13,
+            'authors' : get_authors_by_book(book.book_id)[0]['name'],
+            'genres' : get_genres_by_book(book.book_id)[0]['name']
+        })
+
+    return book_results
 
 
 #BOOK RELATED
+
 def create_author(author):
     """Create Author in database.
         
@@ -144,10 +196,10 @@ def handle_authors(author_list, book_id):
             db.session.commit()
 
     for author in author_list:
-        author_id = get_author_by_name(author).author_id
+        author_obj = get_author_by_name(author)
 
-        if not get_author_book_map_by_id(author_id, book_id):
-            db.session.add(create_author_book_relationship(author_id, book_id))
+        if not get_author_book_map_by_id(author_obj.author_id, book_id):
+            db.session.add(create_author_book_relationship(author_obj.author_id, book_id))
             db.session.commit()
 
 
@@ -232,39 +284,36 @@ def handle_book(book):
     Checks for Book presence in DB, and Creates Book Object.
     """
 
-    if not get_book_by_googleid(book['id']).book_id:
-        google_books_id = book['id']
-        title = book['volumeInfo']['title']
+    google_books_id = book['id']
+    title = book['volumeInfo']['title']
 
-        #Assign ISBN variables
-        isbn_list = book['volumeInfo']['industryIdentifiers']
+    #Assign ISBN variables
+    isbn_list = book['volumeInfo']['industryIdentifiers']
 
-        for info in isbn_list:
-            if info['type'] == 'ISBN_13':
-                isbn_13 = info['identifier']
-            else:
-                isbn_13 = None
+    for info in isbn_list:
+        if info['type'] == 'ISBN_13':
+            isbn_13 = info['identifier'] if 'identifier' in info else 0
+        elif info['type'] == 'ISBN_10':
+            isbn_10 = info['identifier'] if 'identifier' in info else 0
 
-            if info['type'] == 'ISBN_10':
-                isbn_10 = info['identifier']
-            else: 
-                isbn_10 = None
+    overview = book['volumeInfo'].get('description', "Not Provided")
 
-        overview = book['volumeInfo'].get('description', None)
-        cover = book['volumeInfo'].get('imageLinks', None)['thumbnail']
-        publish_date = book['volumeInfo'].get('publishedDate', None)
+    if 'imageLinks' in book['volumeInfo']:
+        cover = book['volumeInfo']['imageLinks']['thumbnail']
+    else:
+        cover = "Not Provided"
+    
+    publish_date = book['volumeInfo'].get('publishedDate', "Not Provided")
 
-        book_to_add = create_book(
-                        google_books_id=google_books_id,
-                        isbn_10 = isbn_10,
-                        isbn_13 = isbn_13,
-                        title = title,
-                        overview = overview,
-                        cover = cover,
-                        publish_date = publish_date
-                        )
-        
-        return book_to_add
+    return Book(
+                google_books_id=google_books_id,
+                isbn_10 = isbn_10,
+                isbn_13 = isbn_13,
+                title = title,
+                overview = overview,
+                cover = cover,
+                publish_date = publish_date
+                )
 
 #USER RELATED
 
