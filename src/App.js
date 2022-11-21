@@ -15,7 +15,7 @@ function App() {
       <Routes>
           <Route path="/login" element={ <Login /> } />
           <Route path="/search" element={ <Search /> } />
-          {/* <Route path="/book/" element={ <BookDetails book={book} />} */}
+          <Route path="/search/book_details/:book_id" element={ <BookDetails />} />
 
       </Routes>
     </Router>

@@ -25,6 +25,8 @@ def search_results(search_input, search_criteria):
     max_results = "&maxResults=40"
     api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
 
+    print(api_query)
+
     books = requests.get(api_query).json()
 
 
@@ -57,12 +59,12 @@ def search_results(search_input, search_criteria):
             genre_list = ["None"]
 
         crud.handle_genres(genre_list, book_obj.book_id)
-
+    print(len(crud.handle_search(search_criteria, search_input)))
     return json.dumps(crud.handle_search(search_criteria, search_input))
 
 
 
-@app.route('/book/<bookID>/details', methods=["POST"])
+@app.route('/book/<bookID>/book_details')
 def bookdetails(bookID):
     """
     Return Book Details
@@ -70,7 +72,7 @@ def bookdetails(bookID):
 
     book = crud.get_book_by_bookid(bookID)
 
-    return book
+    return jsonify(book)
 
 
 if __name__ == "__main__":

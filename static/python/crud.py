@@ -285,7 +285,11 @@ def handle_book(book):
     """
 
     google_books_id = book['id']
-    title = book['volumeInfo']['title']
+
+    if(book['volumeInfo'].get('title') is None):
+        title = "Not Titled"
+    else:
+        title = book['volumeInfo']['title']
 
     if (book['volumeInfo'].get('industryIdentifiers') is None):
         isbn_13 = 0
@@ -304,7 +308,6 @@ def handle_book(book):
                 isbn_13 = info['identifier']
             else:
                 continue
-
 
     if (book['volumeInfo'].get('description')is None):
         overview = "Not Provided"

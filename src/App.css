@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr 3fr;
+  align-items: center;
+}
+
+div.card {
+  display: inline-block;
+}
