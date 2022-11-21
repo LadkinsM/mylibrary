@@ -287,23 +287,39 @@ def handle_book(book):
     google_books_id = book['id']
     title = book['volumeInfo']['title']
 
-    #Assign ISBN variables
-    isbn_list = book['volumeInfo']['industryIdentifiers']
-
-    for info in isbn_list:
-        if info['type'] == 'ISBN_13':
-            isbn_13 = info['identifier'] if 'identifier' in info else 0
-        elif info['type'] == 'ISBN_10':
-            isbn_10 = info['identifier'] if 'identifier' in info else 0
-
-    overview = book['volumeInfo'].get('description', "Not Provided")
-
-    if 'imageLinks' in book['volumeInfo']:
-        cover = book['volumeInfo']['imageLinks']['thumbnail']
+    if (book['volumeInfo'].get('industryIdentifiers') is None):
+        isbn_13 = 0
+        isbn_10 = 0
     else:
+        isbn_list = book['volumeInfo'].get('industryIdentifiers')
+        print(isbn_list)
+        for info in isbn_list:
+            print(info['type'])
+            if 'ISBN_10' not in info or 'ISBN_13' not in info:
+                isbn_10 = 0
+                isbn_13 = 0
+            elif info['type'] == 'ISBN_10':
+                isbn_10 = info['identifier']
+            elif info['type'] == 'ISBN_13':
+                isbn_13 = info['identifier']
+            else:
+                continue
+
+
+    if (book['volumeInfo'].get('description')is None):
+        overview = "Not Provided"
+    else:
+        overview = book['volumeInfo']['description']
+
+    if (book['volumeInfo'].get('imageLinks') is None):
         cover = "Not Provided"
+    else:
+        cover = book['volumeInfo']['imageLinks']['thumbnail']
     
-    publish_date = book['volumeInfo'].get('publishedDate', "Not Provided")
+    if (book['volumeInfo'].get('publishedDate') is None):
+        publish_date = "Not Provided"
+    else:
+        publish_date = book['volumeInfo']['publishedDate']
 
     return Book(
                 google_books_id=google_books_id,

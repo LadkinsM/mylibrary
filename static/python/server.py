@@ -22,9 +22,11 @@ def search_results(search_input, search_criteria):
     """
 
     api_url = 'https://www.googleapis.com/books/v1/volumes?q='
-    api_query = f'{api_url}{search_criteria}{search_input}'
+    max_results = "&maxResults=40"
+    api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
 
     books = requests.get(api_query).json()
+
 
     #Add API Book Data to DB
     books_to_db = []
