@@ -28,23 +28,23 @@ def get_book_by_bookid(book_id):
             'isbn_13' : book.isbn_13,
             }
 
-def get_book_by_author(author_id):
-    """Return all books by author via author_id."""
+# def get_book_by_author(author_id):
+#     """Return all books by author via author_id."""
 
-    return Book.query.filter(Book.authors.author_id == author_id).all()
+#     return Book.query.filter(Book.authors.author_id == author_id).all()
 
 
+# def get_book_by_genre(genre_id):
+#     """Return all books by genre via genre_id."""
 
-def get_book_by_genre(genre_id):
-    """Return all books by genre via genre_id."""
-
-    return Book.query.filter(Book.genres.genre_id == genre_id).all()
+#     return Book.query.filter(Book.genres.genre_id == genre_id).all()
 
 
 def get_author_by_name(name):
     """Return author info by name."""
 
     return Author.query.filter(Author.name == name).first()
+
 
 def get_authors_by_book(book_id):
     """Return all authors by book via book_id."""
@@ -296,9 +296,7 @@ def handle_book(book):
         isbn_10 = 0
     else:
         isbn_list = book['volumeInfo'].get('industryIdentifiers')
-        print(isbn_list)
         for info in isbn_list:
-            print(info['type'])
             if 'ISBN_10' not in info or 'ISBN_13' not in info:
                 isbn_10 = 0
                 isbn_13 = 0

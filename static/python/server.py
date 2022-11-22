@@ -25,18 +25,19 @@ def search_results(search_input, search_criteria):
     max_results = "&maxResults=40"
     api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
 
-    print(api_query)
-
     books = requests.get(api_query).json()
-
 
     #Add API Book Data to DB
     books_to_db = []
     book_items = books['items']
+    google_ids = set()
     
     for book in book_items:
-        if not crud.get_book_by_googleid(book['id']):
-            books_to_db.append(crud.handle_book(book))
+        if crud.get_book_by_googleid(book['id']) == None:
+            if not book['id'] in google_ids:
+                books_to_db.append(crud.handle_book(book))
+                google_ids.add(book['id'])
+
     
     db.session.add_all(books_to_db)
     db.session.commit()
@@ -59,9 +60,8 @@ def search_results(search_input, search_criteria):
             genre_list = ["None"]
 
         crud.handle_genres(genre_list, book_obj.book_id)
-    print(len(crud.handle_search(search_criteria, search_input)))
-    return json.dumps(crud.handle_search(search_criteria, search_input))
 
+    return json.dumps(crud.handle_search(search_criteria, search_input))
 
 
 @app.route('/book/<bookID>/book_details')
@@ -73,6 +73,44 @@ def bookdetails(bookID):
     book = crud.get_book_by_bookid(bookID)
 
     return jsonify(book)
+
+@app.route('/signup', methods=['POST'])
+def create_user():
+    """Create New User."""
+
+    email = request.form.get('email')
+    print(email)
+    password = request.form.get('password')
+    personal_description = request.form.get('personal_description')
+
+    if email==None or password==None or personal_description==None:
+        return jsonify("You must complete all fields to sign up.")
+    else:    
+        user = crud.create_user(email, password, personal_description)
+        db.session.add(user)
+        db.session.commit()
+        return jsonify("Success")
+
+
+@app.route('/login', methods=['POST'])
+def confirm_user():
+    """Login existing user."""
+
+    email = request.json.get('email')
+    print(email)
+    password = request.json.get('password')
+    print(password)
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        if user.password == password:
+            session['user'] = user.user_id
+            return jsonify(user)
+        else:
+            return jsonify("Incorrect Password")
+    else:
+        return jsonify("Incorrect Email")
 
 
 if __name__ == "__main__":
