@@ -340,7 +340,7 @@ def handle_book(book):
 
 #USER RELATED
 
-def create_user(email, password, personal_description):
+def create_user(email, password, personal_description=""):
     """Creates a user"""
 
     return User(email=email, password=password, personal_description=personal_description)

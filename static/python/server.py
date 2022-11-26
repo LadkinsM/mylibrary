@@ -86,21 +86,20 @@ def create_user():
     """Create New User."""
 
     email = request.json.get('email')
-    print(email)
     password = request.json.get('password')
-    personal_description = request.json.get('personal_description')
 
-    if email==None or password==None or personal_description==None:
+    if email==None or password==None:
         return jsonify("You must complete all fields to sign up.")
     else:    
-        user = crud.create_user(email, password, personal_description)
+        user = crud.create_user(email, password)
         db.session.add(user)
         db.session.commit()
-        return jsonify("Success")
+        new_user = crud.get_user_by_email(email)
+        return jsonify({'user_id':user.user_id})
 
 
 @app.route('/login', methods=['POST'])
-def confirm_user():
+def login_user():
     """Login existing user."""
 
     email = request.json.get('email')
@@ -118,6 +117,16 @@ def confirm_user():
             return jsonify("Incorrect Password")
     else:
         return jsonify("Incorrect Email")
+
+
+@app.route('/logout')
+def logout_user():
+    """Logout user in session."""
+
+    del session['user']
+
+    return "False"
+
 
 @app.route('/user')
 def user_logged_in():

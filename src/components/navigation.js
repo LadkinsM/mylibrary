@@ -10,7 +10,14 @@ function Nav() {
       .then((response) => response.text())
       .then((user_id) => {setUser(user_id)});
   }, []);
+
+  const handleSignOut = evt => {
+    fetch('/logout')
+      .then((response) => response.text())
+      .then((updateLogin) => {setUser(updateLogin)});
+  };
   
+
   if (user == "False"){
     return (
       <nav>
@@ -36,11 +43,14 @@ function Nav() {
           <li>
             <Link to={`/user/${user}/profile`}>MyProfile</Link>
           </li>
+          <li>
+            <a href="" onClick={handleSignOut}>Logout</a>
+          </li>
         </ul>
       </nav>
     );
   }
   
-}
+};
 
 export default Nav;

@@ -1,10 +1,11 @@
 import React from 'react';
+import { redirect, Link, Navigate } from 'react-router-dom';
 import '../App.css';
 
 const Login = (props) => {
   const[email, setEmail] = React.useState("");
   const[password, setPassword] = React.useState("");
-  const[user, setUser] = React.useState({})
+  const[user, setUser] = React.useState({});
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -28,9 +29,10 @@ const Login = (props) => {
       })
         .then((response) => response.json())
         .then((userData) => {setUser(userData);
-        console.log(user);
     });
-    }}
+      return (
+        <Navigate to={`/user/${user.user_id}/profile`} />
+      )}}
 
   return (
     <React.Fragment>
@@ -56,6 +58,7 @@ const Login = (props) => {
           <input type="submit" />
         </div>
       </form>
+      <button><Link to="/signup">No account? Click here to sign up!</Link></button>
     </React.Fragment>
   );
 }
