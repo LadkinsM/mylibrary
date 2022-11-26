@@ -29,6 +29,7 @@ function Search() {
   }
 };
 
+console.log(searchCriteria)
 
   return (
     <React.Fragment>
@@ -51,7 +52,7 @@ function Search() {
                 value={searchCriteria} 
                 onChange={updateCriteria}
               >
-                <option value="">All Results</option>
+                <option value="+all">All Results</option>
                 <option value="+intitle:">Title</option>
                 <option value="+inauthor:">Author</option>
                 <option value="+subject:">Genre</option>

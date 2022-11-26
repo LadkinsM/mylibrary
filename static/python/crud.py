@@ -144,12 +144,18 @@ def handle_search(search_criteria, search_input):
     elif search_criteria == "+subject:":
         books = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
     
+    # else:
+    #     books = Book.query.filter(db.or_(
+    #                                 Book.title.ilike(f"%{search_input}%"),
+    #                                 Book.authors(Author.name.ilike(f"%{search_input}%")),
+    #                                 Book.genres(Genre.name.like(f"%{search_input}%")
+    #                                 )).all())
     else:
-        books = Book.query.filter(db.or_(
-                                    Book.title.ilike(f"%{search_input}%"),
-                                    Book.authors(Author.name.ilike(f"%{search_input}%")),
-                                    Book.genres(Genre.name.like(f"%{search_input}%")
-                                    )).all())
+        books = db.session.query(Book).options(db.joinedload(Book.authors, Book.genres))\
+                .filter(db.or_(Book.title.contains(f"{search_input}"),
+                Author.name.contains(f"{search_input}"),
+                Genre.name.contains(f"{search_input}")
+                )).all()
 
     book_results = []
     

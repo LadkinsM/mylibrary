@@ -23,9 +23,15 @@ def search_results(search_input, search_criteria):
 
     api_url = 'https://www.googleapis.com/books/v1/volumes?q='
     max_results = "&maxResults=40"
-    api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
+
+    if search_criteria == "+all:":
+        api_query = f'{api_url}{search_input}{max_results}'
+    else:
+        api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
 
     books = requests.get(api_query).json()
+
+    print(books)
 
     #Add API Book Data to DB
     books_to_db = []
@@ -74,14 +80,15 @@ def bookdetails(bookID):
 
     return jsonify(book)
 
+
 @app.route('/signup', methods=['POST'])
 def create_user():
     """Create New User."""
 
-    email = request.form.get('email')
+    email = request.json.get('email')
     print(email)
-    password = request.form.get('password')
-    personal_description = request.form.get('personal_description')
+    password = request.json.get('password')
+    personal_description = request.json.get('personal_description')
 
     if email==None or password==None or personal_description==None:
         return jsonify("You must complete all fields to sign up.")
@@ -106,11 +113,21 @@ def confirm_user():
     if user:
         if user.password == password:
             session['user'] = user.user_id
-            return jsonify(user)
+            return jsonify({'user_id':user.user_id})
         else:
             return jsonify("Incorrect Password")
     else:
         return jsonify("Incorrect Email")
+
+@app.route('/user')
+def user_logged_in():
+    """Check for logged in user and return user ID."""
+
+    if 'user' not in session:
+        return "False"
+    else:
+        # return session['user']
+        return "1"
 
 
 if __name__ == "__main__":

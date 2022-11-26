@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-const Login = () => {
+const Login = (props) => {
   const[email, setEmail] = React.useState("");
   const[password, setPassword] = React.useState("");
   const[user, setUser] = React.useState({})
