@@ -427,6 +427,15 @@ def create_current_read(user_id, book_id, is_active=True):
     return Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
 
 
+def add_to_bookshelf(shelf_id, book_id):
+    """Adds a book to bookshelf."""
+
+    if get_shelf_book_map_by_id(shelf_id, book_id):
+        return False
+    else:
+        create_shelf_book_relationship(shelf_id, book_id)
+        return True
+
 #HELPER FUNCTIONS
 
 

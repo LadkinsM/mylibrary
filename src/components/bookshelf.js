@@ -16,7 +16,7 @@ const Bookshelves = (props) => {
 
     return(
         <React.Fragment>
-            <section id="bookshelf">
+            <div className="container">
                 {books && books.map(book => {
                     return <Link to={`book_details/${book.book_id}`}>
                                 <div className="card">
@@ -29,7 +29,7 @@ const Bookshelves = (props) => {
                                 </div>
                             </Link>
                 })}
-            </section>
+            </div>
         </React.Fragment>
     )
 };

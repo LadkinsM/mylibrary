@@ -164,8 +164,6 @@ def return_user_bookshelves(user_id):
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
-    print('*******************************')
-    print(shelf_id)
 
     return json.dumps(crud.get_books_by_shelf(shelf_id))
 
@@ -182,6 +180,16 @@ def create_bookshelf():
     db.session.commit()
 
     return "Success"
+
+
+@app.route('/bookshelf/addtoshelf/<shelf_id>/<book_id>')
+def add_to_bookshelf(shelf_id, book_id):
+    """Adds book to shelf."""
+
+    if crud.add_to_bookshelf(shelf_id, book_id):
+        return "Added"
+    else:
+        return "Failed"
 
 
 if __name__ == "__main__":

@@ -17,6 +17,8 @@ const BookDetails = () => {
         .then((user_id) => {setUser(user_id)});
     }, []);
 
+    console.log(user);
+
     const loggedIn = () => {
         if (user == "False") {
             return false
@@ -30,8 +32,6 @@ const BookDetails = () => {
             .then((response) => response.json())
             .then((dbBook) => {setBookInfo(dbBook)});
     }, []);
-
-    
 
     return (
         <React.Fragment>
