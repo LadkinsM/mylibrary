@@ -154,6 +154,13 @@ def return_user_details(user_id):
         'personal_description':user.personal_description,
     })
 
+
+@app.route('/user/<user_id>/bookshelves')
+def return_user_bookshelves(user_id):
+    """Returns List of User's Bookshelves."""
+
+    return json.dumps(crud.get_bookshelves_by_user(user_id))
+
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
@@ -167,7 +174,12 @@ def create_bookshelf():
     shelf_name = request.json.get('name')
     private = request.json.get('private')
 
-    
+    shelf = crud.create_bookshelf(shelf_name, user_id, private)
+
+    db.session.add(shelf)
+    db.session.commit()
+
+    return "Success"
 
 
 if __name__ == "__main__":

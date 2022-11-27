@@ -19,7 +19,6 @@ export const UserBookshelfComp = (props) => {
     const[selectedShelf, setSelectedShelf] = React.useState("")
 
     const updateShelf = evt => {
-        evt.preventdefault()
         setSelectedShelf(evt.target.value);
     };
 
@@ -33,7 +32,7 @@ export const UserBookshelfComp = (props) => {
                 onChange={updateShelf}
                 >
                 {shelves.map(shelf => {
-                    return <option value={shelf.shelf_id}>{shelf.name}</option>
+                    return <option key={shelf.id} value={shelf.id}>{shelf.name}</option>
                 })}
             </select>
             <Bookshelves selectedShelf={selectedShelf} user_id={user_id}/>

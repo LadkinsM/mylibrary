@@ -16,7 +16,7 @@ const UserDetails = () => {
     }, []);
 
     useEffect(() => {
-        fetch('/user/<user_id>/bookshelves')
+        fetch(`/user/${user_id}/bookshelves`)
             .then((response) => response.json())
             .then((dbshelves) => {setShelves(dbshelves)});
     }, []);
@@ -30,7 +30,7 @@ const UserDetails = () => {
                     </Link>: <p>None</p>}
                 </p>
             </div> */}
-            <div class="card">
+            <div className="card">
                 <h1>{userInfo.email}</h1>
                 <p>{userInfo.personal_description}</p>
             </div>

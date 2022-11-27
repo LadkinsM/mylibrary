@@ -127,8 +127,13 @@ def get_faved_books_by_user(user_id):
 def get_bookshelves_by_user(user_id):
     """Return a list of all bookshelves created by user."""
 
-    return Bookshelf.query.filter(Bookshelf.user_id == user_id).all()
+    shelves_list = Bookshelf.query.filter(Bookshelf.user_id == user_id).all()
+    shelves_info = []
 
+    for shelf in shelves_list:
+        shelves_info.append({'name':shelf.shelf_name, 'private':shelf.private, 'id':shelf.shelf_id})
+
+    return shelves_info
 
 def get_shelf_by_id(shelf_id):
     """Return shelf by shelf id."""
