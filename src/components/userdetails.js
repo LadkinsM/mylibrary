@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
+import { Route, useRouteMatch, Routes, Link, useParams } from 'react-router-dom';
 import '../App.css';
+import { UserBookshelfComp } from './usercomps';
 
 const UserDetails = () => {
     // Display details for User
     const[userInfo, setUserInfo] = React.useState({});
-    const { user_id } = React.useParams();
+    const [shelves, setShelves] = React.useState([]);
+    const { user_id } = useParams();
 
     useEffect(() => {
         fetch(`/user/${user_id}/user_details`)
@@ -13,28 +15,32 @@ const UserDetails = () => {
             .then((dbUser) => {setUserInfo(dbUser)});
     }, []);
 
-
-
-
+    useEffect(() => {
+        fetch('/user/<user_id>/bookshelves')
+            .then((response) => response.json())
+            .then((dbshelves) => {setShelves(dbshelves)});
+    }, []);
 
     return (
-        <p>User Details</p>
-        // <React.Fragment>
-        //     <div>
-        //         <p>Currently Reading : 
-        //             {userInfo.current_read ? <Link to={`book_details/${current_read.book_id}`}>
-        //                 {current_read.title}
-        //             </Link>: <p>None</p>}
-        //         </p>
-        //     </div>
-        //     <div class="card">
-        //         <h1>{userInfo.email}</h1>
-        //         <p>{userInfo.personal_description}</p>
-        //     </div>
-        //     <div>
-        //         <Bookshelves user_id={user_id} />
-        //     </div>
-        // </React.Fragment>
+        <React.Fragment>
+            {/* <div>
+                <p>Currently Reading : 
+                    {userInfo.current_read ? <Link to={`book_details/${current_read.book_id}`}>
+                        {current_read.title}
+                    </Link>: <p>None</p>}
+                </p>
+            </div> */}
+            <div class="card">
+                <h1>{userInfo.email}</h1>
+                <p>{userInfo.personal_description}</p>
+            </div>
+            <div>
+                <UserBookshelfComp shelves={shelves} user_id={user_id} />
+            </div>
+            {/* <div>
+                <Bookshelves user_id={user_id} />
+            </div> */}
+        </React.Fragment>
     )};
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import ResultDisplay from './resultcomp';
@@ -7,6 +7,13 @@ function Search() {
   const[searchInput, setSearchInput] = React.useState("");
   const[searchCriteria, setSearchCriteria] = React.useState("");
   const[results, setResults] = React.useState([]);
+  const[user, setUser] = React.useState({});
+
+  useEffect(() => {
+    fetch('/user')
+      .then((response) => response.text())
+      .then((user_id) => {setUser(user_id)});
+  }, []);
 
   const updateInput = evt => {
     setSearchInput(evt.target.value);
@@ -52,7 +59,7 @@ console.log(searchCriteria)
                 value={searchCriteria} 
                 onChange={updateCriteria}
               >
-                <option value="+all">All Results</option>
+                <option value="+all:">All Results</option>
                 <option value="+intitle:">Title</option>
                 <option value="+inauthor:">Author</option>
                 <option value="+subject:">Genre</option>
@@ -62,7 +69,7 @@ console.log(searchCriteria)
           </form>
         </div>
         <div>
-          <ResultDisplay results={results} />
+          <ResultDisplay results={results} user={user} />
         </div>
       </section>
     </React.Fragment>

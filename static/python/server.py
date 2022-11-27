@@ -95,7 +95,8 @@ def create_user():
         db.session.add(user)
         db.session.commit()
         new_user = crud.get_user_by_email(email)
-        return jsonify({'user_id':user.user_id})
+        print(new_user.user_id)
+        return jsonify({'user_id':f"{new_user.user_id}"})
 
 
 @app.route('/login', methods=['POST'])
@@ -112,7 +113,8 @@ def login_user():
     if user:
         if user.password == password:
             session['user'] = user.user_id
-            return jsonify({'user_id':user.user_id})
+            print(user.user_id)
+            return jsonify({'user_id':f"{user.user_id}",})
         else:
             return jsonify("Incorrect Password")
     else:
@@ -135,8 +137,37 @@ def user_logged_in():
     if 'user' not in session:
         return "False"
     else:
-        # return session['user']
-        return "1"
+        print(session['user'])
+        return f"{session['user']}"
+
+
+@app.route('/user/<user_id>/user_details')
+def return_user_details(user_id):
+    """Return user details for logged in user."""
+
+    user = crud.get_user_by_id(user_id)
+    current_read = user.current_reads
+
+    return jsonify({
+        'user_id':user.user_id,
+        'email':user.email,
+        'personal_description':user.personal_description,
+    })
+
+@app.route('/user/<user_id>/bookshelves/<shelf_id>')
+def return_bookshelf(user_id, shelf_id):
+    """Return Books in Shelf"""
+
+    return json.dumps(crud.get_books_by_shelf(shelf_id))
+
+
+@app.route('/bookshelf/createshelf', methods=['POST'])
+def create_bookshelf():
+    user_id = request.json.get('user_id')
+    shelf_name = request.json.get('name')
+    private = request.json.get('private')
+
+    
 
 
 if __name__ == "__main__":

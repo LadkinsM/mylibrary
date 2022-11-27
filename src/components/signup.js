@@ -1,11 +1,12 @@
 import React from 'react';
-import { redirect, Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const SignUp = () => {
     const[email, setEmail] = React.useState("");
     const[password, setPassword] = React.useState("");
     const[user, setUser] = React.useState({});
+    const navigate = useNavigate();
 
     const updateEmail = evt => {
         setEmail(evt.target.value);
@@ -31,9 +32,8 @@ const SignUp = () => {
                 .then((userData) => {setUser(userData);
                 });
             
-            return (
-                <Navigate to={`/user/${user.user_id}/profile`} />
-            )}}
+            navigate(`/login`)
+            }}
 
     return (
         <React.Fragment>

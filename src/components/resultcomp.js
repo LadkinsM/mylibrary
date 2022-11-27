@@ -7,10 +7,10 @@ const ResultDisplay = (props) => {
     return(
         <React.Fragment>
             <h2>Results</h2>
-                <div class="container">
+                <div className="container">
                 {results && results.map(result => {
                     return <Link to={`book_details/${result.book_id}`}>
-                                <div class="card">
+                                <div className="card">
                                 <ul key={result.book_id}>
                                     {result.cover ? <img src={result.cover} />:<p>Image Not Available</p>}
                                     <li>Title: {result.title}</li>

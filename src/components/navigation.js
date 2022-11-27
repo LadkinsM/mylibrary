@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 function Nav() {
-  const[user, setUser] = React.useState("");
+  const[user, setUser] = React.useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('/user')
@@ -17,7 +18,6 @@ function Nav() {
       .then((updateLogin) => {setUser(updateLogin)});
   };
   
-
   if (user == "False"){
     return (
       <nav>

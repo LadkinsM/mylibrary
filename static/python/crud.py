@@ -5,6 +5,7 @@ Bookshelf, Review, Author_book_map, Genre_book_map, Language_book_map,
 Shelf_book_map, Faved_Book, connect_to_db)
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import joinedload
 
 #QUERIES
 
@@ -105,6 +106,12 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
+def get_user_by_id(user_id):
+    """Return user info by user id"""
+
+    return User.query.options(joinedload(User.current_reads)).filter(User.user_id == user_id).first()
+
+
 def get_current_read_by_user(user_id):
     """Return a user's current read."""
 
@@ -121,6 +128,24 @@ def get_bookshelves_by_user(user_id):
     """Return a list of all bookshelves created by user."""
 
     return Bookshelf.query.filter(Bookshelf.user_id == user_id).all()
+
+
+def get_shelf_by_id(shelf_id):
+    """Return shelf by shelf id."""
+
+    return Bookshelf.query.filter(Bookshelf.shelf_id == shelf_id).first()
+
+
+def get_books_by_shelf(shelf_id):
+    """Return all books on shelf by shelf id"""
+
+    shelf = get_shelf_by_id(shelf_id)
+    books_list = []
+
+    for book in shelf.books:
+        books_list.append({'book_id':book.book_id, 'name':book.title})
+
+    return books_list
 
 
 def get_all_users():
