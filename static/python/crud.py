@@ -148,7 +148,16 @@ def get_books_by_shelf(shelf_id):
     books_list = []
 
     for book in shelf.books:
-        books_list.append({'book_id':book.book_id, 'name':book.title})
+        books_list.append({
+            'book_id' : book.book_id,
+            'title' : book.title,
+            'overview' : book.overview,
+            'cover' : book.cover,
+            'publish_date' : book.publish_date,
+            'isbn_10' : book.isbn_10,
+            'isbn_13' : book.isbn_13,
+            }
+        )
 
     return books_list
 
@@ -163,7 +172,7 @@ def get_all_users():
 
 
 def handle_search(search_criteria, search_input):
-    """Search Book Table by search input and return result list."""
+    """Search Tables by search input and return result list."""
 
     if search_criteria == "+intitle:":
         books_list = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()

@@ -17,11 +17,19 @@ export const UserBookshelfComp = (props) => {
     const user_id = props.user_id
     const shelves = props.shelves
     const[selectedShelf, setSelectedShelf] = React.useState("")
+    const[books, setBooks] = React.useState([]);
+
+    const fetchShelf = () => {
+        fetch(`/user/${user_id}/bookshelves/${selectedShelf}`)
+            .then((response) => response.json())
+            .then((dbShelf) => {setBooks(dbShelf)});
+    }
 
     const updateShelf = evt => {
         setSelectedShelf(evt.target.value);
+        fetchShelf();
     };
-
+    console.log(selectedShelf);
     return (
         <React.Fragment>
             <h3>Bookshelves</h3>
@@ -35,7 +43,7 @@ export const UserBookshelfComp = (props) => {
                     return <option key={shelf.id} value={shelf.id}>{shelf.name}</option>
                 })}
             </select>
-            <Bookshelves selectedShelf={selectedShelf} user_id={user_id}/>
+            <Bookshelves user_id={user_id} books={books} />
         </React.Fragment>
     )
 }

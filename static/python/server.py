@@ -44,7 +44,6 @@ def search_results(search_input, search_criteria):
                 books_to_db.append(crud.handle_book(book))
                 google_ids.add(book['id'])
 
-    
     db.session.add_all(books_to_db)
     db.session.commit()
     
@@ -165,6 +164,8 @@ def return_user_bookshelves(user_id):
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
+    print('*******************************')
+    print(shelf_id)
 
     return json.dumps(crud.get_books_by_shelf(shelf_id))
 
