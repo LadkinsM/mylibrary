@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const ResultDisplay = (props) => {
     const results = props.results
 
@@ -19,7 +20,7 @@ const ResultDisplay = (props) => {
                                 </ul>
                                 </div>
                             </Link>
-                })};
+                })}
                 </div>
         </React.Fragment>
     )

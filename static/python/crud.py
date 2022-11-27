@@ -166,13 +166,13 @@ def handle_search(search_criteria, search_input):
     """Search Book Table by search input and return result list."""
 
     if search_criteria == "+intitle:":
-        books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+        books_list = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
             
     elif search_criteria == "+inauthor:":
-        books = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
+        books_list = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
 
     elif search_criteria == "+subject:":
-        books = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
+        books_list = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
     
     # else:
     #     books = Book.query.filter(db.or_(
@@ -180,16 +180,40 @@ def handle_search(search_criteria, search_input):
     #                                 Book.authors(Author.name.ilike(f"%{search_input}%")),
     #                                 Book.genres(Genre.name.like(f"%{search_input}%")
     #                                 )).all())
+    # else:
+    #     books = db.session.query(Book).options(db.joinedload(Book.authors, Book.genres))\
+    #             .filter(db.or_(Book.title.contains(f"{search_input}"),
+    #             Author.name.contains(f"{search_input}"),
+    #             Genre.name.contains(f"{search_input}")
+    #             )).all()
     else:
-        books = db.session.query(Book).options(db.joinedload(Book.authors, Book.genres))\
-                .filter(db.or_(Book.title.contains(f"{search_input}"),
-                Author.name.contains(f"{search_input}"),
-                Genre.name.contains(f"{search_input}")
-                )).all()
+        books_ids = set()
+        books_list = []
+
+        books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+            
+        for book in books:
+            if not book.book_id in books_ids:
+                books_list.append(book)
+                books_ids.add(book.book_id)
+        
+        book_by_genres = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
+
+        for book in book_by_genres:
+            if not book.book_id in books_ids:
+                books_list.append(book)
+                books_ids.add(book.book_id)
+
+        book_by_authors = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
+
+        for book in book_by_authors:
+            if not book.book_id in books_ids:
+                books_list.append(book)
+                books_ids.add(book.book_id)
 
     book_results = []
     
-    for book in books: 
+    for book in books_list: 
         book_results.append({
             'book_id' : book.book_id,
             'title' : book.title,
