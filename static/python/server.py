@@ -113,7 +113,11 @@ def login_user():
         if user.password == password:
             session['user'] = user.user_id
             print(user.user_id)
-            return jsonify({'user_id':f"{user.user_id}",})
+            return jsonify({
+                            'user_id':user.user_id,
+                            'email':user.email,
+                            'personal_description':user.personal_description,
+                        })
         else:
             return jsonify("Incorrect Password")
     else:
@@ -164,6 +168,9 @@ def return_user_bookshelves(user_id):
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
+    print("****************")
+    print(user_id, shelf_id)
+    print("****************")
 
     return json.dumps(crud.get_books_by_shelf(shelf_id))
 
@@ -186,7 +193,12 @@ def create_bookshelf():
 def add_to_bookshelf(shelf_id, book_id):
     """Adds book to shelf."""
 
-    if crud.add_to_bookshelf(shelf_id, book_id):
+    book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)
+
+    db.session.add(book_to_add)
+    db.session.commit()
+
+    if crud.get_shelf_book_map_by_id(shelf_id, book_id):
         return "Added"
     else:
         return "Failed"

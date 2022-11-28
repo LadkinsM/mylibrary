@@ -131,7 +131,7 @@ def get_bookshelves_by_user(user_id):
     shelves_info = []
 
     for shelf in shelves_list:
-        shelves_info.append({'name':shelf.shelf_name, 'private':shelf.private, 'id':shelf.shelf_id})
+        shelves_info.append({'name':shelf.shelf_name, 'private':shelf.private, 'shelf_id':shelf.shelf_id})
 
     return shelves_info
 

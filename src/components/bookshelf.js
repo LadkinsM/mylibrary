@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
 import '../App.css';
 
-const Bookshelves = (props) => {
-    const user_id = props.user_id;
-    const shelf = props.selectedShelf; 
-    const books = props.books;
+const Bookshelves = ({user, books}) => {
+    // const user_id = props.user_id;
+    // const shelf = props.selectedShelf; 
+    // const books = props.books;
     // const[books, setBooks] = React.useState([]);
+    // const { user_id } = useParams();
 
     // useEffect(() => {
-    //     fetch(`/user/${user_id}/bookshelves/${shelf.id}`)
+    //     fetch(`/user/${userInfo.user_id}/bookshelves/${selectedShelf}`)
     //         .then((response) => response.json())
-    //         .then((dbShelf) => {setBooks(dbShelf)});
+    //         .then((dbShelf) => {setBooks(dbShelf);
+    //         console.log(books);});
     // }, []);
 
     return(

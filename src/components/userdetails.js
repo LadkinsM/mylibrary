@@ -3,23 +3,26 @@ import { Route, useRouteMatch, Routes, Link, useParams } from 'react-router-dom'
 import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 
-const UserDetails = () => {
+const UserDetails = ({user}) => {
     // Display details for User
-    const[userInfo, setUserInfo] = React.useState({});
+    // const[userInfo, setUserInfo] = React.useState({});
     const [shelves, setShelves] = React.useState([]);
-    const { user_id } = useParams();
+
+    console.log(user.user_id)
+
+    // useEffect(() => {
+    //     fetch(`/user/${user.user_id}/user_details`)
+    //         .then((response) => response.json())
+    //         .then((dbUser) => {setUserInfo(dbUser)});
+    // }, []);
 
     useEffect(() => {
-        fetch(`/user/${user_id}/user_details`)
-            .then((response) => response.json())
-            .then((dbUser) => {setUserInfo(dbUser)});
-    }, []);
-
-    useEffect(() => {
-        fetch(`/user/${user_id}/bookshelves`)
+        fetch(`/user/${user.user_id}/bookshelves`)
             .then((response) => response.json())
             .then((dbshelves) => {setShelves(dbshelves)});
     }, []);
+
+    console.log(shelves);
 
     return (
         <React.Fragment>
@@ -31,15 +34,12 @@ const UserDetails = () => {
                 </p>
             </div> */}
             <div className="card">
-                <h1>{userInfo.email}</h1>
-                <p>{userInfo.personal_description}</p>
+                <h1>{user.email}</h1>
+                <p>{user.personal_description}</p>
             </div>
             <div>
-                <UserBookshelfComp shelves={shelves} user_id={user_id} />
+                <UserBookshelfComp shelves={shelves} user={user} />
             </div>
-            {/* <div>
-                <Bookshelves user_id={user_id} />
-            </div> */}
         </React.Fragment>
     )};
 

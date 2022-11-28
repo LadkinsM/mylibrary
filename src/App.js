@@ -15,6 +15,7 @@ function App() {
   const[email, setEmail] = React.useState("");
   const[password, setPassword] = React.useState("");
   const[user, setUser] = React.useState({});
+  const[isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -38,18 +39,19 @@ function App() {
       })
         .then((response) => response.json())
         .then((userData) => {setUser(userData);
-    })
-  };};
+        setIsLoggedIn(true);})
+  }};
 
   const handleSignOut = evt => {
     fetch('/logout')
       .then((response) => response.text())
-      .then((updateLogin) => {setUser(updateLogin)});
+      .then((updateLogin) => {setUser(updateLogin);
+      setIsLoggedIn(false)});
   };
 
   return (
     <Router>
-      <Navigation user={user} handleSignOut={evt => handleSignOut(evt)} />
+      <Navigation user={user} handleSignOut={evt => handleSignOut(evt)} isLoggedIn={isLoggedIn} />
       <Routes>
           <Route path="/login" element={ <Login handleLogin={evt => handleLogin(evt)}
                                                 updateEmail={evt => updateEmail(evt)}
@@ -58,7 +60,8 @@ function App() {
                                                 password={password} /> } />
           <Route path="/signup" element={ <SignUp /> } />
           <Route path="/search" element={ <Search /> } />
-          <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} />} />
+          <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} isLoggedIn={isLoggedIn} />} />
+          <Route path="/user/:user_id/profile/book_details/:book_id" element={ <BookDetails user={user} isLoggedIn={isLoggedIn} />} />
           <Route path="/user/:user_id/profile" element={ <UserDetails user={user} /> } />
           <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} />} />
 

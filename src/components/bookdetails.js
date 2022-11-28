@@ -5,27 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserBookComp} from './usercomps';
 
-const BookDetails = () => {
+const BookDetails = ({user, isLoggedIn}) => {
     // Display details for individual book
     const[bookInfo, setBookInfo] = React.useState({});
     const { book_id } = useParams();
-    const[user, setUser] = React.useState({});
+    // const[userInfo, setUserInfo] = React.useState({});
 
-    useEffect(() => {
-        fetch('/user')
-        .then((response) => response.text())
-        .then((user_id) => {setUser(user_id)});
-    }, []);
-
-    console.log(user);
-
-    const loggedIn = () => {
-        if (user == "False") {
-            return false
-        } else {
-            return true
-        }
-    }
+    // useEffect(() => {
+    //     fetch(`/user/${user.user_id}/user_details`)
+    //         .then((response) => response.json())
+    //         .then((dbUser) => {setUserInfo(dbUser)});
+    // }, []);
 
     useEffect(() => {
         fetch(`/book/${book_id}/book_details`)
@@ -42,7 +32,7 @@ const BookDetails = () => {
                 <p>Publish Date: {bookInfo.publish_date}</p>
             </div>
             <div>
-                {user !== "False" && <UserBookComp user={user} book_id={book_id} />}
+                {user !== "False" && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn}/>}
             </div>
         </React.Fragment>
     )};
