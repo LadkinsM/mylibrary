@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-function Nav() {
+function Nav(props) {
+  // const user = props.user;
+  // const handleSignOut = props.handleSignOut;
   const[user, setUser] = React.useState({});
   const navigate = useNavigate();
 

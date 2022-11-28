@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import ResultDisplay from './resultcomp';
 
-function Search() {
+function Search(props) {
   const[searchInput, setSearchInput] = React.useState("");
-  const[searchCriteria, setSearchCriteria] = React.useState("");
+  const[searchCriteria, setSearchCriteria] = React.useState("+all:");
   const[results, setResults] = React.useState([]);
   const[user, setUser] = React.useState({});
 
@@ -14,6 +14,8 @@ function Search() {
       .then((response) => response.text())
       .then((user_id) => {setUser(user_id)});
   }, []);
+
+  // const user = props.user;
 
   const updateInput = evt => {
     setSearchInput(evt.target.value);

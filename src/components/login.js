@@ -3,7 +3,11 @@ import { Link, Navigate, useNavigate, Route } from 'react-router-dom';
 import App from '../App';
 import '../App.css';
 
-const Login = () => {
+const Login = (props) => {
+  // const handleLogin = props.handleLogin
+  // const updateEmail = props.updateEmail
+  // const updatePassword = props.updatePassword
+
   const[email, setEmail] = React.useState("");
   const[password, setPassword] = React.useState("");
   const[user, setUser] = React.useState({});
@@ -33,7 +37,7 @@ const Login = () => {
         .then((response) => response.json())
         .then((userData) => {setUser(userData);
     })
-      navigate(`/search`);
+      navigate(`/search`, {user:{user}});
     };};
 
   return (
@@ -46,7 +50,6 @@ const Login = () => {
             type="text"
             name="email"
             id="user_email"
-            value={email}
             onChange={updateEmail}
           />
           <label htmlFor="password">Password:</label>
@@ -54,7 +57,6 @@ const Login = () => {
             type="text"
             name="password"
             id="user_password"
-            value={password}
             onChange={updatePassword}
           />
           <input type="submit" />
