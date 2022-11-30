@@ -57,26 +57,20 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
 
 export const UserBookshelfComp = ({user, shelves}) => {
     // User toolbar (create bookshelf, select bookshelf) for user details page.
-    const[selectedShelf, setSelectedShelf] = React.useState("")
+    const[selectedShelf, setSelectedShelf] = React.useState("None")
     const[books, setBooks] = React.useState([]);
 
-    const fetchShelf = () => {
+    useEffect(() => {
         fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
             .then((response) => response.json())
             .then((dbShelf) => {setBooks(dbShelf);
-            console.log(books)});
-    }
-
-    // useEffect(() => {
-    //     fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
-    //         .then((response) => response.json())
-    //         .then((dbShelf) => {setBooks(dbShelf);
-    //         console.log(books)});
-    // }, []);
+            console.log(books);});
+    }, [selectedShelf]);
 
     const updateShelf = evt => {
-        setSelectedShelf(evt.target.value);
-        fetchShelf();
+        console.log(evt.target.value);
+        if (evt.target.value != "None") {
+            setSelectedShelf(evt.target.value);}
     };
 
     return (

@@ -31,7 +31,7 @@ def search_results(search_input, search_criteria):
 
     books = requests.get(api_query).json()
 
-    print(books)
+    # print(books)
 
     #Add API Book Data to DB
     books_to_db = []

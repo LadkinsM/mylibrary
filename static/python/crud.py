@@ -115,7 +115,7 @@ def get_user_by_id(user_id):
 def get_current_read_by_user(user_id):
     """Return a user's current read."""
 
-    return Current_Read.query.filter(Current_Read.user_id == user_id).first()
+    return Current_Read.query.filter(Current_Read.user_id == user_id, Current_Read.is_active == True).first()
 
 
 def get_faved_books_by_user(user_id):
@@ -419,6 +419,16 @@ def create_fav_book(user_id, book_id):
     """Creates a Faved Book"""
 
     return Faved_Book(user_id=user_id, book_id=book_id)
+
+
+def deactivate_current_read(user_id):
+    """Deactivates Users Current Read."""
+
+    current_read = get_current_read_by_user(user_id)
+
+    current_read.is_active = False
+
+    db.session.commit()
 
 
 def create_current_read(user_id, book_id, is_active=True):

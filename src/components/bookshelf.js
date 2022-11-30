@@ -3,18 +3,6 @@ import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom'
 import '../App.css';
 
 const Bookshelves = ({user, books}) => {
-    // const user_id = props.user_id;
-    // const shelf = props.selectedShelf; 
-    // const books = props.books;
-    // const[books, setBooks] = React.useState([]);
-    // const { user_id } = useParams();
-
-    // useEffect(() => {
-    //     fetch(`/user/${userInfo.user_id}/bookshelves/${selectedShelf}`)
-    //         .then((response) => response.json())
-    //         .then((dbShelf) => {setBooks(dbShelf);
-    //         console.log(books);});
-    // }, []);
 
     return(
         <React.Fragment>
