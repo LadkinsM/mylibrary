@@ -80,6 +80,34 @@ def bookdetails(bookID):
     return jsonify(book)
 
 
+@app.route('/book/<book_id>/reviews/add', methods=['POST'])
+def add_review():
+    """Adds a review."""
+
+    user_id = request.json.get('user_id')
+    score = request.json.get('score')
+    comment = request.json.get('comment')
+    book_id = request.json.get('book_id')
+
+    print(book_id)
+    print("********************")
+
+    review = crud.create_review(user_id, book_id, score, comment)
+    db.session.add(review)
+    db.session.commit()
+
+    return "Success"
+
+
+@app.route('/book/<book_id>/reviews')
+def return_reviews(book_id):
+    """Returns list of reviews by book_id."""
+
+    print(crud.get_reviews_by_book(book_id))
+
+    return json.dumps(crud.get_reviews_by_book(book_id))
+
+
 @app.route('/signup', methods=['POST'])
 def create_user():
     """Create New User."""
@@ -168,9 +196,6 @@ def return_user_bookshelves(user_id):
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
-    print("****************")
-    print(user_id, shelf_id)
-    print("****************")
 
     return json.dumps(crud.get_books_by_shelf(shelf_id))
 

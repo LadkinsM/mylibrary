@@ -76,6 +76,29 @@ def get_genres_by_book(book_id):
     return genres_list
 
 
+def get_reviews_by_book(book_id):
+    """Returns all reviews by book id."""
+
+    reviews = db.session.query(Review)\
+            .join(Book, Book.book_id==Review.book_id)\
+            .join(User, User.user_id==Review.user_id)\
+            .filter(Review.book_id == book_id).all()
+
+    review_results = []
+
+    for review in reviews:
+        review_results.append({
+            'book_id' : Review.book_id,
+            'title' : Book.title,
+            'user_id' : Review.user_id,
+            'username' : User.email,
+            'score' : Review.score,
+            'comment' : Review.comment,
+        })
+
+    return review_results
+
+
 def get_author_book_map_by_id(author_id, book_id):
     """Return author_book_id by author_id & book_id."""
 
@@ -189,36 +212,40 @@ def handle_search(search_criteria, search_input):
     #                                 Book.authors(Author.name.ilike(f"%{search_input}%")),
     #                                 Book.genres(Genre.name.like(f"%{search_input}%")
     #                                 )).all())
-    # else:
-    #     books = db.session.query(Book).options(db.joinedload(Book.authors, Book.genres))\
-    #             .filter(db.or_(Book.title.contains(f"{search_input}"),
-    #             Author.name.contains(f"{search_input}"),
-    #             Genre.name.contains(f"{search_input}")
-    #             )).all()
     else:
-        books_ids = set()
-        books_list = []
+        books_list = db.session.query(Book)\
+                .join(Author_book_map,Author_book_map.book_id==Book.book_id)\
+                .join(Author,Author.author_id==Author_book_map.author_id)\
+                .join(Genre_book_map,Genre_book_map.book_id==Book.book_id)\
+                .join(Genre,Genre.genre_id==Genre_book_map.genre_id)\
+                .filter(db.or_(Book.title.contains(f"{search_input}"),
+                Author.name.contains(f"{search_input}"),
+                Genre.name.contains(f"{search_input}")
+                )).all()
+    # else:
+    #     books_ids = set()
+    #     books_list = []
 
-        books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
+    #     books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
             
-        for book in books:
-            if not book.book_id in books_ids:
-                books_list.append(book)
-                books_ids.add(book.book_id)
+    #     for book in books:
+    #         if not book.book_id in books_ids:
+    #             books_list.append(book)
+    #             books_ids.add(book.book_id)
         
-        book_by_genres = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
+    #     book_by_genres = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
 
-        for book in book_by_genres:
-            if not book.book_id in books_ids:
-                books_list.append(book)
-                books_ids.add(book.book_id)
+    #     for book in book_by_genres:
+    #         if not book.book_id in books_ids:
+    #             books_list.append(book)
+    #             books_ids.add(book.book_id)
 
-        book_by_authors = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
+    #     book_by_authors = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
 
-        for book in book_by_authors:
-            if not book.book_id in books_ids:
-                books_list.append(book)
-                books_ids.add(book.book_id)
+    #     for book in book_by_authors:
+    #         if not book.book_id in books_ids:
+    #             books_list.append(book)
+    #             books_ids.add(book.book_id)
 
     book_results = []
     
@@ -407,6 +434,12 @@ def create_user(email, password, personal_description=""):
     """Creates a user"""
 
     return User(email=email, password=password, personal_description=personal_description)
+
+
+def create_review(user_id, book_id, score, comment):
+    """Creates a Review"""
+
+    return Review(user_id=user_id, book_id=book_id, score=score, comment=comment)
 
 
 def create_bookshelf(shelf_name, user_id, private):

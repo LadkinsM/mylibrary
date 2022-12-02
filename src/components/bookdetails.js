@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams } from 'react-router-dom';
+import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
 import '../App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserBookComp} from './usercomps';
+import { BookReviewComp } from './reviewcomp';
 
 const BookDetails = ({user, isLoggedIn}) => {
     // Display details for individual book
@@ -26,13 +27,17 @@ const BookDetails = ({user, isLoggedIn}) => {
     return (
         <React.Fragment>
             <div>
+                {user !== "False" && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn}/>}
+            </div>
+            <div>
                 <h1>{bookInfo.title}</h1>
                 <img src={bookInfo.cover} />
                 <p>Description: {bookInfo.overview}</p>
                 <p>Publish Date: {bookInfo.publish_date}</p>
             </div>
             <div>
-                {user !== "False" && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn}/>}
+                {isLoggedIn !== "False" && <Link to={`/book/${book_id}/addReview`}>Add a Review</Link>}
+                <BookReviewComp user={user} book_id={book_id} isLoggedIn={isLoggedIn} />
             </div>
         </React.Fragment>
     )};

@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const CreateShelf = () => {
-    const { user_id } = useParams();
+const CreateShelf = (user) => {
     const [shelfName, setShelfName] = React.useState("");
     const [privacy, setPrivacy] = React.useState(false);
     const [createSuccess, setCreateSuccess] = React.useState("");
@@ -20,7 +19,7 @@ const CreateShelf = () => {
 
     const handleCreateShelf = evt => {
         evt.preventDefault()
-        const shelfJson = {'name':shelfName, 'private':privacy, 'user_id':user_id}
+        const shelfJson = {'name':shelfName, 'private':privacy, 'user_id':user.user_id}
 
         if (shelfName === "") {
             alert("Please enter a name for your Bookshelf.")
@@ -35,7 +34,7 @@ const CreateShelf = () => {
         }};
     
     if (createSuccess == "Success") {
-        return navigate(`/user/${user_id}/profile`)
+        return navigate(`/user/${user.user_id}/profile`)
     } else {
         return (
             <React.Fragment>
