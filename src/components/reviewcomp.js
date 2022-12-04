@@ -79,7 +79,28 @@ export const AddReview = ({user}) => {
 }
 
 export const UserReviewComp = ({user, isLoggedIn}) => {
-    return (<><p>Hello</p></>)
+    const [reviews, setReviews] = React.useState([]);
+
+    useEffect(() => {
+        fetch(`/user/${user.user_id}/reviews`)
+            .then((response) => response.json())
+            .then((dbreviews) => {setReviews(dbreviews)});
+    }, []);
+
+    return (
+        <React.Fragment>
+            <h2>Reviews</h2>
+            <div className="reviews">
+                {reviews && reviews.map(review => {
+                    return <div className="review">
+                                <h3>{review.title}</h3>
+                                <p>Score: {review.score}</p>
+                                <p>{review.comment}</p>
+                            </div>
+                })}
+            </div>
+        </React.Fragment>
+    )
 }
 
 export const BookReviewComp = ({user, isLoggedIn, book_id}) => {

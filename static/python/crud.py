@@ -29,16 +29,16 @@ def get_book_by_bookid(book_id):
             'isbn_13' : book.isbn_13,
             }
 
-# def get_book_by_author(author_id):
-#     """Return all books by author via author_id."""
+def get_books_by_author(author_id):
+    """Return all books by author via author_id."""
 
-#     return Book.query.filter(Book.authors.author_id == author_id).all()
+    return Book.query.join(Author_book_map).join(Author).filter(Author.author_id == author_id).all()
 
 
-# def get_book_by_genre(genre_id):
-#     """Return all books by genre via genre_id."""
+def get_books_by_genre(genre_id):
+    """Return all books by genre via genre_id."""
 
-#     return Book.query.filter(Book.genres.genre_id == genre_id).all()
+    return Book.query.join(Genre_book_map).join(Genre).filter(Genre.genre_id == genre_id).all()
 
 
 def get_author_by_name(name):
@@ -83,21 +83,19 @@ def get_reviews_by_book(book_id):
             .join(Review, Review.book_id==Book.book_id)\
             .join(User, User.user_id==Review.user_id)\
             .filter(Book.book_id == book_id).first()
-    reviews = book.reviews
 
-    review_results = []
+    return handle_reviews(book.reviews)
 
-    for review in reviews:
-        review_results.append({
-            'book_id' : review.book_id,
-            'title' : book.title,
-            'user_id' : review.user_id,
-            'username' : review.user.email,
-            'score' : review.score,
-            'comment' : review.comment,
-        })
 
-    return review_results
+def get_reviews_by_user(user_id):
+    """Returns all reviews by user id."""
+
+    user = User.query\
+            .join(Review, Review.user_id==User.user_id)\
+            .join(Book, Review.book_id==Book.book_id)\
+            .filter(User.user_id==user_id).first()
+    
+    return handle_reviews(user.reviews)
 
 
 def get_author_book_map_by_id(author_id, book_id):
@@ -159,6 +157,7 @@ def get_bookshelves_by_user(user_id):
 
     return shelves_info
 
+
 def get_shelf_by_id(shelf_id):
     """Return shelf by shelf id."""
 
@@ -207,12 +206,6 @@ def handle_search(search_criteria, search_input):
     elif search_criteria == "+subject:":
         books_list = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
     
-    # else:
-    #     books = Book.query.filter(db.or_(
-    #                                 Book.title.ilike(f"%{search_input}%"),
-    #                                 Book.authors(Author.name.ilike(f"%{search_input}%")),
-    #                                 Book.genres(Genre.name.like(f"%{search_input}%")
-    #                                 )).all())
     else:
         books_list = db.session.query(Book)\
                 .join(Author_book_map,Author_book_map.book_id==Book.book_id)\
@@ -223,30 +216,6 @@ def handle_search(search_criteria, search_input):
                 Author.name.contains(f"{search_input}"),
                 Genre.name.contains(f"{search_input}")
                 )).all()
-    # else:
-    #     books_ids = set()
-    #     books_list = []
-
-    #     books = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
-            
-    #     for book in books:
-    #         if not book.book_id in books_ids:
-    #             books_list.append(book)
-    #             books_ids.add(book.book_id)
-        
-    #     book_by_genres = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
-
-    #     for book in book_by_genres:
-    #         if not book.book_id in books_ids:
-    #             books_list.append(book)
-    #             books_ids.add(book.book_id)
-
-    #     book_by_authors = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
-
-    #     for book in book_by_authors:
-    #         if not book.book_id in books_ids:
-    #             books_list.append(book)
-    #             books_ids.add(book.book_id)
 
     book_results = []
     
@@ -480,7 +449,23 @@ def add_to_bookshelf(shelf_id, book_id):
         create_shelf_book_relationship(shelf_id, book_id)
         return True
 
-#HELPER FUNCTIONS
+#REVIEWS
+
+def handle_reviews(reviews):
+
+    review_results = []
+
+    for review in reviews:
+        review_results.append({
+            'book_id' : review.book_id,
+            'title' : review.books.title,
+            'user_id' : review.user_id,
+            'username' : review.user.email,
+            'score' : review.score,
+            'comment' : review.comment,
+        })
+
+    return review_results
 
 
 

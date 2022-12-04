@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, Link, useParams } from 'react-router-dom';
 import '../App.css';
 import { UserBookshelfComp } from './usercomps';
+import { UserReviewComp } from './reviewcomp';
 
 const UserDetails = ({user}) => {
     // Display details for User
@@ -39,6 +40,9 @@ const UserDetails = ({user}) => {
             </div>
             <div>
                 <UserBookshelfComp shelves={shelves} user={user} />
+            </div>
+            <div>
+                <UserReviewComp user={user} />
             </div>
         </React.Fragment>
     )};

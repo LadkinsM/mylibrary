@@ -186,6 +186,13 @@ def return_user_details(user_id):
     })
 
 
+@app.route('/user/<user_id>/reviews')
+def return_user_reviews(user_id):
+    """Return List of User's Reviews."""
+
+    return json.dumps(crud.get_reviews_by_user(user_id))
+
+
 @app.route('/user/<user_id>/bookshelves')
 def return_user_bookshelves(user_id):
     """Returns List of User's Bookshelves."""
