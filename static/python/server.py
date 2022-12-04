@@ -80,8 +80,8 @@ def bookdetails(bookID):
     return jsonify(book)
 
 
-@app.route('/book/<book_id>/reviews/add', methods=['POST'])
-def add_review():
+@app.route('/book/<book_id>/review', methods=['POST'])
+def add_review(book_id):
     """Adds a review."""
 
     user_id = request.json.get('user_id')

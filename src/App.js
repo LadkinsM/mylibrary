@@ -65,8 +65,7 @@ function App() {
                                                                 isLoggedIn={isLoggedIn} />} />
           <Route path="/user/:user_id/profile/book_details/:book_id" element={ <BookDetails user={user} 
                                                                                 isLoggedIn={isLoggedIn} />} />
-          <Route path="/book/:book_id/addReview" element={ <AddReview user={user}
-                                                                        isLoggedIn={isLoggedIn} /> } />
+          <Route path="/book/:book_id/addReview" element={ <AddReview user={user} /> } />
           <Route path="/user/:user_id/profile" element={ <UserDetails user={user} /> } />
           <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} />} />
 

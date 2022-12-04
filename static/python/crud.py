@@ -79,21 +79,22 @@ def get_genres_by_book(book_id):
 def get_reviews_by_book(book_id):
     """Returns all reviews by book id."""
 
-    reviews = db.session.query(Review)\
-            .join(Book, Book.book_id==Review.book_id)\
+    book = Book.query\
+            .join(Review, Review.book_id==Book.book_id)\
             .join(User, User.user_id==Review.user_id)\
-            .filter(Review.book_id == book_id).all()
+            .filter(Book.book_id == book_id).first()
+    reviews = book.reviews
 
     review_results = []
 
     for review in reviews:
         review_results.append({
-            'book_id' : Review.book_id,
-            'title' : Book.title,
-            'user_id' : Review.user_id,
-            'username' : User.email,
-            'score' : Review.score,
-            'comment' : Review.comment,
+            'book_id' : review.book_id,
+            'title' : book.title,
+            'user_id' : review.user_id,
+            'username' : review.user.email,
+            'score' : review.score,
+            'comment' : review.comment,
         })
 
     return review_results

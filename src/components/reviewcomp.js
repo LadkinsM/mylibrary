@@ -2,10 +2,11 @@ import React, { useEffect, useInsertionEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-export const AddReview = ({user, isLoggedIn, book_id}) => {
+export const AddReview = ({user}) => {
     const [score, setScore] = React.useState("");
     const [comment, setComment] = React.useState("");
     const [addSuccess, setAddSuccess] = React.useState("");
+    const { book_id } = useParams();
 
     const navigate = useNavigate();
 
@@ -29,13 +30,14 @@ export const AddReview = ({user, isLoggedIn, book_id}) => {
         if (score === "" || comment === "") {
             alert("Please complete both the score and comment sections.")
         } else {
-            fetch(`/book/${book_id}/reviews/add`, {
+            fetch(`/book/${book_id}/review`, {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify(reviewJSON)
             })
                 .then((response) => response.text(""))
                 .then((addConfirmation) => {setAddSuccess(addConfirmation)})
+                console.log(reviewJSON)
         }};
 
     if (addSuccess == "Success") {
@@ -87,7 +89,7 @@ export const BookReviewComp = ({user, isLoggedIn, book_id}) => {
         fetch(`/book/${book_id}/reviews`)
             .then((response) => response.json())
             .then((reviewData) => {setReviews(reviewData)})
-    });
+    }, []);
 
     return (
         <React.Fragment>
