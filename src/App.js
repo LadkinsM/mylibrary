@@ -10,7 +10,7 @@ import CreateShelf from "./components/createShelf";
 import SignUp from "./components/signup";
 
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import { AddReview } from './components/reviewcomp';
+import { AddReview, EditReview } from './components/reviewcomp';
 
 function App() {
   const[email, setEmail] = React.useState("");
@@ -66,6 +66,7 @@ function App() {
           <Route path="/user/:user_id/profile/book_details/:book_id" element={ <BookDetails user={user} 
                                                                                 isLoggedIn={isLoggedIn} />} />
           <Route path="/book/:book_id/addReview" element={ <AddReview user={user} /> } />
+          <Route path="/book/:book_id/:review_id/editReview" element={ <EditReview user={user} /> } />
           <Route path="/user/:user_id/profile" element={ <UserDetails user={user} /> } />
           <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} />} />
 

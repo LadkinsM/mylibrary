@@ -98,6 +98,12 @@ def get_reviews_by_user(user_id):
     return handle_reviews(user.reviews)
 
 
+def get_review_by_id(review_id):
+    """Returns review by review id."""
+
+    return Review.query.filter(Review.review_id==review_id).first()
+
+
 def get_author_book_map_by_id(author_id, book_id):
     """Return author_book_id by author_id & book_id."""
 
@@ -412,6 +418,17 @@ def create_review(user_id, book_id, score, comment):
     return Review(user_id=user_id, book_id=book_id, score=score, comment=comment)
 
 
+def edit_review(review_id, score, comment):
+    """Edit a Review"""
+
+    active_review = get_review_by_id(review_id)
+
+    active_review.score = score
+    active_review.comment = comment
+
+    db.session.commit()
+
+
 def create_bookshelf(shelf_name, user_id, private):
     """Creates a Bookshelf"""
 
@@ -457,6 +474,7 @@ def handle_reviews(reviews):
 
     for review in reviews:
         review_results.append({
+            'review_id' : review.review_id,
             'book_id' : review.book_id,
             'title' : review.books.title,
             'user_id' : review.user_id,

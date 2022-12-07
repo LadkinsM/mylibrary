@@ -193,6 +193,32 @@ def return_user_reviews(user_id):
     return json.dumps(crud.get_reviews_by_user(user_id))
 
 
+@app.route('/user/<user_id>/<review_id>', methods=['POST'])
+def update_review(user_id, review_id):
+    """Update Review"""
+
+    score = request.json.get('score')
+    comment = request.json.get('comment')
+
+    crud.edit_review(review_id, score, comment)
+
+    return "Success"
+
+
+@app.route('/user/<user_id>/<review_id>/edit')
+def return_review(user_id, review_id):
+    """Return a review by review id."""
+
+    review = crud.get_review_by_id(review_id)
+
+    return jsonify({
+        'review_id' : review.review_id,
+        'book_id' : review.book_id,
+        'user_id' : review.user_id,
+        'score' : review.score,
+        'comment' : review.comment,
+    })
+
 @app.route('/user/<user_id>/bookshelves')
 def return_user_bookshelves(user_id):
     """Returns List of User's Bookshelves."""
