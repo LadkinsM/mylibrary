@@ -140,7 +140,6 @@ def login_user():
     if user:
         if user.password == password:
             session['user'] = user.user_id
-            print(user.user_id)
             return jsonify({
                             'user_id':user.user_id,
                             'email':user.email,

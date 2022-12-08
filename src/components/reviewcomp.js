@@ -90,7 +90,7 @@ export const EditReview = ({user}) => {
     console.log(user)
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/${review_id}`)
+        fetch(`/user/${user.user_id}/${review_id}/edit`)
             .then((response) => response.json())
             .then((reviewData) => {setOriginalReview(reviewData)});
     }, []);

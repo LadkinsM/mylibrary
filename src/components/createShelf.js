@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const CreateShelf = (user) => {
+const CreateShelf = ({user}) => {
     const [shelfName, setShelfName] = React.useState("");
     const [privacy, setPrivacy] = React.useState(false);
     const [createSuccess, setCreateSuccess] = React.useState("");
+
 
     const navigate = useNavigate();
 
