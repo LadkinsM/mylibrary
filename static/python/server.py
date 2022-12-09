@@ -112,8 +112,10 @@ def create_user():
     email = request.json.get('email')
     password = request.json.get('password')
 
-    if email==None or password==None:
-        return jsonify("You must complete all fields to sign up.")
+    user = crud.get_user_by_email(email)
+
+    if user:
+        return jsonify({'alert':"User already exsists."})
     else:    
         user = crud.create_user(email, password)
         db.session.add(user)

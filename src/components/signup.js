@@ -30,37 +30,38 @@ const SignUp = () => {
             })
                 .then((response) => response.json())
                 .then((userData) => {setUser(userData);
-                });
-            
-            navigate(`/login`)
+                {user.user_id ? alert("You've successfully created an account, please log in!"): alert("That user already exsists.")}});
             }}
 
-    return (
-        <React.Fragment>
-            <h1>Sign Up</h1>
-            <form id="signup" onSubmit={handleSignUp}>
-                <div>
-                    <label htmlFor="email">User Email:</label>
-                    <input 
-                        type="text"
-                        name="email"
-                        id="user_email"
-                        value={email}
-                        onChange={updateEmail}
-                    />
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="text"
-                        name="password"
-                        id="user_password"
-                        value={password}
-                        onChange={updatePassword}
-                    />
-                    <input type="submit" />
-                </div>
-            </form>
-        </React.Fragment>
-    )
-}
 
+    if (user.user_id) {
+        return navigate(`/login`)
+    } else {
+        return (
+            <React.Fragment>
+                <h1>Sign Up</h1>
+                <form id="signup" onSubmit={handleSignUp}>
+                    <div>
+                        <label htmlFor="email">User Email:</label>
+                        <input 
+                            type="text"
+                            name="email"
+                            id="user_email"
+                            value={email}
+                            onChange={updateEmail}
+                        />
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="text"
+                            name="password"
+                            id="user_password"
+                            value={password}
+                            onChange={updatePassword}
+                        />
+                        <input type="submit" />
+                    </div>
+                </form>
+            </React.Fragment>
+        )}
+}
 export default SignUp;
