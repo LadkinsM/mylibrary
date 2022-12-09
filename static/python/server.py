@@ -89,9 +89,6 @@ def add_review(book_id):
     comment = request.json.get('comment')
     book_id = request.json.get('book_id')
 
-    print(book_id)
-    print("********************")
-
     review = crud.create_review(user_id, book_id, score, comment)
     db.session.add(review)
     db.session.commit()

@@ -7,7 +7,6 @@ const CreateShelf = ({user}) => {
     const [privacy, setPrivacy] = React.useState(false);
     const [createSuccess, setCreateSuccess] = React.useState("");
 
-
     const navigate = useNavigate();
 
     const updateShelfName = evt => {

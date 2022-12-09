@@ -26,6 +26,16 @@ function App() {
     setPassword(evt.target.value);
   };
 
+  const confirmLogin = (user) => {
+    if (user === "Incorrect Email") {
+      alert("Email and password is incorrect.")
+    } else if (user === "Incorrect Password") {
+      alert("Password is incorrect.")
+    } else {
+      setIsLoggedIn(true);
+    }
+  }
+
   const handleLogin = evt => {
     evt.preventDefault()
     const userJson = { 'email': email, 'password': password };
@@ -40,7 +50,7 @@ function App() {
       })
         .then((response) => response.json())
         .then((userData) => {setUser(userData);
-        setIsLoggedIn(true);})
+        confirmLogin(user)})
   }};
 
   const handleSignOut = evt => {
@@ -58,7 +68,8 @@ function App() {
                                                 updateEmail={evt => updateEmail(evt)}
                                                 updatePassword={evt => updatePassword(evt)}
                                                 email={email}
-                                                password={password} /> } />
+                                                password={password}
+                                                isLoggedIn={isLoggedIn} /> } />
           <Route path="/signup" element={ <SignUp /> } />
           <Route path="/search" element={ <Search /> } />
           <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} 

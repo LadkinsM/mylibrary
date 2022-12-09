@@ -87,8 +87,6 @@ export const EditReview = ({user}) => {
     const [review, setReview] = React.useState({});
     const { book_id, review_id } = useParams();
 
-    console.log(user)
-
     useEffect(() => {
         fetch(`/user/${user.user_id}/${review_id}/edit`)
             .then((response) => response.json())
@@ -174,6 +172,10 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">
+                            {(review.user_id === user.user_id && isLoggedIn !== false) && 
+                                        <Link to={`/book/${review.book_id}/${review.review_id}/editReview`}>
+                                            Edit Review
+                                        </Link>}
                                 <h3>{review.title}</h3>
                                 <p>Score: {review.score}</p>
                                 <p>{review.comment}</p>
