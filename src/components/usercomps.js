@@ -5,13 +5,45 @@ import Bookshelves from './bookshelf';
 
 export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // User toolbar (like book, add to bookshelf) for book details page.
-    const [shelves, setShelves] = React.useState([])
+    const[shelves, setShelves] = React.useState([])
     const[selectedShelf, setSelectedShelf] = React.useState("")
     const[addConfirmed, setAddConfirmed] = React.useState("")
+    const[currentRead, setCurrentRead] = React.useState({})
+
+    useEffect(() => {
+        fetch(`/user/${user.user_id}/currentread`)
+            .then((response) => response.json())
+            .then((bookData) => {setCurrentRead(bookData)});
+    }, []);
 
     const updateShelf = evt => {
         setSelectedShelf(evt.target.value);
         addToShelf();
+    };
+
+    const updateCurrentRead = evt => {
+        let userJson;
+
+        if (evt.target.value == "add") {
+            userJson = {'user_id':user.user_id, 'book_id':book_id};
+        } else {
+            userJson = {'user_id':user.user_id, 'book_id':"Remove"};
+        };
+
+        editCurrentRead(userJson);
+    };
+
+    const editCurrentRead = (userJson) => { 
+
+        console.log(userJson)
+
+        fetch(`/user/${user.user_id}/currentread/edit`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userJson)
+        })
+            .then((response) => response.json())
+            .then((bookData) => {setCurrentRead(bookData)});
     };
 
     const addToShelf = evt => {
@@ -33,24 +65,30 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             .then((response) => response.json())
             .then((dbshelves) => {setShelves(dbshelves)});
     }, []);
-    
-    console.log(`/user/${user.user_id}/bookshelves`);
-    console.log(shelves);
+
+    console.log(book_id)
+    console.log(currentRead)
 
     return (
         <React.Fragment>
-            <form id="add_to_shelf" onSubmit={addToShelf}>
-                <select
-                    id="select_shelf"
-                    value={selectedShelf}
-                    onChange={updateShelf}
-                    >
-                    {shelves.map(shelf => {
-                        return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
-                    })}
-                </select>
-                <input type="submit" />
-            </form>
+            <div>
+                {book_id !== `${currentRead.book_id}` ? <button id="button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
+                                : <button id="button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
+            </div>
+            <div>
+                <form id="add_to_shelf" onSubmit={addToShelf}>
+                    <select
+                        id="select_shelf"
+                        value={selectedShelf}
+                        onChange={updateShelf}
+                        >
+                        {shelves.map(shelf => {
+                            return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
+                        })}
+                    </select>
+                    <input type="submit" />
+                </form>
+            </div>
         </React.Fragment>
     )
 }

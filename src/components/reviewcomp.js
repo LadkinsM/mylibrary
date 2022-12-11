@@ -88,7 +88,7 @@ export const EditReview = ({user}) => {
     const { book_id, review_id } = useParams();
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/${review_id}/edit`)
+        fetch(`/user/${user.user_id}/${review_id}`)
             .then((response) => response.json())
             .then((reviewData) => {setOriginalReview(reviewData)});
     }, []);
@@ -113,7 +113,7 @@ export const EditReview = ({user}) => {
         if (score === "" || comment === "") {
             alert("Please complete both the score and comment sections.")
         } else {
-            fetch(`/user/${user.user_id}/${originalReview.review_id}`, {
+            fetch(`/user/${user.user_id}/${originalReview.review_id}/edit`, {
                 method: 'POST',
                 headers: {'Content-Type':'application/json'},
                 body: JSON.stringify(reviewJSON)

@@ -27,7 +27,7 @@ const BookDetails = ({user, isLoggedIn}) => {
     return (
         <React.Fragment>
             <div>
-                {isLoggedIn !== false && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn}/>}
+                {isLoggedIn !== false && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn} />}
             </div>
             <div>
                 <h1>{bookInfo.title}</h1>

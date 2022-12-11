@@ -175,7 +175,6 @@ def return_user_details(user_id):
     """Return user details for logged in user."""
 
     user = crud.get_user_by_id(user_id)
-    current_read = user.current_reads
 
     return jsonify({
         'user_id':user.user_id,
@@ -191,7 +190,7 @@ def return_user_reviews(user_id):
     return json.dumps(crud.get_reviews_by_user(user_id))
 
 
-@app.route('/user/<user_id>/<review_id>', methods=['POST'])
+@app.route('/user/<user_id>/<review_id>/edit', methods=['POST'])
 def update_review(user_id, review_id):
     """Update Review"""
 
@@ -203,7 +202,7 @@ def update_review(user_id, review_id):
     return "Success"
 
 
-@app.route('/user/<user_id>/<review_id>/edit')
+@app.route('/user/<user_id>/<review_id>')
 def return_review(user_id, review_id):
     """Return a review by review id."""
 
@@ -216,6 +215,40 @@ def return_review(user_id, review_id):
         'score' : review.score,
         'comment' : review.comment,
     })
+
+
+@app.route('/user/<user_id>/currentread')
+def return_current_read(user_id):
+    """Return current read by user id."""
+
+    current_read = crud.get_current_read_by_user(user_id)
+
+    if current_read is None:
+        return jsonify({
+            'book_id' : 'None',
+        })
+    else:
+        return jsonify({
+            'book_id' : current_read.book_id
+        })
+
+
+@app.route('/user/<user_id>/currentread/edit', methods=['POST'])
+def update_current_read(user_id):
+    """Update current read by user."""
+
+    user_id = request.json.get('user_id')
+    book_id = request.json.get('book_id')
+
+    if book_id == "Remove":
+        crud.deactivate_current_read(user_id)
+    elif crud.get_current_read_by_user(user_id) is None:
+        crud.create_current_read(user_id, book_id)
+    else:
+        crud.update_current_read(user_id, book_id)
+
+    return return_current_read(user_id)
+
 
 @app.route('/user/<user_id>/bookshelves')
 def return_user_bookshelves(user_id):

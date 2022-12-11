@@ -14,6 +14,7 @@ def get_book_by_googleid(google_books_id):
 
     return Book.query.filter(Book.google_books_id == google_books_id).first()
 
+
 def get_book_by_bookid(book_id):
     """Return book info by book_id"""
 
@@ -28,6 +29,7 @@ def get_book_by_bookid(book_id):
             'isbn_10' : book.isbn_10,
             'isbn_13' : book.isbn_13,
             }
+
 
 def get_books_by_author(author_id):
     """Return all books by author via author_id."""
@@ -412,6 +414,29 @@ def create_user(email, password, personal_description=""):
     return User(email=email, password=password, personal_description=personal_description)
 
 
+def create_bookshelf(shelf_name, user_id, private):
+    """Creates a Bookshelf"""
+
+    return Bookshelf(shelf_name=shelf_name, user_id=user_id, private=private)
+
+
+def create_fav_book(user_id, book_id):
+    """Creates a Faved Book"""
+
+    return Faved_Book(user_id=user_id, book_id=book_id)
+
+
+def add_to_bookshelf(shelf_id, book_id):
+    """Adds a book to bookshelf."""
+
+    if get_shelf_book_map_by_id(shelf_id, book_id):
+        return False
+    else:
+        create_shelf_book_relationship(shelf_id, book_id)
+        return True
+
+#REVIEWS
+
 def create_review(user_id, book_id, score, comment):
     """Creates a Review"""
 
@@ -429,45 +454,6 @@ def edit_review(review_id, score, comment):
     db.session.commit()
 
 
-def create_bookshelf(shelf_name, user_id, private):
-    """Creates a Bookshelf"""
-
-    return Bookshelf(shelf_name=shelf_name, user_id=user_id, private=private)
-
-
-def create_fav_book(user_id, book_id):
-    """Creates a Faved Book"""
-
-    return Faved_Book(user_id=user_id, book_id=book_id)
-
-
-def deactivate_current_read(user_id):
-    """Deactivates Users Current Read."""
-
-    current_read = get_current_read_by_user(user_id)
-
-    current_read.is_active = False
-
-    db.session.commit()
-
-
-def create_current_read(user_id, book_id, is_active=True):
-    """Creates a users current read."""
-
-    return Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
-
-
-def add_to_bookshelf(shelf_id, book_id):
-    """Adds a book to bookshelf."""
-
-    if get_shelf_book_map_by_id(shelf_id, book_id):
-        return False
-    else:
-        create_shelf_book_relationship(shelf_id, book_id)
-        return True
-
-#REVIEWS
-
 def handle_reviews(reviews):
 
     review_results = []
@@ -484,6 +470,35 @@ def handle_reviews(reviews):
         })
 
     return review_results
+
+#CURRENT READ
+
+def deactivate_current_read(user_id):
+    """Deactivates Users Current Read."""
+
+    current_read = get_current_read_by_user(user_id)
+
+    current_read.is_active = False
+
+    db.session.commit()
+
+
+def create_current_read(user_id, book_id, is_active=True):
+    """Creates a users current read."""
+
+    current_read = Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
+
+    db.session.add(current_read)
+    db.session.commit()
+
+
+def update_current_read(user_id, book_id):
+    """Updates a users current read."""
+
+    if get_current_read_by_user is not None:
+        deactivate_current_read(user_id)
+    
+    create_current_read(user_id, book_id)
 
 
 
