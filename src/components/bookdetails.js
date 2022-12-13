@@ -4,25 +4,22 @@ import '../App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserBookComp} from './usercomps';
-import { BookReviewComp } from './reviewcomp';
+import { BookReviewComp, AddReview } from './reviewcomp';
 
 const BookDetails = ({user, isLoggedIn}) => {
     // Display details for individual book
     const[bookInfo, setBookInfo] = React.useState({});
+    const[showReviewModal, setShowReviewModal] = React.useState(false);
     const { book_id } = useParams();
-    // const[userInfo, setUserInfo] = React.useState({});
-
-    // useEffect(() => {
-    //     fetch(`/user/${user.user_id}/user_details`)
-    //         .then((response) => response.json())
-    //         .then((dbUser) => {setUserInfo(dbUser)});
-    // }, []);
 
     useEffect(() => {
         fetch(`/book/${book_id}/book_details`)
             .then((response) => response.json())
             .then((dbBook) => {setBookInfo(dbBook)});
     }, []);
+
+    const handleShow = evt => {setShowReviewModal(true)};
+    const handleClose = evt => {setShowReviewModal(false)};
 
     return (
         <React.Fragment>
@@ -36,7 +33,20 @@ const BookDetails = ({user, isLoggedIn}) => {
                 <p>Publish Date: {bookInfo.publish_date}</p>
             </div>
             <div>
-                {isLoggedIn !== false && <Link to={`/book/${book_id}/addReview`}>Add a Review</Link>}
+                {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}
+                    <Modal
+                        show={showReviewModal}
+                        onHide={handleClose}
+                        backdrop="static"
+                        keyboard={false}
+                    >
+                        <Modal.Header closeButton onClick={handleClose}>
+                            <Modal.Title>Enter your review below!</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <AddReview user={user} book_id={book_id} handleClose={evt => handleClose(evt)}/>
+                        </Modal.Body>
+                    </Modal>
                 <BookReviewComp user={user} book_id={book_id} isLoggedIn={isLoggedIn} />
             </div>
         </React.Fragment>

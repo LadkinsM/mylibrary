@@ -30,7 +30,7 @@ const SignUp = () => {
             })
                 .then((response) => response.json())
                 .then((userData) => {setUser(userData);
-                {user.user_id ? alert("You've successfully created an account, please log in!"): alert("That user already exsists.")}});
+                {user.user_id !== undefined ? alert("You've successfully created an account, please log in!"): alert("That user already exsists.")}});
             }}
 
 

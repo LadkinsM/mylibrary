@@ -24,7 +24,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     const updateCurrentRead = evt => {
         let userJson;
 
-        if (evt.target.value == "add") {
+        if (evt.target.value === "add") {
             userJson = {'user_id':user.user_id, 'book_id':book_id};
         } else {
             userJson = {'user_id':user.user_id, 'book_id':"Remove"};
@@ -53,7 +53,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             .then((response) => response.text(""))
             .then((addConfirmation) => {setAddConfirmed(addConfirmation)});
 
-        if (addConfirmed == "Failed") {
+        if (addConfirmed === "Failed") {
             alert("This book has already been added.");
         } else {
             alert(`This book has been added.`);

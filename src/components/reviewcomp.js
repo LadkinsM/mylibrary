@@ -2,11 +2,10 @@ import React, { useEffect, useInsertionEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-export const AddReview = ({user}) => {
+export const AddReview = ({user, book_id, handleClose}) => {
     const [score, setScore] = React.useState("");
     const [comment, setComment] = React.useState("");
     const [addSuccess, setAddSuccess] = React.useState("");
-    const { book_id } = useParams();
 
     const navigate = useNavigate();
 
@@ -19,7 +18,6 @@ export const AddReview = ({user}) => {
     };
 
     const addReview = evt => {
-        evt.preventDefault()
         const reviewJSON = {
             'user_id':user.user_id,
             'book_id':book_id,
@@ -37,7 +35,7 @@ export const AddReview = ({user}) => {
             })
                 .then((response) => response.text(""))
                 .then((addConfirmation) => {setAddSuccess(addConfirmation)})
-                console.log(reviewJSON)
+                handleClose();
         }};
 
     if (addSuccess == "Success") {
