@@ -6,7 +6,6 @@ import { UserReviewComp } from './reviewcomp';
 
 const UserDetails = ({user}) => {
     // Display details for User
-    // const[userInfo, setUserInfo] = React.useState({});
     const [shelves, setShelves] = React.useState([]);
     const[currentRead, setCurrentRead] = React.useState({})
 

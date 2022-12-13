@@ -29,6 +29,9 @@ const BookDetails = ({user, isLoggedIn}) => {
             <div>
                 <h1>{bookInfo.title}</h1>
                 <img src={bookInfo.cover} />
+                {/* <p>Authors: {bookInfo.authors.map(author => {return <p>{author.name}</p>})}</p> */}
+                <p>Authors: {bookInfo.authors}</p>
+                <p>Genres: {bookInfo.genres}</p>
                 <p>Description: {bookInfo.overview}</p>
                 <p>Publish Date: {bookInfo.publish_date}</p>
             </div>

@@ -18,7 +18,12 @@ def get_book_by_googleid(google_books_id):
 def get_book_by_bookid(book_id):
     """Return book info by book_id"""
 
-    book = Book.query.filter(Book.book_id == book_id).first()
+    book = Book.query\
+            .join(Author_book_map, Author_book_map.book_id==Book.book_id)\
+            .join(Author, Author.author_id==Author_book_map.author_id)\
+            .join(Genre_book_map, Genre_book_map.book_id==Book.book_id)\
+            .join(Genre, Genre.genre_id==Genre_book_map.genre_id)\
+            .filter(Book.book_id == book_id).first()
 
     return {
             'book_id' : book.book_id,
@@ -28,6 +33,10 @@ def get_book_by_bookid(book_id):
             'publish_date' : book.publish_date,
             'isbn_10' : book.isbn_10,
             'isbn_13' : book.isbn_13,
+            # 'authors' : [{'name':author.name, 'author_id':author.author_id} for author in book.authors],
+            'authors' : ", ".join(author.name for author in book.authors),
+            # 'genres' : [{'name':genre.name, 'genre_id':genre.genre_id} for genre in book.genres]
+            'genres' : ", ".join(genre.name for genre in book.genres)
             }
 
 
@@ -242,7 +251,7 @@ def handle_search(search_criteria, search_input):
             'publish_date' : book.publish_date,
             'isbn_10' : book.isbn_10,
             'isbn_13' : book.isbn_13,
-            'authors' : get_authors_by_book(book.book_id)[0]['name'],
+            'authors' : ', '.join(author.name for author in book.authors),
             'genres' : get_genres_by_book(book.book_id)[0]['name']
         })
 

@@ -77,6 +77,8 @@ def bookdetails(bookID):
 
     book = crud.get_book_by_bookid(bookID)
 
+    print(book)
+
     return jsonify(book)
 
 
@@ -223,8 +225,6 @@ def return_current_read(user_id):
 
     current_read = crud.get_current_read_by_user(user_id)
     authors = ','.join(author.name for author in current_read.books.authors)
-    print("********************************")
-    print(authors)
 
     if current_read is None:
         return jsonify({

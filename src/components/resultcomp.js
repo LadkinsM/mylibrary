@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 const ResultDisplay = (props) => {
     const results = props.results
 
+
     return(
         <React.Fragment>
             <h2>Results</h2>
