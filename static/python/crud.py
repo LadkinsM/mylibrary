@@ -145,7 +145,13 @@ def get_user_by_id(user_id):
 def get_current_read_by_user(user_id):
     """Return a user's current read."""
 
-    return Current_Read.query.filter(Current_Read.user_id == user_id, Current_Read.is_active == True).first()
+    current_read = Current_Read.query\
+                .join(Book, Book.book_id==Current_Read.book_id)\
+                .join(Author_book_map,Author_book_map.book_id==Book.book_id)\
+                .join(Author,Author.author_id==Author_book_map.author_id)\
+                .filter(Current_Read.user_id == user_id, Current_Read.is_active == True).first()
+
+    return current_read
 
 
 def get_faved_books_by_user(user_id):

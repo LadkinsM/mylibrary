@@ -8,14 +8,9 @@ const UserDetails = ({user}) => {
     // Display details for User
     // const[userInfo, setUserInfo] = React.useState({});
     const [shelves, setShelves] = React.useState([]);
+    const[currentRead, setCurrentRead] = React.useState({})
 
     console.log(user.user_id)
-
-    // useEffect(() => {
-    //     fetch(`/user/${user.user_id}/user_details`)
-    //         .then((response) => response.json())
-    //         .then((dbUser) => {setUserInfo(dbUser)});
-    // }, []);
 
     useEffect(() => {
         fetch(`/user/${user.user_id}/bookshelves`)
@@ -23,17 +18,24 @@ const UserDetails = ({user}) => {
             .then((dbshelves) => {setShelves(dbshelves)});
     }, []);
 
+    useEffect(() => {
+        fetch(`/user/${user.user_id}/currentread`)
+            .then((response) => response.json())
+            .then((bookData) => {setCurrentRead(bookData)});
+    }, []);
+
     console.log(shelves);
 
     return (
         <React.Fragment>
-            {/* <div>
-                <p>Currently Reading : 
-                    {userInfo.current_read ? <Link to={`book_details/${current_read.book_id}`}>
-                        {current_read.title}
-                    </Link>: <p>None</p>}
+            <div>
+                <p>Currently Reading :  
+                    {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
+                        {currentRead.title} by {currentRead.author}
+                    </Link>
+                    : <Link to='/search'>What are you currently reading?</Link>}
                 </p>
-            </div> */}
+            </div>
             <div className="card">
                 <h1>{user.email}</h1>
                 <p>{user.personal_description}</p>
