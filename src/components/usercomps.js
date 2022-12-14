@@ -54,7 +54,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             .then((addConfirmation) => {setAddConfirmed(addConfirmation)});
 
         if (addConfirmed === "Failed") {
-            alert("This book has already been added.");
+            alert("This book has already been added to this shelf.");
         } else {
             alert(`This book has been added.`);
         }

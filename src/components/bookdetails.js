@@ -55,20 +55,4 @@ const BookDetails = ({user, isLoggedIn}) => {
         </React.Fragment>
     )};
 
-    // return (
-    //     <Modal size="lg" centered>
-    //         <Modal.Header closeButton>
-    //             <Modal.Title>{bookInfo.title}</Modal.Title>
-    //         </Modal.Header>
-    //         <Modal.Body>
-    //             <img src={bookInfo.cover} />
-    //             <p>Description: {bookInfo.overview}</p>
-    //             <p>Publish Date: {bookInfo.publish_date}</p>
-    //         </Modal.Body>
-    //         <Modal.Footer>
-    //             {user !== "False" && <UserBookComp user={user} book_id={book_id} />}
-    //         </Modal.Footer>
-    //     </Modal>
-    // )};
-
 export default BookDetails;

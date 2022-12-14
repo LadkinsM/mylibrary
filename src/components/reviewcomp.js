@@ -18,6 +18,7 @@ export const AddReview = ({user, book_id, handleClose}) => {
     };
 
     const addReview = evt => {
+        evt.preventDefault();
         const reviewJSON = {
             'user_id':user.user_id,
             'book_id':book_id,

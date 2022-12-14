@@ -71,7 +71,7 @@ function App() {
                                                 password={password}
                                                 isLoggedIn={isLoggedIn} /> } />
           <Route path="/signup" element={ <SignUp /> } />
-          <Route path="/search" element={ <Search /> } />
+          <Route path="/search" element={ <Search user={user} /> } />
           <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} 
                                                                 isLoggedIn={isLoggedIn} />} />
           <Route path="/user/:user_id/profile/book_details/:book_id" element={ <BookDetails user={user} 

@@ -184,7 +184,14 @@ def get_bookshelves_by_user(user_id):
 def get_shelf_by_id(shelf_id):
     """Return shelf by shelf id."""
 
-    return Bookshelf.query.filter(Bookshelf.shelf_id == shelf_id).first()
+    return Bookshelf.query\
+                .join(Shelf_book_map, Shelf_book_map.shelf_id==Bookshelf.shelf_id)\
+                .join(Book, Book.book_id==Shelf_book_map.book_id)\
+                .join(Author_book_map,Author_book_map.book_id==Book.book_id)\
+                .join(Author,Author.author_id==Author_book_map.author_id)\
+                .join(Genre_book_map,Genre_book_map.book_id==Book.book_id)\
+                .join(Genre,Genre.genre_id==Genre_book_map.genre_id)\
+                .filter(Bookshelf.shelf_id == shelf_id).first()
 
 
 def get_books_by_shelf(shelf_id):
@@ -202,6 +209,8 @@ def get_books_by_shelf(shelf_id):
             'publish_date' : book.publish_date,
             'isbn_10' : book.isbn_10,
             'isbn_13' : book.isbn_13,
+            'authors' : ', '.join(author.name for author in book.authors),
+            'genres' : ', '.join(genre.name for genre in book.genres)
             }
         )
 

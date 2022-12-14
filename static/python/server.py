@@ -287,12 +287,15 @@ def create_bookshelf():
 def add_to_bookshelf(shelf_id, book_id):
     """Adds book to shelf."""
 
-    book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)
+    # book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)
 
-    db.session.add(book_to_add)
-    db.session.commit()
+    # db.session.add(book_to_add)
+    # db.session.commit()
 
-    if crud.get_shelf_book_map_by_id(shelf_id, book_id):
+    if not crud.get_shelf_book_map_by_id(shelf_id, book_id):
+        book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)
+        db.session.add(book_to_add)
+        db.session.commit()
         return "Added"
     else:
         return "Failed"
