@@ -200,21 +200,23 @@ def get_books_by_shelf(shelf_id):
     shelf = get_shelf_by_id(shelf_id)
     books_list = []
 
-    for book in shelf.books:
-        books_list.append({
-            'book_id' : book.book_id,
-            'title' : book.title,
-            'overview' : book.overview,
-            'cover' : book.cover,
-            'publish_date' : book.publish_date,
-            'isbn_10' : book.isbn_10,
-            'isbn_13' : book.isbn_13,
-            'authors' : ', '.join(author.name for author in book.authors),
-            'genres' : ', '.join(genre.name for genre in book.genres)
-            }
-        )
-
+    if shelf:
+        for book in shelf.books:
+            books_list.append({
+                'book_id' : book.book_id,
+                'title' : book.title,
+                'overview' : book.overview,
+                'cover' : book.cover,
+                'publish_date' : book.publish_date,
+                'isbn_10' : book.isbn_10,
+                'isbn_13' : book.isbn_13,
+                'authors' : ', '.join(author.name for author in book.authors),
+                'genres' : ', '.join(genre.name for genre in book.genres)
+                }
+            )
+    
     return books_list
+
 
 
 def get_all_users():

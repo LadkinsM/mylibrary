@@ -265,7 +265,7 @@ def return_user_bookshelves(user_id):
 @app.route('/user/<user_id>/bookshelves/<shelf_id>')
 def return_bookshelf(user_id, shelf_id):
     """Return Books in Shelf"""
-
+    
     return json.dumps(crud.get_books_by_shelf(shelf_id))
 
 

@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-function Nav({user, handleSignOut, isLoggedIn}) {
+function Nav({user, handleSignOut, isLoggedIn, loading}) {
     return (
       <React.Fragment>
+        {loading ? (<p>Loading...</p>) : (
         <nav key={user}>
           <h3>Site Name</h3>
           <ul>
@@ -19,7 +20,7 @@ function Nav({user, handleSignOut, isLoggedIn}) {
               && <li><Link to={`/user/${user.user_id}/profile`}>MyProfile</Link></li>
               }
           </ul>
-        </nav>
+        </nav>)}
       </React.Fragment>
     );
   }

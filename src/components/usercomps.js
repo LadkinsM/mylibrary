@@ -126,7 +126,8 @@ export const UserBookshelfComp = ({user, shelves}) => {
                 })}
             </select>
             <div>
-                <Bookshelves user={user} books={books} />
+            {books.length==0 ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
+                <Bookshelves user={user} books={books} /> }
             </div>
         </React.Fragment>
     )

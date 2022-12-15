@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navigation from "./components/navigation";
 import Login from "./components/login";
 import Search from "./components/search";
@@ -17,6 +17,20 @@ function App() {
   const[password, setPassword] = React.useState("");
   const[user, setUser] = React.useState({});
   const[isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const[loading, setLoading] = React.useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`/user`)
+      .then((response) => response.text())
+      .then((loginData) => {
+        if (loginData != "False") {
+          setIsLoggedIn(true);
+          setLoading(false);
+        } else {
+          setLoading(false);
+        }}
+      )}, []);
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -62,7 +76,10 @@ function App() {
 
   return (
     <Router>
-      <Navigation user={user} handleSignOut={evt => handleSignOut(evt)} isLoggedIn={isLoggedIn} />
+      <Navigation user={user} 
+                  handleSignOut={evt => handleSignOut(evt)} 
+                  loading={loading}
+                  isLoggedIn={isLoggedIn} />
       <Routes>
           <Route path="/login" element={ <Login handleLogin={evt => handleLogin(evt)}
                                                 updateEmail={evt => updateEmail(evt)}
