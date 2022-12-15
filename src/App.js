@@ -19,18 +19,14 @@ function App() {
   const[isLoggedIn, setIsLoggedIn] = React.useState(false);
   const[loading, setLoading] = React.useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`/user`)
-      .then((response) => response.text())
-      .then((loginData) => {
-        if (loginData != "False") {
-          setIsLoggedIn(true);
-          setLoading(false);
-        } else {
-          setLoading(false);
-        }}
-      )}, []);
+  // useEffect(() => {
+  //   setLoading(true)
+  //   fetch(`/user`)
+  //     .then((response) => response.json())
+  //     .then((userData) => {setUser(userData);
+  //     setIsLoggedIn(true);
+  //     setLoading(false)})
+  // }, []);
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -86,17 +82,20 @@ function App() {
                                                 updatePassword={evt => updatePassword(evt)}
                                                 email={email}
                                                 password={password}
-                                                isLoggedIn={isLoggedIn} /> } />
+                                                isLoggedIn={isLoggedIn} 
+                                                loading={loading}/> } />
           <Route path="/signup" element={ <SignUp /> } />
-          <Route path="/search" element={ <Search user={user} /> } />
+          <Route path="/search" element={ <Search user={user} loading={loading} /> } />
           <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} 
-                                                                isLoggedIn={isLoggedIn} />} />
+                                                                isLoggedIn={isLoggedIn} 
+                                                                loading={loading}/>} />
           <Route path="/user/:user_id/profile/book_details/:book_id" element={ <BookDetails user={user} 
-                                                                                isLoggedIn={isLoggedIn} />} />
-          <Route path="/book/:book_id/addReview" element={ <AddReview user={user} /> } />
-          <Route path="/book/:book_id/:review_id/editReview" element={ <EditReview user={user} /> } />
-          <Route path="/user/:user_id/profile" element={ <UserDetails user={user} /> } />
-          <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} />} />
+                                                                                isLoggedIn={isLoggedIn}
+                                                                                loading={loading} />} />
+          <Route path="/book/:book_id/addReview" element={ <AddReview user={user} loading={loading}/> } />
+          <Route path="/book/:book_id/:review_id/editReview" element={ <EditReview user={user} loading={loading}/> } />
+          <Route path="/user/:user_id/profile" element={ <UserDetails user={user} loading={loading}/> } />
+          <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} loading={loading}/>} />
 
       </Routes>
     </Router>

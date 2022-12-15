@@ -66,8 +66,6 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             .then((dbshelves) => {setShelves(dbshelves)});
     }, []);
 
-    console.log(book_id)
-    console.log(currentRead)
 
     return (
         <React.Fragment>

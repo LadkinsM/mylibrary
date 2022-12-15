@@ -4,7 +4,7 @@ import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 import { UserReviewComp } from './reviewcomp';
 
-const UserDetails = ({user}) => {
+const UserDetails = ({user, loading}) => {
     // Display details for User
     const [shelves, setShelves] = React.useState([]);
     const[currentRead, setCurrentRead] = React.useState({})
@@ -23,7 +23,6 @@ const UserDetails = ({user}) => {
             .then((bookData) => {setCurrentRead(bookData)});
     }, []);
 
-    console.log(shelves);
 
     return (
         <React.Fragment>

@@ -140,7 +140,11 @@ def login_user():
 
     if user:
         if user.password == password:
-            session['user'] = user.user_id
+            session['user'] = {
+                            'user_id':user.user_id,
+                            'email':user.email,
+                            'personal_description':user.personal_description,
+                        }
             return jsonify({
                             'user_id':user.user_id,
                             'email':user.email,
@@ -166,10 +170,10 @@ def user_logged_in():
     """Check for logged in user and return user ID."""
 
     if 'user' not in session:
-        return "False"
+        return jsonify({'user_id':"False"})
     else:
         print(session['user'])
-        return f"{session['user']}"
+        return jsonify(session['user'])
 
 
 @app.route('/user/<user_id>/user_details')
@@ -224,13 +228,14 @@ def return_current_read(user_id):
     """Return current read by user id."""
 
     current_read = crud.get_current_read_by_user(user_id)
-    authors = ','.join(author.name for author in current_read.books.authors)
 
     if current_read is None:
         return jsonify({
             'book_id' : 'None',
         })
     else:
+        authors = ','.join(author.name for author in current_read.books.authors)
+
         return jsonify({
             'book_id' : current_read.book_id,
             'title' : current_read.books.title,
@@ -271,6 +276,7 @@ def return_bookshelf(user_id, shelf_id):
 
 @app.route('/bookshelf/createshelf', methods=['POST'])
 def create_bookshelf():
+    """Creates bookshelf in db."""
     user_id = request.json.get('user_id')
     shelf_name = request.json.get('name')
     private = request.json.get('private')

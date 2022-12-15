@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 function Nav({user, handleSignOut, isLoggedIn, loading}) {
+  // Display navigation bar
     return (
       <React.Fragment>
         {loading ? (<p>Loading...</p>) : (
         <nav key={user}>
-          <h3>Site Name</h3>
+          <h3>MyLibrary</h3>
           <ul>
             <li>
               <Link to="/search">Search</Link>
