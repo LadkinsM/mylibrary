@@ -19,14 +19,19 @@ function App() {
   const[isLoggedIn, setIsLoggedIn] = React.useState(false);
   const[loading, setLoading] = React.useState(false);
 
-  // useEffect(() => {
-  //   setLoading(true)
-  //   fetch(`/user`)
-  //     .then((response) => response.json())
-  //     .then((userData) => {setUser(userData);
-  //     setIsLoggedIn(true);
-  //     setLoading(false)})
-  // }, []);
+  useEffect(() => {
+    setLoading(true)
+    fetch(`/user`)
+      .then((response) => response.json())
+      .then((userData) => {
+      if (!(userData.user_id)) {
+        setUser({});
+        setIsLoggedIn(false);}
+      else {
+        setUser(userData);
+        setIsLoggedIn(true);}
+      setLoading(false)})
+  }, []);
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -66,7 +71,7 @@ function App() {
   const handleSignOut = evt => {
     fetch('/logout')
       .then((response) => response.text())
-      .then((updateLogin) => {setUser(updateLogin);
+      .then((updateLogin) => {setUser({});
       setIsLoggedIn(false)});
   };
 

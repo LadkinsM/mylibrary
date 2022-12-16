@@ -1,24 +1,21 @@
 import React, { useEffect, useInsertionEffect } from 'react';
+import ModalDialog from 'react-bootstrap/esm/ModalDialog';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 export const AddReview = ({user, book_id, handleClose}) => {
+    //Add a new review, accessed via bookdetails page.
     const [score, setScore] = React.useState("");
     const [comment, setComment] = React.useState("");
     const [addSuccess, setAddSuccess] = React.useState("");
-
     const navigate = useNavigate();
 
-    const updateScore = evt => {
-        setScore(evt.target.value);
-    };
-
-    const updateComment = evt => {
-        setComment(evt.target.value);
-    };
+    const updateScore = evt => {setScore(evt.target.value)};
+    const updateComment = evt => {setComment(evt.target.value)};
 
     const addReview = evt => {
-        evt.preventDefault();
         const reviewJSON = {
             'user_id':user.user_id,
             'book_id':book_id,
@@ -44,7 +41,6 @@ export const AddReview = ({user, book_id, handleClose}) => {
     } else {
         return (
             <React.Fragment>
-                <h3>Create Review</h3>
                 <form id="addreview" onSubmit={addReview}>
                     <div>
                         <label htmlFor="score">Score:</label>
@@ -78,13 +74,12 @@ export const AddReview = ({user, book_id, handleClose}) => {
 }
 
 
-export const EditReview = ({user}) => {
+export const EditReview = ({user, book_id, review_id, handleClose}) => {
+    //Edit an exsisting review, accessed via bookdetails & userdetails pages.
     const [score, setScore] = React.useState("");
     const [comment, setComment] = React.useState("");
     const [addSuccess, setAddSuccess] = React.useState("");
     const [originalReview, setOriginalReview] = React.useState({});
-    const [review, setReview] = React.useState({});
-    const { book_id, review_id } = useParams();
 
     useEffect(() => {
         fetch(`/user/${user.user_id}/${review_id}`)
@@ -92,16 +87,11 @@ export const EditReview = ({user}) => {
             .then((reviewData) => {setOriginalReview(reviewData)});
     }, []);
 
-    const updateScore = evt => {
-        setScore(evt.target.value);
-    };
+    const updateScore = evt => {setScore(evt.target.value)};
 
-    const updateComment = evt => {
-        setComment(evt.target.value);
-    };
+    const updateComment = evt => {setComment(evt.target.value)};
 
     const editReview = evt => {
-        evt.preventDefault()
         const reviewJSON = {
             'review_id':originalReview.review_id,
             'user_id':user.user_id,
@@ -119,7 +109,7 @@ export const EditReview = ({user}) => {
             })
                 .then((response) => response.text(""))
                 .then((addConfirmation) => {setAddSuccess(addConfirmation)})
-                console.log(reviewJSON)
+                handleClose();
         }};
     
     return (
@@ -156,14 +146,16 @@ export const EditReview = ({user}) => {
 
 
 export const UserReviewComp = ({user, isLoggedIn}) => {
+    // Displays reviews by user on user details page.
     const [reviews, setReviews] = React.useState([]);
 
-
     useEffect(() => {
-        fetch(`/user/${user.user_id}/reviews`)
-            .then((response) => response.json())
-            .then((dbreviews) => {setReviews(dbreviews)});
-    }, []);
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/reviews`)
+                .then((response) => response.json())
+                .then((dbreviews) => {setReviews(dbreviews)});
+        }
+    }, [user]);
 
     return (
         <React.Fragment>
@@ -186,25 +178,42 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
 }
 
 
-export const BookReviewComp = ({user, isLoggedIn, book_id}) => {
-    const [reviews, setReviews] = React.useState([]);
+export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
+    //Display reviews by book on book details page.
+    const[showReviewModal, setShowReviewModal] = React.useState(false);
+    const[currentReview, setCurrentReview] = React.useState({});
 
-    useEffect(() => {
-        fetch(`/book/${book_id}/reviews`)
-            .then((response) => response.json())
-            .then((reviewData) => {setReviews(reviewData)})
-    }, []);
+    const handleShow = (review_id) => {
+        setShowReviewModal(true);
+        setCurrentReview(review_id);
+    };
+    const handleClose = evt => {setShowReviewModal(false)};
 
     return (
         <React.Fragment>
             <h2>Reviews</h2>
+            <Modal
+                show={showReviewModal}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton onClick={handleClose}>
+                    <Modal.Title>Edit your review below!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <EditReview user={user}
+                        book_id={book_id}
+                        review_id={currentReview}
+                        handleClose={evt => handleClose(evt)}
+                    />
+                </Modal.Body>
+            </Modal>
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">
                                 {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                        <Link to={`/book/${book_id}/${review.review_id}/editReview`}>
-                                            Edit Review
-                                        </Link>}
+                                        <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                 <h3>{review.username} says...</h3>
                                 <p>Score: {review.score}</p>
                                 <p>{review.comment}</p>

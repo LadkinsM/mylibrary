@@ -97,10 +97,12 @@ export const UserBookshelfComp = ({user, shelves}) => {
     const[books, setBooks] = React.useState([]);
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
-            .then((response) => response.json())
-            .then((dbShelf) => {setBooks(dbShelf);
-            console.log(books);});
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
+                .then((response) => response.json())
+                .then((dbShelf) => {setBooks(dbShelf);
+                console.log(books);});
+        }
     }, [selectedShelf]);
 
     const updateShelf = evt => {

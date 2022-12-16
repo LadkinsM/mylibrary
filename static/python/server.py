@@ -170,7 +170,7 @@ def user_logged_in():
     """Check for logged in user and return user ID."""
 
     if 'user' not in session:
-        return jsonify({'user_id':"False"})
+        return jsonify({})
     else:
         print(session['user'])
         return jsonify(session['user'])
@@ -227,8 +227,13 @@ def return_review(user_id, review_id):
 def return_current_read(user_id):
     """Return current read by user id."""
 
-    current_read = crud.get_current_read_by_user(user_id)
+    if not user_id:
+        return jsonify({
+            'book_id' : 'None',
+        })
 
+    current_read = crud.get_current_read_by_user(user_id)
+    
     if current_read is None:
         return jsonify({
             'book_id' : 'None',

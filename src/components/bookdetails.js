@@ -10,6 +10,7 @@ const BookDetails = ({user, isLoggedIn}) => {
     // Display details for individual book
     const[bookInfo, setBookInfo] = React.useState({});
     const[showReviewModal, setShowReviewModal] = React.useState(false);
+    const [reviews, setReviews] = React.useState([]);
     const { book_id } = useParams();
 
     useEffect(() => {
@@ -17,6 +18,14 @@ const BookDetails = ({user, isLoggedIn}) => {
             .then((response) => response.json())
             .then((dbBook) => {setBookInfo(dbBook)});
     }, []);
+
+    useEffect(() => {getReviewsByBook()}, []);
+
+    const getReviewsByBook = () => {
+        fetch(`/book/${book_id}/reviews`)
+            .then((response) => response.json())
+            .then((reviewData) => {setReviews(reviewData)})
+    };
 
     const handleShow = evt => {setShowReviewModal(true)};
     const handleClose = evt => {setShowReviewModal(false)};
@@ -50,7 +59,11 @@ const BookDetails = ({user, isLoggedIn}) => {
                             <AddReview user={user} book_id={book_id} handleClose={evt => handleClose(evt)}/>
                         </Modal.Body>
                     </Modal>
-                <BookReviewComp user={user} book_id={book_id} isLoggedIn={isLoggedIn} />
+                <BookReviewComp user={user} 
+                                book_id={book_id} 
+                                isLoggedIn={isLoggedIn} 
+                                reviews={reviews}
+                />
             </div>
         </React.Fragment>
     )};

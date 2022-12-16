@@ -9,19 +9,22 @@ const UserDetails = ({user, loading}) => {
     const [shelves, setShelves] = React.useState([]);
     const[currentRead, setCurrentRead] = React.useState({})
 
-    console.log(user.user_id)
+    useEffect(() => {
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/bookshelves`)
+                .then((response) => response.json())
+                .then((dbshelves) => {setShelves(dbshelves)});
+        }
+    }, [user]);
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/bookshelves`)
-            .then((response) => response.json())
-            .then((dbshelves) => {setShelves(dbshelves)});
-    }, []);
-
-    useEffect(() => {
-        fetch(`/user/${user.user_id}/currentread`)
-            .then((response) => response.json())
-            .then((bookData) => {setCurrentRead(bookData)});
-    }, []);
+        if (user.user_id) {
+                console.log("fetch")
+                fetch(`/user/${user.user_id}/currentread`)
+                    .then((response) => response.json())
+                    .then((bookData) => {setCurrentRead(bookData)});
+                }
+    }, [user]);
 
 
     return (
