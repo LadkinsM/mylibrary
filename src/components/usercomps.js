@@ -12,12 +12,19 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     const[selectedShelf, setSelectedShelf] = React.useState("")
     const[addConfirmed, setAddConfirmed] = React.useState("")
     const[currentRead, setCurrentRead] = React.useState({})
+    // const[likedBook, setLikedBook] = React.useState(false)
 
     useEffect(() => {
         fetch(`/user/${user.user_id}/currentread`)
             .then((response) => response.json())
             .then((bookData) => {setCurrentRead(bookData)});
-    }, []);
+    }, [user]);
+
+    // useEffect(() => {
+    //     fetch(`/user/${user.user_id}/likedbooks/${book_id}`)
+    //         .then((response) => response.ok())
+    //         .then((response) => {setLikedBook(response)});
+    // }, [user]);
 
     const updateShelf = evt => {
         setSelectedShelf(evt.target.value);
@@ -62,6 +69,13 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             alert(`This book has been added.`);
         }
     };
+
+    // const addToLikedBooks = evt => {
+    //     evt.preventDefault()
+
+    //     //Create fetch request to add book to liked books shelf.
+    //     //should update button to reflect added to liked books shelf.
+    // }
 
     useEffect(() => {
         fetch(`/user/${user.user_id}/bookshelves`)
@@ -133,7 +147,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
                         <Modal.Title>Create a new shelf below!</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CreateShelf user={user} handleClose={evt => handleClose(evt)} />
+                        <CreateShelf user={user} shelves={shelves} handleClose={evt => handleClose(evt)} />
                     </Modal.Body>
                 </Modal>
             <select
@@ -141,13 +155,13 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
                 value={selectedShelf}
                 onChange={updateShelf}
                 >
-                <option key="None">Select Shelf</option>
+                <option key="None" value="None">Select Shelf</option>
                 {shelves.map(shelf => {
                     return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
                 })}
             </select>
             <div>
-            {books.length==0 && selectedShelf !== "Select Shelf" ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
+            {books.length==0 && selectedShelf !== "None" ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
                 <Bookshelves user={user} books={books} /> }
             </div>
         </React.Fragment>

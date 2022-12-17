@@ -194,6 +194,14 @@ def get_shelf_by_id(shelf_id):
                 .filter(Bookshelf.shelf_id == shelf_id).first()
 
 
+def get_liked_books_shelf(user_id):
+    """Return Liked Books Shelf by user id."""
+
+    liked_books_shelf = Bookshelf.query.filter(Bookshelf.name=="Liked Books", Bookshelf.user_id==user_id).first()
+
+    return get_books_by_shelf(liked_books_shelf.shelf_id)
+
+
 def get_books_by_shelf(shelf_id):
     """Return all books on shelf by shelf id"""
 
@@ -216,7 +224,6 @@ def get_books_by_shelf(shelf_id):
             )
     
     return books_list
-
 
 
 def get_all_users():

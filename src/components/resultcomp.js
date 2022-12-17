@@ -10,7 +10,6 @@ const ResultDisplay = (props) => {
 
     return(
         <React.Fragment>
-            <h2>Results</h2>
                 <div className="container">
                 {results && results.map(result => {
                     return <Link to={`book_details/${result.book_id}`}>

@@ -185,7 +185,6 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
                     />
                 </Modal.Body>
             </Modal>
-            <h2>Reviews</h2>
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">

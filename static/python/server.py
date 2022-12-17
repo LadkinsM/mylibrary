@@ -122,8 +122,13 @@ def create_user():
         user = crud.create_user(email, password)
         db.session.add(user)
         db.session.commit()
+
         new_user = crud.get_user_by_email(email)
-        print(new_user.user_id)
+
+        bookshelf = crud.create_bookshelf("Liked Books", new_user.user_id, private=True)
+        db.session.add(bookshelf)
+        db.session.commit()
+
         return jsonify({'user_id':f"{new_user.user_id}"})
 
 
@@ -265,6 +270,18 @@ def update_current_read(user_id):
     return return_current_read(user_id)
 
 
+@app.route('/user/<user_id>/likedbooks/<book_id>')
+def check_liked_books(user_id, book_id):
+    """Checks if book_id is in users liked books."""
+
+    liked_books = set(crud.get_liked_books_shelf(user_id))
+
+    if book_id in liked_books:
+        return True
+    else:
+        return False
+
+
 @app.route('/user/<user_id>/bookshelves')
 def return_user_bookshelves(user_id):
     """Returns List of User's Bookshelves."""
@@ -286,12 +303,18 @@ def create_bookshelf():
     shelf_name = request.json.get('name')
     private = request.json.get('private')
 
-    shelf = crud.create_bookshelf(shelf_name, user_id, private)
+    user_shelves = crud.get_bookshelves_by_user(user_id)
+    shelves = set(shelf['name'] for shelf in user_shelves)
 
-    db.session.add(shelf)
-    db.session.commit()
+    if not shelf_name in shelves:
+        shelf = crud.create_bookshelf(shelf_name, user_id, private)
 
-    return "Success"
+        db.session.add(shelf)
+        db.session.commit()
+
+        return "Success"
+    else:
+        return "A Bookshelf by that name already exists."
 
 
 @app.route('/bookshelf/addtoshelf/<shelf_id>/<book_id>')

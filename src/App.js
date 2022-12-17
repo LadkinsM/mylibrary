@@ -73,12 +73,7 @@ function App() {
       .then((response) => response.text())
       .then((updateLogin) => {setUser({});
       setIsLoggedIn(false);
-      redirectToSearch();
     });
-  };
-
-  const redirectToSearch = () => {
-    redirect(`/search`);
   };
 
   return (

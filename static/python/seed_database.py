@@ -106,7 +106,7 @@ for n in range(1, 11):
     email = f'user{n}@test.com'
     password = 'test'
     personal_description = "Hi! I'm a test account!"
-    shelf_name = "Test Bookshelf"
+    shelf_name = "Liked Books"
     private = True
 
     user = crud.create_user(email=email, 
