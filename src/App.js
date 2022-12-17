@@ -105,7 +105,7 @@ function App() {
                                                                                 loading={loading} />} />
           <Route path="/book/:book_id/addReview" element={ <AddReview user={user} loading={loading}/> } />
           <Route path="/book/:book_id/:review_id/editReview" element={ <EditReview user={user} loading={loading}/> } />
-          <Route path="/user/:user_id/profile" element={ <UserDetails user={user} loading={loading}/> } />
+          <Route path="/user/:user_id/profile" element={ <UserDetails user={user} loading={loading} isLoggedIn={isLoggedIn}/> } />
           <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} loading={loading}/>} />
 
       </Routes>

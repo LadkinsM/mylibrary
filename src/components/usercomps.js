@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
 import '../App.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import Bookshelves from './bookshelf';
+import CreateShelf from './createShelf';
 
 export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // User toolbar (like book, add to bookshelf) for book details page.
@@ -91,10 +94,11 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     )
 }
 
-export const UserBookshelfComp = ({user, shelves}) => {
+export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
     // User toolbar (create bookshelf, select bookshelf) for user details page.
     const[selectedShelf, setSelectedShelf] = React.useState("None")
     const[books, setBooks] = React.useState([]);
+    const[showCreateShelfModal, setShowCreateShelfModal] = React.useState(false);
 
     useEffect(() => {
         if (user.user_id && selectedShelf !== "Select Shelf") {
@@ -112,10 +116,26 @@ export const UserBookshelfComp = ({user, shelves}) => {
             setSelectedShelf(evt.target.value);}
     };
 
+    const handleShow = evt => {setShowCreateShelfModal(true)};
+    const handleClose = evt => {setShowCreateShelfModal(false)};
+
     return (
         <React.Fragment>
             <h3>Bookshelves</h3>
-            <Link to={`/user/${user.user_id}/createshelf`}>Create New Bookshelf</Link>
+            {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}
+                <Modal
+                    show={showCreateShelfModal}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton onClick={handleClose}>
+                        <Modal.Title>Create a new shelf below!</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <CreateShelf user={user} handleClose={evt => handleClose(evt)} />
+                    </Modal.Body>
+                </Modal>
             <select
                 id="select_shelf"
                 value={selectedShelf}

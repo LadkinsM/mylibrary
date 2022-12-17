@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-const CreateShelf = ({user}) => {
+const CreateShelf = ({user, handleClose}) => {
     const [shelfName, setShelfName] = React.useState("");
     const [privacy, setPrivacy] = React.useState(false);
     const [createSuccess, setCreateSuccess] = React.useState("");
@@ -18,7 +18,6 @@ const CreateShelf = ({user}) => {
     }
 
     const handleCreateShelf = evt => {
-        evt.preventDefault()
         const shelfJson = {'name':shelfName, 'private':privacy, 'user_id':user.user_id}
 
         if (shelfName === "") {
@@ -31,6 +30,7 @@ const CreateShelf = ({user}) => {
             }) 
                 .then((response) => response.text())
                 .then((shelfData) => {setCreateSuccess(shelfData)})
+                handleClose();
         }};
     
     if (createSuccess == "Success") {
