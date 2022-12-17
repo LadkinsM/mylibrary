@@ -9,7 +9,7 @@ import UserDetails from './components/userdetails';
 import CreateShelf from "./components/createShelf";
 import SignUp from "./components/signup";
 
-import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useNavigate, redirect } from "react-router-dom";
 import { AddReview, EditReview } from './components/reviewcomp';
 
 function App() {
@@ -72,7 +72,13 @@ function App() {
     fetch('/logout')
       .then((response) => response.text())
       .then((updateLogin) => {setUser({});
-      setIsLoggedIn(false)});
+      setIsLoggedIn(false);
+      redirectToSearch();
+    });
+  };
+
+  const redirectToSearch = () => {
+    redirect(`/search`);
   };
 
   return (
