@@ -16,7 +16,8 @@ const BookDetails = ({user, isLoggedIn}) => {
     useEffect(() => {
         fetch(`/book/${book_id}/book_details`)
             .then((response) => response.json())
-            .then((dbBook) => {setBookInfo(dbBook)});
+            .then((dbBook) => {setBookInfo(dbBook);
+            console.log("Book Info Set");});
     }, []);
 
     useEffect(() => {getReviewsByBook()}, []);

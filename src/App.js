@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useEffect } from 'react';
 import Navigation from "./components/navigation";
@@ -8,8 +7,9 @@ import BookDetails from "./components/bookdetails";
 import UserDetails from './components/userdetails';
 import CreateShelf from "./components/createShelf";
 import SignUp from "./components/signup";
+import Home from "./components/Home";
 
-import { BrowserRouter as Router, Route, Routes, useNavigate, redirect } from "react-router-dom";
+import { Route, Routes, useNavigate, redirect } from "react-router-dom";
 import { AddReview, EditReview } from './components/reviewcomp';
 
 function App() {
@@ -19,19 +19,29 @@ function App() {
   const[isLoggedIn, setIsLoggedIn] = React.useState(false);
   const[loading, setLoading] = React.useState(false);
 
+
   useEffect(() => {
     setLoading(true)
     fetch(`/user`)
       .then((response) => response.json())
       .then((userData) => {
-      if (!(userData.user_id)) {
-        setUser({});
-        setIsLoggedIn(false);}
-      else {
-        setUser(userData);
-        setIsLoggedIn(true);}
+        if (!(userData.user_id)) {
+          setUser({});
+          setIsLoggedIn(false);}
+        else {
+          setUser(userData);
+          setIsLoggedIn(true);}
       setLoading(false)})
   }, []);
+
+  useEffect(() => {
+    console.log("This is the redirect useEffect.");
+    console.log(isLoggedIn);
+    if (!(isLoggedIn)) {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      redirect(`/`)
+    }
+  }, [isLoggedIn])
 
   const updateEmail = evt => {
     setEmail(evt.target.value);
@@ -71,18 +81,20 @@ function App() {
   const handleSignOut = evt => {
     fetch('/logout')
       .then((response) => response.text())
-      .then((updateLogin) => {setUser({});
-      setIsLoggedIn(false);
+      .then((updateLogin) => {
+        setUser({});
+        setIsLoggedIn(false);
     });
   };
 
   return (
-    <Router>
+    <React.Fragment>
       <Navigation user={user} 
                   handleSignOut={evt => handleSignOut(evt)} 
                   loading={loading}
                   isLoggedIn={isLoggedIn} />
       <Routes>
+          <Route path="/" element={ <Home user={user} isLoggedIn={isLoggedIn} /> } />
           <Route path="/login" element={ <Login handleLogin={evt => handleLogin(evt)}
                                                 updateEmail={evt => updateEmail(evt)}
                                                 updatePassword={evt => updatePassword(evt)}
@@ -102,9 +114,8 @@ function App() {
           <Route path="/book/:book_id/:review_id/editReview" element={ <EditReview user={user} loading={loading}/> } />
           <Route path="/user/:user_id/profile" element={ <UserDetails user={user} loading={loading} isLoggedIn={isLoggedIn}/> } />
           <Route path="/user/:user_id/createshelf" element={ <CreateShelf user={user} loading={loading}/>} />
-
       </Routes>
-    </Router>
+    </React.Fragment>
   );
 }
 

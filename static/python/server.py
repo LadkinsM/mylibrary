@@ -314,7 +314,7 @@ def create_bookshelf():
 
         return "Success"
     else:
-        return "A Bookshelf by that name already exists."
+        return ""
 
 
 @app.route('/bookshelf/addtoshelf/<shelf_id>/<book_id>')
