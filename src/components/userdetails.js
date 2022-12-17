@@ -9,23 +9,32 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
     const [shelves, setShelves] = React.useState([]);
     const[currentRead, setCurrentRead] = React.useState({})
 
-    useEffect(() => {
-        if (user.user_id) {
-            fetch(`/user/${user.user_id}/bookshelves`)
-                .then((response) => response.json())
-                .then((dbshelves) => {setShelves(dbshelves)});
-        }
-    }, [user]);
+    // useEffect(() => {
+    //     if (user.user_id) {
+    //         fetch(`/user/${user.user_id}/bookshelves`)
+    //             .then((response) => response.json())
+    //             .then((dbshelves) => {setShelves(dbshelves)});
+    //     }
+    // }, [user]);
 
     useEffect(() => {
         if (user.user_id) {
                 console.log("fetch")
                 fetch(`/user/${user.user_id}/currentread`)
                     .then((response) => response.json())
-                    .then((bookData) => {setCurrentRead(bookData)});
+                    .then((bookData) => {
+                        setCurrentRead(bookData);
+                        updateShelves();});
                 }
     }, [user]);
 
+    const updateShelves = () => {
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/bookshelves`)
+                .then((response) => response.json())
+                .then((dbshelves) => {setShelves(dbshelves)});
+        }
+    }
 
     return (
         <React.Fragment>
@@ -42,7 +51,11 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
                 <p>{user.personal_description}</p>
             </div>
             <div>
-                <UserBookshelfComp shelves={shelves} user={user} isLoggedIn={isLoggedIn}/>
+                <UserBookshelfComp shelves={shelves} 
+                                    user={user} 
+                                    isLoggedIn={isLoggedIn}
+                                    updateShelves = {() => updateShelves()}
+                />
             </div>
             <div>
                 <UserReviewComp user={user} isLoggedIn={isLoggedIn}/>

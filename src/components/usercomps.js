@@ -108,7 +108,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     )
 }
 
-export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
+export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) => {
     // User toolbar (create bookshelf, select bookshelf) for user details page.
     const[selectedShelf, setSelectedShelf] = React.useState("None")
     const[books, setBooks] = React.useState([]);
@@ -131,7 +131,10 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
     };
 
     const handleShow = evt => {setShowCreateShelfModal(true)};
-    const handleClose = evt => {setShowCreateShelfModal(false)};
+    const handleClose = evt => {
+        setShowCreateShelfModal(false);
+        updateShelves();
+    };
 
     return (
         <React.Fragment>
@@ -147,7 +150,10 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn}) => {
                         <Modal.Title>Create a new shelf below!</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CreateShelf user={user} shelves={shelves} handleClose={evt => handleClose(evt)} />
+                        <CreateShelf user={user} 
+                                    shelves={shelves} 
+                                    handleClose={evt => handleClose(evt)}
+                        />
                     </Modal.Body>
                 </Modal>
             <select

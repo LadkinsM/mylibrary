@@ -18,6 +18,7 @@ const CreateShelf = ({user, handleClose, shelves}) => {
     }
 
     const handleCreateShelf = evt => {
+        evt.preventDefault();
         const shelfJson = {'name':shelfName, 'private':privacy, 'user_id':user.user_id}
 
         if (shelfName === "") {
@@ -29,7 +30,13 @@ const CreateShelf = ({user, handleClose, shelves}) => {
                 body: JSON.stringify(shelfJson)
             }) 
                 .then((response) => response.text())
-                .then((shelfData) => {setCreateSuccess(shelfData)})
+                .then((shelfData) => {
+                    if (shelfData === "Success") {
+                        setCreateSuccess(shelfData);
+                        handleClose();
+                    } else {
+                        alert("A Bookshelf by that name already exists.")
+                    }})
         }};
     
 
