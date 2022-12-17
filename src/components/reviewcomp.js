@@ -148,7 +148,9 @@ export const EditReview = ({user, book_id, review_id, handleClose}) => {
 export const UserReviewComp = ({user, isLoggedIn}) => {
     // Displays reviews by user on user details page.
     const [reviews, setReviews] = React.useState([]);
-
+    const[showReviewModal, setShowReviewModal] = React.useState(false);
+    const[currentReview, setCurrentReview] = React.useState({});
+    
     useEffect(() => {
         if (user.user_id) {
             fetch(`/user/${user.user_id}/reviews`)
@@ -157,16 +159,38 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
         }
     }, [user]);
 
+    const handleShow = (review_id) => {
+        setShowReviewModal(true);
+        setCurrentReview(review_id);
+    };
+    const handleClose = evt => {setShowReviewModal(false)};
+
     return (
         <React.Fragment>
+            <h2>Reviews</h2>
+            <Modal
+                show={showReviewModal}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton onClick={handleClose}>
+                    <Modal.Title>Edit your review below!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <EditReview user={user}
+                        book_id={currentReview.book_id}
+                        review_id={currentReview}
+                        handleClose={evt => handleClose(evt)}
+                    />
+                </Modal.Body>
+            </Modal>
             <h2>Reviews</h2>
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">
                             {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                        <Link to={`/book/${review.book_id}/${review.review_id}/editReview`}>
-                                            Edit Review
-                                        </Link>}
+                                        <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                 <h3>{review.title}</h3>
                                 <p>Score: {review.score}</p>
                                 <p>{review.comment}</p>

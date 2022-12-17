@@ -97,16 +97,17 @@ export const UserBookshelfComp = ({user, shelves}) => {
     const[books, setBooks] = React.useState([]);
 
     useEffect(() => {
-        if (user.user_id) {
+        if (user.user_id && selectedShelf !== "Select Shelf") {
             fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
                 .then((response) => response.json())
                 .then((dbShelf) => {setBooks(dbShelf);
                 console.log(books);});
+        } else {
+            setBooks([])
         }
     }, [selectedShelf]);
 
     const updateShelf = evt => {
-        console.log(evt.target.value);
         if (evt.target.value != "None") {
             setSelectedShelf(evt.target.value);}
     };
@@ -126,7 +127,7 @@ export const UserBookshelfComp = ({user, shelves}) => {
                 })}
             </select>
             <div>
-            {books.length==0 ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
+            {books.length==0 && selectedShelf !== "Select Shelf" ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
                 <Bookshelves user={user} books={books} /> }
             </div>
         </React.Fragment>
