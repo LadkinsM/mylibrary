@@ -95,7 +95,10 @@ def get_reviews_by_book(book_id):
             .join(User, User.user_id==Review.user_id)\
             .filter(Book.book_id == book_id).first()
 
-    return handle_reviews(book.reviews)
+    if hasattr(book,"reviews"):
+        return handle_reviews(book.reviews)
+
+    return None
 
 
 def get_reviews_by_user(user_id):
@@ -106,13 +109,22 @@ def get_reviews_by_user(user_id):
             .join(Book, Review.book_id==Book.book_id)\
             .filter(User.user_id==user_id).first()
     
-    return handle_reviews(user.reviews)
+    if user.reviews:
+        return handle_reviews(user.reviews)
+    else:
+        return []
 
 
 def get_review_by_id(review_id):
     """Returns review by review id."""
 
     return Review.query.filter(Review.review_id==review_id).first()
+
+
+def get_user_review_by_book(user_id, book_id):
+    """Returns user review by book."""
+
+    return Review.query.filter(Review.user_id==user_id, Review.book_id==book_id).first()
 
 
 def get_author_book_map_by_id(author_id, book_id):
@@ -237,6 +249,8 @@ def get_all_users():
 
 def handle_search(search_criteria, search_input):
     """Search Tables by search input and return result list."""
+
+    """TODO - Account for capitalization in title names."""
 
     if search_criteria == "+intitle:":
         books_list = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()

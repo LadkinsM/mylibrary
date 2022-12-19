@@ -1,8 +1,7 @@
 import React, { useEffect, useInsertionEffect } from 'react';
-import ModalDialog from 'react-bootstrap/esm/ModalDialog';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 export const AddReview = ({user, book_id, handleClose}) => {
@@ -163,6 +162,7 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
         setShowReviewModal(true);
         setCurrentReview(review_id);
     };
+
     const handleClose = evt => {setShowReviewModal(false)};
 
     return (
@@ -210,6 +210,7 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
         setShowReviewModal(true);
         setCurrentReview(review_id);
     };
+
     const handleClose = evt => {setShowReviewModal(false)};
 
     return (

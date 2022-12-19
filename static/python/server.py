@@ -66,7 +66,7 @@ def search_results(search_input, search_criteria):
 
         crud.handle_genres(genre_list, book_obj.book_id)
 
-    return json.dumps(crud.handle_search(search_criteria, search_input))
+    return json.dumps(crud.handle_search(search_criteria, search_input.title()))
 
 
 @app.route('/book/<bookID>/book_details')
@@ -101,9 +101,7 @@ def add_review(book_id):
 @app.route('/book/<book_id>/reviews')
 def return_reviews(book_id):
     """Returns list of reviews by book_id."""
-
-    print(crud.get_reviews_by_book(book_id))
-
+        
     return json.dumps(crud.get_reviews_by_book(book_id))
 
 
@@ -114,9 +112,7 @@ def create_user():
     email = request.json.get('email')
     password = request.json.get('password')
 
-    user = crud.get_user_by_email(email)
-
-    if user:
+    if crud.get_user_by_email(email):
         return jsonify({'alert':"User already exsists."})
     else:    
         user = crud.create_user(email, password)
@@ -137,9 +133,7 @@ def login_user():
     """Login existing user."""
 
     email = request.json.get('email')
-    print(email)
     password = request.json.get('password')
-    print(password)
 
     user = crud.get_user_by_email(email)
 
@@ -197,6 +191,8 @@ def return_user_details(user_id):
 @app.route('/user/<user_id>/reviews')
 def return_user_reviews(user_id):
     """Return List of User's Reviews."""
+
+    print(json.dumps(crud.get_reviews_by_user(user_id)))
 
     return json.dumps(crud.get_reviews_by_user(user_id))
 

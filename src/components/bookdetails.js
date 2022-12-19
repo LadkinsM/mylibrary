@@ -25,7 +25,10 @@ const BookDetails = ({user, isLoggedIn}) => {
     const getReviewsByBook = () => {
         fetch(`/book/${book_id}/reviews`)
             .then((response) => response.json())
-            .then((reviewData) => {setReviews(reviewData)})
+            .then((reviewData) => {
+                if (reviewData) {
+                    setReviews(reviewData)}
+            })
     };
 
     const handleShow = evt => {setShowReviewModal(true)};

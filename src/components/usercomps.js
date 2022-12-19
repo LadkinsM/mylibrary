@@ -15,9 +15,11 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // const[likedBook, setLikedBook] = React.useState(false)
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/currentread`)
-            .then((response) => response.json())
-            .then((bookData) => {setCurrentRead(bookData)});
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/currentread`)
+                .then((response) => response.json())
+                .then((bookData) => {setCurrentRead(bookData)});
+        }
     }, [user]);
 
     // useEffect(() => {
@@ -44,9 +46,6 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     };
 
     const editCurrentRead = (userJson) => { 
-
-        console.log(userJson)
-
         fetch(`/user/${user.user_id}/currentread/edit`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -78,9 +77,11 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // }
 
     useEffect(() => {
-        fetch(`/user/${user.user_id}/bookshelves`)
-            .then((response) => response.json())
-            .then((dbshelves) => {setShelves(dbshelves)});
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/bookshelves`)
+                .then((response) => response.json())
+                .then((dbshelves) => {setShelves(dbshelves)});
+        }
     }, []);
 
 
@@ -115,7 +116,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
     const[showCreateShelfModal, setShowCreateShelfModal] = React.useState(false);
 
     useEffect(() => {
-        if (user.user_id && selectedShelf !== "Select Shelf") {
+        if (user.user_id && selectedShelf !== "None") {
             fetch(`/user/${user.user_id}/bookshelves/${selectedShelf}`)
                 .then((response) => response.json())
                 .then((dbShelf) => {setBooks(dbShelf);

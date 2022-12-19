@@ -29,8 +29,13 @@ const SignUp = () => {
                 body: JSON.stringify(userJson)
             })
                 .then((response) => response.json())
-                .then((userData) => {setUser(userData);
-                {user.user_id !== undefined ? alert("You've successfully created an account, please log in!"): alert("That user already exsists.")}});
+                .then((userData) => {
+                if (userData.alert) {
+                    alert("That user already exists.")
+                } else {
+                    alert("Your account has been created, please log in.")
+                    setUser(userData);
+                }});
             }}
 
 

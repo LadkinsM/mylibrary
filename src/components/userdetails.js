@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, Link, useParams } from 'react-router-dom';
+import { Route, useRouteMatch, Routes, Link, useParams, useNavigate, redirect} from 'react-router-dom';
 import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 import { UserReviewComp } from './reviewcomp';
@@ -8,18 +8,17 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
     // Display details for User
     const [shelves, setShelves] = React.useState([]);
     const[currentRead, setCurrentRead] = React.useState({})
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (user.user_id) {
-    //         fetch(`/user/${user.user_id}/bookshelves`)
-    //             .then((response) => response.json())
-    //             .then((dbshelves) => {setShelves(dbshelves)});
-    //     }
-    // }, [user]);
+    useEffect(() => {
+        console.log(isLoggedIn);
+        if (isLoggedIn === false) {
+            navigate("/search");
+        }
+    }, [isLoggedIn]);
 
     useEffect(() => {
         if (user.user_id) {
-                console.log("fetch")
                 fetch(`/user/${user.user_id}/currentread`)
                     .then((response) => response.json())
                     .then((bookData) => {
