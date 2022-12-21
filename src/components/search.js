@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import React from 'react';
 import '../App.css';
 import ResultDisplay from './resultcomp';
 
 function Search({user}) {
+  //Search Component, submits request to api and directs results to result component.
+  
   const[searchInput, setSearchInput] = React.useState("");
   const[searchCriteria, setSearchCriteria] = React.useState("+all:");
   const[results, setResults] = React.useState([]);

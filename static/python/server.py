@@ -21,50 +21,8 @@ def search_results(search_input, search_criteria):
     Sends API Request, Adds Response to DB, Returns Results.
     """
 
-    api_url = 'https://www.googleapis.com/books/v1/volumes?q='
-    max_results = "&maxResults=40"
-
-    if search_criteria == "+all:":
-        api_query = f'{api_url}{search_input}{max_results}'
-    else:
-        api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
-
-    books = requests.get(api_query).json()
-
-    # print(books)
-
-    #Add API Book Data to DB
-    books_to_db = []
-    book_items = books['items']
-    google_ids = set()
-    
-    for book in book_items:
-        if crud.get_book_by_googleid(book['id']) == None:
-            if not book['id'] in google_ids:
-                books_to_db.append(crud.handle_book(book))
-                google_ids.add(book['id'])
-
-    db.session.add_all(books_to_db)
-    db.session.commit()
-    
-    #Add API Author/Genre Data for Book to DB
-    for book in book_items:
-
-        if 'authors' in book['volumeInfo']:
-            author_list = book['volumeInfo']['authors']
-        else:
-            author_list = ["None"]
-    
-        book_obj = crud.get_book_by_googleid(book['id'])
-
-        crud.handle_authors(author_list, book_obj.book_id)
-
-        if 'categories' in book['volumeInfo']:
-            genre_list = book['volumeInfo']['categories']
-        else:
-            genre_list = ["None"]
-
-        crud.handle_genres(genre_list, book_obj.book_id)
+    books = crud.google_books_api_request(search_input, search_criteria)
+    crud.add_books_to_db(books)
 
     return json.dumps(crud.handle_search(search_criteria, search_input.title()))
 
@@ -76,8 +34,6 @@ def bookdetails(bookID):
     """
 
     book = crud.get_book_by_bookid(bookID)
-
-    print(book)
 
     return jsonify(book)
 
@@ -171,7 +127,6 @@ def user_logged_in():
     if 'user' not in session:
         return jsonify({})
     else:
-        print(session['user'])
         return jsonify(session['user'])
 
 
@@ -191,8 +146,6 @@ def return_user_details(user_id):
 @app.route('/user/<user_id>/reviews')
 def return_user_reviews(user_id):
     """Return List of User's Reviews."""
-
-    print(json.dumps(crud.get_reviews_by_user(user_id)))
 
     return json.dumps(crud.get_reviews_by_user(user_id))
 
@@ -268,7 +221,7 @@ def update_current_read(user_id):
 
 @app.route('/user/<user_id>/likedbooks/<book_id>')
 def check_liked_books(user_id, book_id):
-    """Checks if book_id is in users liked books."""
+    """Not in Use. Checks if book_id is in users liked books."""
 
     liked_books = set(crud.get_liked_books_shelf(user_id))
 
@@ -295,6 +248,7 @@ def return_bookshelf(user_id, shelf_id):
 @app.route('/bookshelf/createshelf', methods=['POST'])
 def create_bookshelf():
     """Creates bookshelf in db."""
+
     user_id = request.json.get('user_id')
     shelf_name = request.json.get('name')
     private = request.json.get('private')
@@ -316,11 +270,6 @@ def create_bookshelf():
 @app.route('/bookshelf/addtoshelf/<shelf_id>/<book_id>')
 def add_to_bookshelf(shelf_id, book_id):
     """Adds book to shelf."""
-
-    # book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)
-
-    # db.session.add(book_to_add)
-    # db.session.commit()
 
     if not crud.get_shelf_book_map_by_id(shelf_id, book_id):
         book_to_add = crud.create_shelf_book_relationship(shelf_id, book_id)

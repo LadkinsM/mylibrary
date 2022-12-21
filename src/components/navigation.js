@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 function Nav({user, handleSignOut, isLoggedIn, loading}) {
   // Display navigation bar
+
     return (
       <React.Fragment>
         {loading ? (<p>Loading...</p>) : (
@@ -24,8 +25,6 @@ function Nav({user, handleSignOut, isLoggedIn, loading}) {
         </nav>)}
       </React.Fragment>
     );
-  }
-  
-// };
+  };
 
 export default Nav;

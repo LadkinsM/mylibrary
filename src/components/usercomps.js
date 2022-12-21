@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -12,7 +12,6 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     const[selectedShelf, setSelectedShelf] = React.useState("")
     const[addConfirmed, setAddConfirmed] = React.useState("")
     const[currentRead, setCurrentRead] = React.useState({})
-    // const[likedBook, setLikedBook] = React.useState(false)
 
     useEffect(() => {
         if (user.user_id) {
@@ -21,12 +20,14 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
                 .then((bookData) => {setCurrentRead(bookData)});
         }
     }, [user]);
-
-    // useEffect(() => {
-    //     fetch(`/user/${user.user_id}/likedbooks/${book_id}`)
-    //         .then((response) => response.ok())
-    //         .then((response) => {setLikedBook(response)});
-    // }, [user]);
+    
+    useEffect(() => {
+        if (user.user_id) {
+            fetch(`/user/${user.user_id}/bookshelves`)
+                .then((response) => response.json())
+                .then((dbshelves) => {setShelves(dbshelves)});
+        }
+    }, [user]);
 
     const updateShelf = evt => {
         setSelectedShelf(evt.target.value);
@@ -56,7 +57,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     };
 
     const addToShelf = evt => {
-        evt.preventDefault()
+        evt.preventDefault();
 
         fetch(`/bookshelf/addtoshelf/${selectedShelf}/${book_id}`)
             .then((response) => response.text(""))
@@ -68,22 +69,6 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
             alert(`This book has been added.`);
         }
     };
-
-    // const addToLikedBooks = evt => {
-    //     evt.preventDefault()
-
-    //     //Create fetch request to add book to liked books shelf.
-    //     //should update button to reflect added to liked books shelf.
-    // }
-
-    useEffect(() => {
-        if (user.user_id) {
-            fetch(`/user/${user.user_id}/bookshelves`)
-                .then((response) => response.json())
-                .then((dbshelves) => {setShelves(dbshelves)});
-        }
-    }, []);
-
 
     return (
         <React.Fragment>
@@ -111,6 +96,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
 
 export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) => {
     // User toolbar (create bookshelf, select bookshelf) for user details page.
+
     const[selectedShelf, setSelectedShelf] = React.useState("None")
     const[books, setBooks] = React.useState([]);
     const[showCreateShelfModal, setShowCreateShelfModal] = React.useState(false);
@@ -168,7 +154,8 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                 })}
             </select>
             <div>
-            {books.length==0 && selectedShelf !== "None" ? <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
+            {books.length==0 && selectedShelf !== "None" ? 
+                <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
                 <Bookshelves user={user} books={books} /> }
             </div>
         </React.Fragment>

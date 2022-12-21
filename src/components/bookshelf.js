@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../App.css';
+import NoImageProvided from '../images/NoImageProvided.png';
 
 const Bookshelves = ({user, books}) => {
+    //Display books for selected bookshelf.
 
     return(
         <React.Fragment>
@@ -11,7 +13,8 @@ const Bookshelves = ({user, books}) => {
                     return <Link to={`book_details/${book.book_id}`}>
                                 <div className="card">
                                 <ul key={book.book_id}>
-                                    {book.cover ? <img src={book.cover} />:<p>Image Not Available</p>}
+                                    {book.cover !== "Not Provided" ? <img src={book.cover} /> :
+                                                                <img src={NoImageProvided} /> }
                                     <li>Title: {book.title}</li>
                                     <li>Author: {book.authors}</li>
                                     <li>Published Date: {book.publish_date}</li>

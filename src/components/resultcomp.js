@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
+import NoImageProvided from '../images/NoImageProvided.png';
 
 
 const ResultDisplay = (props) => {
-    const results = props.results
+    //Display results from search input.
 
+    const results = props.results
 
     return(
         <React.Fragment>
@@ -15,7 +15,8 @@ const ResultDisplay = (props) => {
                     return <Link to={`book_details/${result.book_id}`}>
                                 <div className="card">
                                 <ul key={result.book_id}>
-                                    {result.cover ? <img src={result.cover} />:<p>Image Not Available</p>}
+                                    {result.cover !== "Not Provided" ? <img src={result.cover} /> : 
+                                                                    <img src={NoImageProvided} /> }
                                     <li>Title: {result.title}</li>
                                     <li>Author: {result.authors}</li>
                                     <li>Published Date: {result.publish_date}</li>

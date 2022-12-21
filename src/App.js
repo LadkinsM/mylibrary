@@ -7,9 +7,8 @@ import BookDetails from "./components/bookdetails";
 import UserDetails from './components/userdetails';
 import CreateShelf from "./components/createShelf";
 import SignUp from "./components/signup";
-import Home from "./components/Home";
 
-import { Route, Routes, useNavigate, redirect, Navigate } from "react-router-dom";
+import { Route, Routes, redirect } from "react-router-dom";
 import { AddReview, EditReview } from './components/reviewcomp';
 
 function App() {
@@ -101,7 +100,6 @@ function App() {
                                                 loading={loading}/> } />
           <Route path="/signup" element={ <SignUp /> } />
           <Route path="/search" element={ <Search user={user} loading={loading} /> } />
-          {/* <Route path="/search/:search_input/:search_criteria" element={ <Search user={user} /> } /> */}
           <Route path="/search/book_details/:book_id" element={ <BookDetails user={user} 
                                                                 isLoggedIn={isLoggedIn} 
                                                                 loading={loading}/>} />

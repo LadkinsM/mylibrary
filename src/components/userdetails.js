@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, Link, useParams, useNavigate, redirect} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 import { UserReviewComp } from './reviewcomp';
@@ -11,7 +11,6 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(isLoggedIn);
         if (isLoggedIn === false) {
             navigate("/search");
         }
@@ -23,7 +22,8 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
                     .then((response) => response.json())
                     .then((bookData) => {
                         setCurrentRead(bookData);
-                        updateShelves();});
+                        updateShelves();
+                    });
                 }
     }, [user]);
 

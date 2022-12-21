@@ -1,8 +1,10 @@
 import React from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const SignUp = () => {
+    //User sign up page.
+
     const[email, setEmail] = React.useState("");
     const[password, setPassword] = React.useState("");
     const[user, setUser] = React.useState({});

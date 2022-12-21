@@ -6,6 +6,7 @@ Shelf_book_map, Faved_Book, connect_to_db)
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import joinedload
+import requests
 
 #QUERIES
 
@@ -33,9 +34,7 @@ def get_book_by_bookid(book_id):
             'publish_date' : book.publish_date,
             'isbn_10' : book.isbn_10,
             'isbn_13' : book.isbn_13,
-            # 'authors' : [{'name':author.name, 'author_id':author.author_id} for author in book.authors],
             'authors' : ", ".join(author.name for author in book.authors),
-            # 'genres' : [{'name':genre.name, 'genre_id':genre.genre_id} for genre in book.genres]
             'genres' : ", ".join(genre.name for genre in book.genres)
             }
 
@@ -43,13 +42,17 @@ def get_book_by_bookid(book_id):
 def get_books_by_author(author_id):
     """Return all books by author via author_id."""
 
-    return Book.query.join(Author_book_map).join(Author).filter(Author.author_id == author_id).all()
+    return Book.query.join(Author_book_map)\
+                    .join(Author)\
+                    .filter(Author.author_id == author_id).all()
 
 
 def get_books_by_genre(genre_id):
     """Return all books by genre via genre_id."""
 
-    return Book.query.join(Genre_book_map).join(Genre).filter(Genre.genre_id == genre_id).all()
+    return Book.query.join(Genre_book_map)\
+                    .join(Genre)\
+                    .filter(Genre.genre_id == genre_id).all()
 
 
 def get_author_by_name(name):
@@ -65,7 +68,10 @@ def get_authors_by_book(book_id):
     authors_list = []
 
     for author in book.authors:
-        authors_list.append({'author_id':author.author_id, 'name':author.name})
+        authors_list.append({
+                            'author_id':author.author_id, 
+                            'name':author.name
+                            })
 
     return authors_list
 
@@ -77,6 +83,7 @@ def get_genre_by_name(name):
 
 
 def get_genres_by_book(book_id):
+    """Returns all genres by book id."""
 
     book = Book.query.filter(Book.book_id == book_id).first()
     genres_list = []
@@ -124,7 +131,10 @@ def get_review_by_id(review_id):
 def get_user_review_by_book(user_id, book_id):
     """Returns user review by book."""
 
-    return Review.query.filter(Review.user_id==user_id, Review.book_id==book_id).first()
+    return Review.query.filter(
+                                Review.user_id==user_id, 
+                                Review.book_id==book_id
+                                ).first()
 
 
 def get_author_book_map_by_id(author_id, book_id):
@@ -160,7 +170,8 @@ def get_user_by_email(email):
 def get_user_by_id(user_id):
     """Return user info by user id"""
 
-    return User.query.options(joinedload(User.current_reads)).filter(User.user_id == user_id).first()
+    return User.query.options(joinedload(User.current_reads))\
+                    .filter(User.user_id == user_id).first()
 
 
 def get_current_read_by_user(user_id):
@@ -188,7 +199,11 @@ def get_bookshelves_by_user(user_id):
     shelves_info = []
 
     for shelf in shelves_list:
-        shelves_info.append({'name':shelf.shelf_name, 'private':shelf.private, 'shelf_id':shelf.shelf_id})
+        shelves_info.append({
+                            'name':shelf.shelf_name, 
+                            'private':shelf.private, 
+                            'shelf_id':shelf.shelf_id
+                            })
 
     return shelves_info
 
@@ -209,7 +224,8 @@ def get_shelf_by_id(shelf_id):
 def get_liked_books_shelf(user_id):
     """Return Liked Books Shelf by user id."""
 
-    liked_books_shelf = Bookshelf.query.filter(Bookshelf.name=="Liked Books", Bookshelf.user_id==user_id).first()
+    liked_books_shelf = Bookshelf.query\
+                        .filter(Bookshelf.name=="Liked Books", Bookshelf.user_id==user_id).first()
 
     return get_books_by_shelf(liked_books_shelf.shelf_id)
 
@@ -250,16 +266,18 @@ def get_all_users():
 def handle_search(search_criteria, search_input):
     """Search Tables by search input and return result list."""
 
-    """TODO - Account for capitalization in title names."""
-
     if search_criteria == "+intitle:":
         books_list = Book.query.filter(Book.title.ilike(f"%{search_input}%")).all()
             
     elif search_criteria == "+inauthor:":
-        books_list = Book.query.join(Author_book_map).join(Author).filter(Author.name.ilike(f"%{search_input}%")).all()
+        books_list = Book.query.join(Author_book_map)\
+                                .join(Author)\
+                                .filter(Author.name.ilike(f"%{search_input}%")).all()
 
     elif search_criteria == "+subject:":
-        books_list = Book.query.join(Genre_book_map).join(Genre).filter(Genre.name.ilike(f"%{search_input}%")).all()
+        books_list = Book.query.join(Genre_book_map)\
+                                .join(Genre)\
+                                .filter(Genre.name.ilike(f"%{search_input}%")).all()
     
     else:
         books_list = db.session.query(Book)\
@@ -267,9 +285,9 @@ def handle_search(search_criteria, search_input):
                 .join(Author,Author.author_id==Author_book_map.author_id)\
                 .join(Genre_book_map,Genre_book_map.book_id==Book.book_id)\
                 .join(Genre,Genre.genre_id==Genre_book_map.genre_id)\
-                .filter(db.or_(Book.title.contains(f"{search_input}"),
-                Author.name.contains(f"{search_input}"),
-                Genre.name.contains(f"{search_input}")
+                .filter(db.or_(Book.title.ilike(f"%{search_input}%"),
+                Author.name.ilike(f"%{search_input}%"),
+                Genre.name.ilike(f"%{search_input}%")
                 )).all()
 
     book_results = []
@@ -292,10 +310,62 @@ def handle_search(search_criteria, search_input):
 
 #BOOK RELATED
 
+def google_books_api_request(search_input, search_criteria):
+    """Sends API Request to Google Books API."""
+
+    api_url = 'https://www.googleapis.com/books/v1/volumes?q='
+    max_results = "&maxResults=40"
+
+    if search_criteria == "+all:":
+        api_query = f'{api_url}{search_input}{max_results}'
+    else:
+        api_query = f'{api_url}{search_criteria}{search_input}{max_results}'
+
+    books = requests.get(api_query).json()
+
+    return books
+
+
+def add_books_to_db(books):
+    """Adds API Response to Db."""
+
+    books_to_db = []
+    book_items = books['items']
+    google_ids = set()
+    
+    for book in book_items:
+        if get_book_by_googleid(book['id']) == None:
+            if not book['id'] in google_ids:
+                books_to_db.append(handle_book(book))
+                google_ids.add(book['id'])
+
+    db.session.add_all(books_to_db)
+    db.session.commit()
+    
+    """Add API Author/Genre Data for Book to DB"""
+    for book in book_items:
+
+        if 'authors' in book['volumeInfo']:
+            author_list = book['volumeInfo']['authors']
+        else:
+            author_list = ["None"]
+    
+        book_obj = get_book_by_googleid(book['id'])
+
+        handle_authors(author_list, book_obj.book_id)
+
+        if 'categories' in book['volumeInfo']:
+            genre_list = book['volumeInfo']['categories']
+        else:
+            genre_list = ["None"]
+
+        handle_genres(genre_list, book_obj.book_id)
+
+
 def create_author(author):
-    """Create Author in database.
-        
-        Helper function for create_book."""
+    """
+    Create Author in database.
+    """
 
     return Author(name = author)
 
@@ -325,9 +395,7 @@ def handle_authors(author_list, book_id):
 
 
 def create_genre(genre):
-    """Create Genre in database.
-    
-        Helper function for create_book."""
+    """Create Genre in database."""
 
     return Genre(name = genre)
 
@@ -357,9 +425,9 @@ def handle_genres(genre_list, book_id):
 
 
 def create_language(language):
-    """Create Language in database.
-        
-        Helper function for create_book."""
+    """
+    Create Language in database.
+    """
 
     return Language(name = language)
 
@@ -453,18 +521,26 @@ def handle_book(book):
                 publish_date = publish_date
                 )
 
+
 #USER RELATED
+
 
 def create_user(email, password, personal_description=""):
     """Creates a user"""
-
-    return User(email=email, password=password, personal_description=personal_description)
+    
+    return User(email=email, 
+                password=password, 
+                personal_description=personal_description
+                )
 
 
 def create_bookshelf(shelf_name, user_id, private):
     """Creates a Bookshelf"""
 
-    return Bookshelf(shelf_name=shelf_name, user_id=user_id, private=private)
+    return Bookshelf(shelf_name=shelf_name, 
+                    user_id=user_id, 
+                    private=private
+                    )
 
 
 def create_fav_book(user_id, book_id):
@@ -482,12 +558,18 @@ def add_to_bookshelf(shelf_id, book_id):
         create_shelf_book_relationship(shelf_id, book_id)
         return True
 
+
 #REVIEWS
+
 
 def create_review(user_id, book_id, score, comment):
     """Creates a Review"""
 
-    return Review(user_id=user_id, book_id=book_id, score=score, comment=comment)
+    return Review(user_id=user_id, 
+                book_id=book_id, 
+                score=score, 
+                comment=comment
+                )
 
 
 def edit_review(review_id, score, comment):
@@ -502,6 +584,7 @@ def edit_review(review_id, score, comment):
 
 
 def handle_reviews(reviews):
+    """Formats review results and returns a list."""
 
     review_results = []
 
@@ -518,7 +601,9 @@ def handle_reviews(reviews):
 
     return review_results
 
+
 #CURRENT READ
+
 
 def deactivate_current_read(user_id):
     """Deactivates Users Current Read."""
@@ -533,7 +618,10 @@ def deactivate_current_read(user_id):
 def create_current_read(user_id, book_id, is_active=True):
     """Creates a users current read."""
 
-    current_read = Current_Read(user_id=user_id, book_id=book_id, is_active=is_active)
+    current_read = Current_Read(user_id=user_id, 
+                                book_id=book_id, 
+                                is_active=is_active
+                                )
 
     db.session.add(current_read)
     db.session.commit()
@@ -546,7 +634,6 @@ def update_current_read(user_id, book_id):
         deactivate_current_read(user_id)
     
     create_current_read(user_id, book_id)
-
 
 
 if __name__ == '__main__':

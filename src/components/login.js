@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link, Navigate, useNavigate, Route } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import App from '../App';
 import '../App.css';
 
 const Login = ({handleLogin, updateEmail, updatePassword, isLoggedIn}) => {
+  //User Login Page
 
   const navigate = useNavigate();
 

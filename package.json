@@ -16,7 +16,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "./static/python/server.py",
+    "start-server": "python3 static/python/server.py",
+    "install-deps": "npm i; pip3 install -r requirements.txt",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

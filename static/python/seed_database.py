@@ -137,4 +137,3 @@ for n in range(1, 11):
 
     model.db.session.add(create_faved_book)
     model.db.session.commit()
-    print(crud.get_faved_books_by_user(n))

@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../App.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {UserBookComp} from './usercomps';
 import { BookReviewComp, AddReview } from './reviewcomp';
+import NoImageProvided from '../images/NoImageProvided.png';
+
 
 const BookDetails = ({user, isLoggedIn}) => {
     // Display details for individual book
@@ -37,12 +39,15 @@ const BookDetails = ({user, isLoggedIn}) => {
     return (
         <React.Fragment>
             <div>
-                {isLoggedIn !== false && <UserBookComp user={user} book_id={book_id} isLoggedIn={isLoggedIn} />}
+                {isLoggedIn !== false && <UserBookComp user={user} 
+                                                        book_id={book_id} 
+                                                        isLoggedIn={isLoggedIn} 
+                                                        />}
             </div>
             <div>
                 <h1>{bookInfo.title}</h1>
-                <img src={bookInfo.cover} />
-                {/* <p>Authors: {bookInfo.authors.map(author => {return <p>{author.name}</p>})}</p> */}
+                {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
+                                                    <img src={NoImageProvided} /> }
                 <p>Authors: {bookInfo.authors}</p>
                 <p>Genres: {bookInfo.genres}</p>
                 <p>Description: {bookInfo.overview}</p>
@@ -60,7 +65,9 @@ const BookDetails = ({user, isLoggedIn}) => {
                             <Modal.Title>Enter your review below!</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <AddReview user={user} book_id={book_id} handleClose={evt => handleClose(evt)}/>
+                            <AddReview user={user} 
+                                        book_id={book_id} 
+                                        handleClose={evt => handleClose(evt)}/>
                         </Modal.Body>
                     </Modal>
                 <BookReviewComp user={user} 

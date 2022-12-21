@@ -1,13 +1,12 @@
-import React, { useEffect } from 'react';
-import { Route, useRouteMatch, Routes, useParams, Link, useNavigate } from 'react-router-dom';
+import React from 'react';
 import '../App.css';
 
 const CreateShelf = ({user, handleClose, shelves}) => {
+    //Create Bookshelf Component
+    
     const [shelfName, setShelfName] = React.useState("");
     const [privacy, setPrivacy] = React.useState(false);
     const [createSuccess, setCreateSuccess] = React.useState("");
-
-    const navigate = useNavigate();
 
     const updateShelfName = evt => {
         setShelfName(evt.target.value);
@@ -40,9 +39,6 @@ const CreateShelf = ({user, handleClose, shelves}) => {
         }};
     
 
-    if (createSuccess == "Success") {
-        return navigate(`/user/${user.user_id}/profile`)
-    } else {
         return (
             <React.Fragment>
                 <h2>Create New Bookshelf</h2>
@@ -69,7 +65,6 @@ const CreateShelf = ({user, handleClose, shelves}) => {
                 </form>
             </React.Fragment>
         )
-    }
-};
+    };
 
 export default CreateShelf;
