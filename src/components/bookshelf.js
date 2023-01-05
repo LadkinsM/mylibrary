@@ -2,27 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import NoImageProvided from '../images/NoImageProvided.png';
+import { Col, Container, Row, Card, CardGroup } from 'react-bootstrap';
 
 const Bookshelves = ({user, books}) => {
     //Display books for selected bookshelf.
 
     return(
         <React.Fragment>
-            <div className="container">
-                {books && books.map(book => {
-                    return <Link to={`book_details/${book.book_id}`}>
-                                <div className="card">
-                                <ul key={book.book_id}>
-                                    {book.cover !== "Not Provided" ? <img src={book.cover} /> :
-                                                                <img src={NoImageProvided} /> }
-                                    <li>Title: {book.title}</li>
-                                    <li>Author: {book.authors}</li>
-                                    <li>Published Date: {book.publish_date}</li>
-                                </ul>
-                                </div>
-                            </Link>
-                })}
-            </div>
+            <Row>
+                <Col md={{ span: 10 }}>
+                    <CardGroup>
+                        {books && books.map(book => {
+                            return <Link to={`book_details/${book.book_id}`}>
+                                        <Card className="card">
+                                            {book.cover !== "Not Provided" ? <img src={book.cover} /> :
+                                                                        <img src={NoImageProvided} /> }
+                                            <Card.Title>{book.title}</Card.Title>
+                                            <Card.Subtitle>{book.authors}</Card.Subtitle>
+                                            <Card.Text>Published Date: {book.publish_date}</Card.Text>
+                                        </Card>
+                                    </Link>
+                        })}
+                    </CardGroup>
+                </Col>
+            </Row>
         </React.Fragment>
     )
 };

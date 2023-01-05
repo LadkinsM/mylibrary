@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import { Col, Container, Row } from 'react-bootstrap';
 
 export const AddReview = ({user, book_id, handleClose}) => {
     //Add a new review, accessed via bookdetails page.
@@ -167,7 +168,6 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <h2>Reviews</h2>
             <Modal
                 show={showReviewModal}
                 onHide={handleClose}
@@ -188,11 +188,21 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">
-                            {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                        <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
-                                <h3>{review.title}</h3>
-                                <p>Score: {review.score}</p>
-                                <p>{review.comment}</p>
+                                <Row>
+                                    <Col md={{ span: 4 }}>
+                                        <h4>{review.title}</h4>
+                                    </Col>
+                                    <Col md={{ span: 6 }} className='toolbar-right-col'>
+                                        {(review.user_id === user.user_id && isLoggedIn !== false) && 
+                                                    <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={10}>
+                                        <p>Score: {review.score}</p>
+                                        <p>{review.comment}</p>
+                                    </Col>
+                                </Row>
                             </div>
                 })}
             </div>
@@ -215,7 +225,6 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
 
     return (
         <React.Fragment>
-            <h2>Reviews</h2>
             <Modal
                 show={showReviewModal}
                 onHide={handleClose}
@@ -236,11 +245,21 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
             <div className="reviews">
                 {reviews && reviews.map(review => {
                     return <div className="review">
-                                {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                        <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
-                                <h3>{review.username} says...</h3>
-                                <p>Score: {review.score}</p>
-                                <p>{review.comment}</p>
+                                <Row>
+                                    <Col md={{ span: 4 }}>
+                                        <h4>{review.username} says...</h4>
+                                    </Col>
+                                    <Col md={{ span: 6 }} className='toolbar-right-col'>
+                                        {(review.user_id === user.user_id && isLoggedIn !== false) && 
+                                                <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={10}>
+                                        <p>Score: {review.score}</p>
+                                        <p>{review.comment}</p>
+                                    </Col>
+                                </Row>
                             </div>
                 })}
             </div>

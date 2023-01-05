@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import {UserBookComp} from './usercomps';
 import { BookReviewComp, AddReview } from './reviewcomp';
 import NoImageProvided from '../images/NoImageProvided.png';
+import { Col, Container, Row } from 'react-bootstrap';
 
 
 const BookDetails = ({user, isLoggedIn}) => {
@@ -38,23 +39,36 @@ const BookDetails = ({user, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <div>
+            <Container>
                 {isLoggedIn !== false && <UserBookComp user={user} 
                                                         book_id={book_id} 
                                                         isLoggedIn={isLoggedIn} 
                                                         />}
-            </div>
-            <div>
-                <h1>{bookInfo.title}</h1>
-                {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
-                                                    <img src={NoImageProvided} /> }
-                <p>Authors: {bookInfo.authors}</p>
-                <p>Genres: {bookInfo.genres}</p>
-                <p>Description: {bookInfo.overview}</p>
-                <p>Publish Date: {bookInfo.publish_date}</p>
-            </div>
-            <div>
-                {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}
+            </Container>
+            <Container>
+                <Row>
+                    <Col md={{ span:2, offset: 0}} sm={1}>
+                        {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
+                                                            <img src={NoImageProvided} /> }
+                    </Col>
+                    <Col md={{ span:8 }} sm={1}>
+                        <h1>{bookInfo.title}</h1>
+                        <p>{bookInfo.authors}</p>
+                        <p>{bookInfo.genres}</p>
+                        <p>{bookInfo.overview}</p>
+                        <p>Publish Date: {bookInfo.publish_date}</p>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row>
+                    <Col md={{ span: 5 }}>
+                        <h2>Reviews</h2>
+                    </Col>
+                    <Col md={{ span: 5 }} className='toolbar-right-col'>
+                        {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}
+                    </Col>
+                </Row>
                     <Modal
                         show={showReviewModal}
                         onHide={handleClose}
@@ -70,12 +84,14 @@ const BookDetails = ({user, isLoggedIn}) => {
                                         handleClose={evt => handleClose(evt)}/>
                         </Modal.Body>
                     </Modal>
+            </Container>
+            <Container className='review-container'>
                 <BookReviewComp user={user} 
                                 book_id={book_id} 
                                 isLoggedIn={isLoggedIn} 
                                 reviews={reviews}
                 />
-            </div>
+            </Container>
         </React.Fragment>
     )};
 

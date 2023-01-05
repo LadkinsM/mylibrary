@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NoImageProvided from '../images/NoImageProvided.png';
+import { Col, Container, Row, Card, CardGroup } from 'react-bootstrap';
+import '../App.css';
 
 
 const ResultDisplay = (props) => {
@@ -10,21 +12,19 @@ const ResultDisplay = (props) => {
 
     return(
         <React.Fragment>
-                <div className="container">
+                <CardGroup className="card-container">
                 {results && results.map(result => {
                     return <Link to={`book_details/${result.book_id}`}>
-                                <div className="card">
-                                <ul key={result.book_id}>
-                                    {result.cover !== "Not Provided" ? <img src={result.cover} /> : 
-                                                                    <img src={NoImageProvided} /> }
-                                    <li>Title: {result.title}</li>
-                                    <li>Author: {result.authors}</li>
-                                    <li>Published Date: {result.publish_date}</li>
-                                </ul>
-                                </div>
+                                <Card className="card" key={result.book_id}>
+                                    {result.cover !== "Not Provided" ? <Card.Img variant="top" src={result.cover} /> : 
+                                                                    <Card.Img variant="top" src={NoImageProvided} /> }
+                                    <Card.Title>{result.title}</Card.Title>
+                                    <Card.Subtitle>{result.authors}</Card.Subtitle>
+                                    <Card.Text>Published Date: {result.publish_date}</Card.Text>
+                                </Card>
                             </Link>
                 })}
-                </div>
+                </CardGroup>
         </React.Fragment>
     )
 }

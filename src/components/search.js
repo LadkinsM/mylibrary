@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
 import ResultDisplay from './resultcomp';
+import { Col, Container, Row } from 'react-bootstrap';
 
 function Search({user}) {
   //Search Component, submits request to api and directs results to result component.
@@ -33,36 +34,43 @@ function Search({user}) {
   return (
     <React.Fragment>
       <section id="search_results">
-        <div>
-          <h2>Search</h2>
-          <form id="search" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="user_search_input">Please input your search.</label>
-                <input 
-                  type="text" 
-                  name="search_input" 
-                  id="user_search_input"
-                  value={searchInput}
-                  onChange={updateInput}
-                />
-              <label htmlFor="search_criteria">Search Criteria</label>
-              <select 
-                id="search_criteria" 
-                value={searchCriteria} 
-                onChange={updateCriteria}
-              >
-                <option value="+all:">All Results</option>
-                <option value="+intitle:">Title</option>
-                <option value="+inauthor:">Author</option>
-                <option value="+subject:">Genre</option>
-              </select>
-              <input type="submit" />
-            </div>
-          </form>
-        </div>
-        <div>
+        <Container className='search-container'>
+          <Row>
+            <h2 className='search-header'>Search</h2>
+          </Row>
+            <form id="search" onSubmit={handleSubmit}>
+              <Row id="search-row">
+                <Col md={{ span: 4, offset: 0 }}>
+                    <input 
+                      type="text" 
+                      name="search_input" 
+                      id="user_search_input"
+                      value={searchInput}
+                      onChange={updateInput}
+                    />
+                </Col>
+                <Col md={{ span: 1 }}>
+                  {/* <label htmlFor="search_criteria">Search Criteria</label> */}
+                  <select 
+                    id="search_criteria" 
+                    value={searchCriteria} 
+                    onChange={updateCriteria}
+                  >
+                    <option value="+all:">All Results</option>
+                    <option value="+intitle:">Title</option>
+                    <option value="+inauthor:">Author</option>
+                    <option value="+subject:">Genre</option>
+                  </select>
+                </Col>
+                <Col md={{ span: 1 }} id='search-submit'>
+                  <input type="submit" />
+                </Col>
+              </Row>
+            </form>
+        </Container>
+        <Container>
           <ResultDisplay results={results} user={user} />
-        </div>
+        </Container>
       </section>
     </React.Fragment>
   );

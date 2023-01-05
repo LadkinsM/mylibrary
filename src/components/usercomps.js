@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Bookshelves from './bookshelf';
 import CreateShelf from './createShelf';
+import { Col, Container, Row } from 'react-bootstrap';
 
 export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // User toolbar (like book, add to bookshelf) for book details page.
@@ -72,24 +73,26 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <div>
-                {book_id !== `${currentRead.book_id}` ? <button id="button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
-                                : <button id="button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
-            </div>
-            <div>
-                <form id="add_to_shelf" onSubmit={addToShelf}>
-                    <select
-                        id="select_shelf"
-                        value={selectedShelf}
-                        onChange={updateShelf}
-                        >
-                        {shelves.map(shelf => {
-                            return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
-                        })}
-                    </select>
-                    <input type="submit" />
-                </form>
-            </div>
+            <Row className='toolbar'>
+                <Col md={{ span: 4, offset: 0 }} sm={1}>
+                    {book_id !== `${currentRead.book_id}` ? <button id="button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
+                                    : <button id="button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
+                </Col>
+                <Col md={{ span: 6 }} sm={1} className='toolbar-right-col'>
+                    <form id="add_to_shelf" onSubmit={addToShelf}>
+                        <select
+                            id="select_shelf"
+                            value={selectedShelf}
+                            onChange={updateShelf}
+                            >
+                            {shelves.map(shelf => {
+                                return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
+                            })}
+                        </select>
+                        <input type="submit" />
+                    </form>
+                </Col>
+            </Row>
         </React.Fragment>
     )
 }
@@ -125,39 +128,45 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
 
     return (
         <React.Fragment>
-            <h3>Bookshelves</h3>
-            {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}
-                <Modal
-                    show={showCreateShelfModal}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                >
-                    <Modal.Header closeButton onClick={handleClose}>
-                        <Modal.Title>Create a new shelf below!</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <CreateShelf user={user} 
-                                    shelves={shelves} 
-                                    handleClose={evt => handleClose(evt)}
-                        />
-                    </Modal.Body>
-                </Modal>
-            <select
-                id="select_shelf"
-                value={selectedShelf}
-                onChange={updateShelf}
-                >
-                <option key="None" value="None">Select Shelf</option>
-                {shelves.map(shelf => {
-                    return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
-                })}
-            </select>
-            <div>
-            {books.length==0 && selectedShelf !== "None" ? 
-                <Link to='/search'>I'm an empty shelf! Head to search to add books!</Link> : 
-                <Bookshelves user={user} books={books} /> }
-            </div>
+            <Row>
+                <Col md={{ span: 5 }}>
+                    <h3>Bookshelves</h3>
+                </Col>
+                <Col md={{ span: 5 }} className='toolbar-right-col'>
+                    {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}
+                        <Modal
+                            show={showCreateShelfModal}
+                            onHide={handleClose}
+                            backdrop="static"
+                            keyboard={false}
+                        >
+                            <Modal.Header closeButton onClick={handleClose}>
+                                <Modal.Title>Create a new shelf below!</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <CreateShelf user={user} 
+                                            shelves={shelves} 
+                                            handleClose={evt => handleClose(evt)}
+                                />
+                            </Modal.Body>
+                        </Modal>
+                    <select
+                        id="select_shelf"
+                        value={selectedShelf}
+                        onChange={updateShelf}
+                        >
+                        <option key="None" value="None">Select Shelf</option>
+                        {shelves.map(shelf => {
+                            return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
+                        })}
+                    </select>
+                </Col>
+            </Row>
+            <Container>
+                {books.length==0 && selectedShelf !== "None" ? 
+                    <Link to='/search' id='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> : 
+                    <Bookshelves user={user} books={books} /> }
+            </Container>
         </React.Fragment>
     )
 }

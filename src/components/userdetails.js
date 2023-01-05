@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 import { UserReviewComp } from './reviewcomp';
+import { Col, Container, Row } from 'react-bootstrap';
 
 const UserDetails = ({user, loading, isLoggedIn}) => {
     // Display details for User
@@ -37,28 +38,46 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <div>
-                <p>Currently Reading :  
-                    {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
-                        {currentRead.title} by {currentRead.author}
-                    </Link>
-                    : <Link to='/search'>What are you currently reading?</Link>}
-                </p>
-            </div>
-            <div className="card">
-                <h1>{user.email}</h1>
-                <p>{user.personal_description}</p>
-            </div>
-            <div>
+            <Container>
+                <Row>
+                    <Col md={{ span: 10}}>
+                        <p>Currently Reading :  
+                            {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
+                                {currentRead.title} by {currentRead.author}
+                            </Link>
+                            : <Link className='link' to='/search'> What are you currently reading?</Link>}
+                        </p>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row>
+                    <Col md={{ span: 2 }}>
+                        <p>Placeholder</p>
+                    </Col>
+                    <Col md={{ span: 8 }}>
+                        <h2>{user.email}</h2>
+                        <p>{user.personal_description}</p>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
                 <UserBookshelfComp shelves={shelves} 
                                     user={user} 
                                     isLoggedIn={isLoggedIn}
                                     updateShelves = {() => updateShelves()}
                 />
-            </div>
-            <div>
+            </Container>
+            <Container>
+                <Row>
+                    <Col md={{ span: 10 }}>
+                        <h2>Reviews</h2>
+                    </Col>
+                </Row>
+            </Container>
+            <Container className='review-container'>
                 <UserReviewComp user={user} isLoggedIn={isLoggedIn}/>
-            </div>
+            </Container>
         </React.Fragment>
     )};
 
