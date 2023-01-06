@@ -51,7 +51,7 @@ const BookDetails = ({user, isLoggedIn}) => {
                         {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
                                                             <img src={NoImageProvided} /> }
                     </Col>
-                    <Col md={{ span:8 }} sm={1}>
+                    <Col md={{ span:10 }} sm={1}>
                         <h1>{bookInfo.title}</h1>
                         <p>{bookInfo.authors}</p>
                         <p>{bookInfo.genres}</p>
@@ -62,10 +62,10 @@ const BookDetails = ({user, isLoggedIn}) => {
             </Container>
             <Container>
                 <Row>
-                    <Col md={{ span: 5 }}>
+                    <Col md={{ span: 6 }}>
                         <h2>Reviews</h2>
                     </Col>
-                    <Col md={{ span: 5 }} className='toolbar-right-col'>
+                    <Col md={{ span: 6 }} className='toolbar-right-col'>
                         {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}
                     </Col>
                 </Row>

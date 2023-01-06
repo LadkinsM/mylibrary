@@ -114,9 +114,9 @@ label {
 
 div.card {
   width: 15rem;
+  height: 20rem;
   margin: 1rem;
   padding: 1rem;
-  height: 100%;
   border-width: 1px;
 }
 
@@ -127,8 +127,23 @@ div.card {
   margin-bottom: 1rem;
 }
 
+div.card-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 div.card-subtitle {
   margin-bottom: .5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+p.card-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 div.card-group {
@@ -158,9 +173,16 @@ div.review-container {
   margin-bottom: 2rem;
 }
 
-div.bookshelf-container {
+.bookshelf-container.card-group{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 24rem;
   overflow-x: auto;
-  height: auto;
+}
+
+.bookshelf-card {
+  display: inline-block;
 }
 
 a#empty-shelf {

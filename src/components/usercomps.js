@@ -78,7 +78,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
                     {book_id !== `${currentRead.book_id}` ? <button id="button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
                                     : <button id="button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
                 </Col>
-                <Col md={{ span: 6 }} sm={1} className='toolbar-right-col'>
+                <Col md={{ span: 8 }} sm={1} className='toolbar-right-col'>
                     <form id="add_to_shelf" onSubmit={addToShelf}>
                         <select
                             id="select_shelf"
@@ -129,10 +129,10 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
     return (
         <React.Fragment>
             <Row>
-                <Col md={{ span: 5 }}>
+                <Col md={{ span: 6 }}>
                     <h3>Bookshelves</h3>
                 </Col>
-                <Col md={{ span: 5 }} className='toolbar-right-col'>
+                <Col md={{ span: 6 }} className='toolbar-right-col'>
                     {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}
                         <Modal
                             show={showCreateShelfModal}
@@ -164,7 +164,9 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
             </Row>
             <Container>
                 {books.length==0 && selectedShelf !== "None" ? 
-                    <Link to='/search' id='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> : 
+                    <Link to='/search' id='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> :
+                    books.length==0 && selectedShelf == "None" ? 
+                    <p>Select a bookshelf to view it's contents!</p> :
                     <Bookshelves user={user} books={books} /> }
             </Container>
         </React.Fragment>

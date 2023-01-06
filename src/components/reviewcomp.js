@@ -192,13 +192,13 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
                                     <Col md={{ span: 4 }}>
                                         <h4>{review.title}</h4>
                                     </Col>
-                                    <Col md={{ span: 6 }} className='toolbar-right-col'>
+                                    <Col md={{ span: 8 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
                                                     <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={10}>
+                                    <Col md={12}>
                                         <p>Score: {review.score}</p>
                                         <p>{review.comment}</p>
                                     </Col>
@@ -249,13 +249,13 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
                                     <Col md={{ span: 4 }}>
                                         <h4>{review.username} says...</h4>
                                     </Col>
-                                    <Col md={{ span: 6 }} className='toolbar-right-col'>
+                                    <Col md={{ span: 8 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
                                                 <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={10}>
+                                    <Col md={12}>
                                         <p>Score: {review.score}</p>
                                         <p>{review.comment}</p>
                                     </Col>

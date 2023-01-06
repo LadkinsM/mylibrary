@@ -18,7 +18,7 @@ function Navigation({user, handleSignOut, isLoggedIn, loading}) {
             <Col md={{ span: 4, offset: 0}} sm={1}>
               <h3>MyLibrary</h3>
             </Col>
-            <Col md={{ span: 6 }} sm={{ span: 1 }} className="header-nav">
+            <Col md={{ span: 8 }} sm={{ span: 1 }} className="header-nav">
               <Navbar expand="lg">
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

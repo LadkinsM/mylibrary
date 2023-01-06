@@ -40,7 +40,7 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
         <React.Fragment>
             <Container>
                 <Row>
-                    <Col md={{ span: 10}}>
+                    <Col md={{ span: 12}}>
                         <p>Currently Reading :  
                             {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
                                 {currentRead.title} by {currentRead.author}
@@ -52,7 +52,7 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
             </Container>
             <Container>
                 <Row>
-                    <Col md={{ span: 2 }}>
+                    <Col md={{ span: 4 }}>
                         <p>Placeholder</p>
                     </Col>
                     <Col md={{ span: 8 }}>
@@ -70,7 +70,7 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
             </Container>
             <Container>
                 <Row>
-                    <Col md={{ span: 10 }}>
+                    <Col md={{ span: 12 }}>
                         <h2>Reviews</h2>
                     </Col>
                 </Row>
