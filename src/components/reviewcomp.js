@@ -189,10 +189,10 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
                 {reviews && reviews.map(review => {
                     return <div className="review">
                                 <Row>
-                                    <Col md={{ span: 4 }}>
+                                    <Col md={{ span: 8 }} className='toolbar-left-col'>
                                         <h4>{review.title}</h4>
                                     </Col>
-                                    <Col md={{ span: 8 }} className='toolbar-right-col'>
+                                    <Col md={{ span: 4 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
                                                     <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                     </Col>
@@ -246,10 +246,10 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
                 {reviews && reviews.map(review => {
                     return <div className="review">
                                 <Row>
-                                    <Col md={{ span: 4 }}>
+                                    <Col md={{ span: 8 }} className='toolbar-left-col'>
                                         <h4>{review.username} says...</h4>
                                     </Col>
-                                    <Col md={{ span: 8 }} className='toolbar-right-col'>
+                                    <Col md={{ span: 4 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
                                                 <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
                                     </Col>

@@ -37,6 +37,10 @@
   }
 }
 
+div.container {
+  width: 1200px;
+}
+
 .card-container {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr 3fr;
@@ -185,9 +189,9 @@ div.review-container {
   display: inline-block;
 }
 
-a#empty-shelf {
+#empty-shelf {
   display: flex;
-  height: 300px;
+  height: 24rem;
   justify-content: center;
   align-items: center;
 }

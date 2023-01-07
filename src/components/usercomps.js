@@ -166,7 +166,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                 {books.length==0 && selectedShelf !== "None" ? 
                     <Link to='/search' id='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> :
                     books.length==0 && selectedShelf == "None" ? 
-                    <p>Select a bookshelf to view it's contents!</p> :
+                    <p id='empty-shelf'>Select a bookshelf to view it's contents!</p> :
                     <Bookshelves user={user} books={books} /> }
             </Container>
         </React.Fragment>
