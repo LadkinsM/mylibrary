@@ -16,7 +16,7 @@ function Navigation({user, handleSignOut, isLoggedIn, loading}) {
         <Container>
           <Row className="nav-container">
             <Col md={{ span: 4, offset: 0}} sm={1}>
-              <h3>MyLibrary</h3>
+              <Link to="/" className="home-link"><h2>myLibrary</h2></Link>
             </Col>
             <Col md={{ span: 8 }} sm={{ span: 1 }} className="header-nav">
               <Navbar expand="lg">

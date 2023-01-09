@@ -46,13 +46,13 @@ const BookDetails = ({user, isLoggedIn}) => {
                                                         />}
             </Container>
             <Container>
-                <Row>
-                    <Col md={{ span:2, offset: 0}} sm={1}>
+                <Row id='cover-row'>
+                    <Col md={{ span:2, offset: 0}} sm={1} id='cover-container'>
                         {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
-                                                            <img src={NoImageProvided} /> }
+                                <img src={NoImageProvided} /> }
                     </Col>
                     <Col md={{ span:10 }} sm={1}>
-                        <h1>{bookInfo.title}</h1>
+                        <h3>{bookInfo.title}</h3>
                         <p>{bookInfo.authors}</p>
                         <p>{bookInfo.genres}</p>
                         <p>{bookInfo.overview}</p>
@@ -63,7 +63,7 @@ const BookDetails = ({user, isLoggedIn}) => {
             <Container>
                 <Row>
                     <Col md={{ span: 6 }}>
-                        <h2>Reviews</h2>
+                        <h3>Reviews</h3>
                     </Col>
                     <Col md={{ span: 6 }} className='toolbar-right-col'>
                         {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}

@@ -75,11 +75,12 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
         <React.Fragment>
             <Row className='toolbar'>
                 <Col md={{ span: 4, offset: 0 }} sm={1}>
-                    {book_id !== `${currentRead.book_id}` ? <button id="button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
-                                    : <button id="button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
+                    {book_id !== `${currentRead.book_id}` ? <button id="select_shelf" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
+                                    : <button id="select_shelf" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
                 </Col>
                 <Col md={{ span: 8 }} sm={1} className='toolbar-right-col'>
                     <form id="add_to_shelf" onSubmit={addToShelf}>
+                        <label for="select_shelf">Add to bookshelf?</label>
                         <select
                             id="select_shelf"
                             value={selectedShelf}
@@ -89,7 +90,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
                                 return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
                             })}
                         </select>
-                        <input type="submit" />
+                        <input type="submit" id="select_shelf"/>
                     </form>
                 </Col>
             </Row>
@@ -128,9 +129,9 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
 
     return (
         <React.Fragment>
-            <Row>
+            <Row className='toolbar'>
                 <Col md={{ span: 6 }}>
-                    <h3>Bookshelves</h3>
+                    <h4>Bookshelves</h4>
                 </Col>
                 <Col md={{ span: 6 }} className='toolbar-right-col'>
                     {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}

@@ -36,11 +36,11 @@ function Search({user}) {
       <section id="search_results">
         <Container className='search-container'>
           <Row>
-            <h2 className='search-header'>Search</h2>
+            <h1 className='search-header'>Search</h1>
           </Row>
             <form id="search" onSubmit={handleSubmit}>
               <Row id="search-row">
-                <Col md={{ span: 4, offset: 0 }}>
+                <Col md={{ span: 6, offset: 0 }} className='search-selects'>
                     <input 
                       type="text" 
                       name="search_input" 
@@ -48,9 +48,6 @@ function Search({user}) {
                       value={searchInput}
                       onChange={updateInput}
                     />
-                </Col>
-                <Col md={{ span: 1 }}>
-                  {/* <label htmlFor="search_criteria">Search Criteria</label> */}
                   <select 
                     id="search_criteria" 
                     value={searchCriteria} 
@@ -61,8 +58,6 @@ function Search({user}) {
                     <option value="+inauthor:">Author</option>
                     <option value="+subject:">Genre</option>
                   </select>
-                </Col>
-                <Col md={{ span: 1 }} id='search-submit'>
                   <input type="submit" />
                 </Col>
               </Row>

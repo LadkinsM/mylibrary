@@ -10,6 +10,7 @@ import SignUp from "./components/signup";
 
 import { Route, Routes, redirect } from "react-router-dom";
 import { AddReview, EditReview } from './components/reviewcomp';
+import Home from './components/Home';
 
 function App() {
   const[email, setEmail] = React.useState("");
@@ -91,6 +92,7 @@ function App() {
                   loading={loading}
                   isLoggedIn={isLoggedIn} />
       <Routes>
+          <Route path="/" element={ <Home /> } />
           <Route path="/login" element={ <Login handleLogin={evt => handleLogin(evt)}
                                                 updateEmail={evt => updateEmail(evt)}
                                                 updatePassword={evt => updatePassword(evt)}
