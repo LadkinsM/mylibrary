@@ -9,14 +9,12 @@ const Bookshelves = ({user, books}) => {
 
     return(
         <React.Fragment>
-            <Row>
-                <Col md={{ span: 12 }}>
                     <CardGroup className='bookshelf-container'>
                         {books && books.map(book => {
-                            return <Link to={`book_details/${book.book_id}`}>
-                                        <Card className="bookshelf-card">
-                                            {book.cover !== "Not Provided" ? <img src={book.cover} /> :
-                                                                        <img src={NoImageProvided} /> }
+                            return <Link to={`book_details/${book.book_id}`} className='card_link'>
+                                        <Card className="card" key={book.book_id}>
+                                            {book.cover !== "Not Provided" ? <Card.Img variant="top" src={book.cover} /> :
+                                                                        <Card.Img variant="top" src={NoImageProvided} /> }
                                             <Card.Title>{book.title}</Card.Title>
                                             <Card.Subtitle>{book.authors}</Card.Subtitle>
                                             <Card.Text>Published Date: {book.publish_date}</Card.Text>
@@ -24,8 +22,6 @@ const Bookshelves = ({user, books}) => {
                                     </Link>
                         })}
                     </CardGroup>
-                </Col>
-            </Row>
         </React.Fragment>
     )
 };

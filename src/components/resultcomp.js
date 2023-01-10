@@ -14,7 +14,7 @@ const ResultDisplay = (props) => {
         <React.Fragment>
                 <CardGroup className="card-container">
                 {results && results.map(result => {
-                    return <Link to={`book_details/${result.book_id}`}>
+                    return <Link to={`book_details/${result.book_id}`} className='card_link'>
                                 <Card className="card" key={result.book_id}>
                                     {result.cover !== "Not Provided" ? <Card.Img variant="top" src={result.cover} /> : 
                                                                     <Card.Img variant="top" src={NoImageProvided} /> }

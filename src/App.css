@@ -39,7 +39,7 @@
 
 a, p {
   font-family: 'Lato', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 h1 {
@@ -57,22 +57,24 @@ h2 {
   color: #917F71;
 }
 
-div.container {
-  width: 1200px;
-  padding-top: 5px;
+h3 {
+  color: #262322;
 }
 
-div#home-container {
+.container {
+  width: 1200px;
+}
+
+#home-container {
   height: 500px;
   background-image: url('images/alfons-morales-PyUXxFrYweY-unsplash.jpg');
   background-color: #262322;
   background-size: 155%;
-  border-radius: 5px;
   background-blend-mode: screen;
   background-position-y: top;
 }
 
-div#home-column {
+#home-column {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -81,7 +83,7 @@ div#home-column {
 }
 
 #home-header {
-  font-size: 4rem;
+  font-size: 8vh;
 }
 
 #home-para {
@@ -97,13 +99,13 @@ div#home-column {
 }
 
 .card-container {
-  display: grid;
-  grid-template-columns: 3fr 3fr 3fr 3fr;
+  /* display: grid; */
+  /* grid-template-columns: 3fr 3fr 3fr 3fr; */
   align-items: center;
   justify-content: center;
 }
 
-div.card {
+.card {
   display: inline-block;
   border:none;
   border-radius: 5px;
@@ -111,39 +113,25 @@ div.card {
   transition: .5s ease-out;
 }
 
-div.card:hover {
+.card:hover {
   box-shadow: 0 2px 15px 0 #917F71;
 }
 
-div.row.nav-container {
+.row.nav_row {
   display: flex;
   align-items: center;
-  margin-top: 0%;
-  margin-bottom: 0%;
 }
 
-.navigation-bar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+.nav_container {
+  height:fit-content;
 }
 
-.navbar.navbar-expand-lg.navbar-light {
+.header-nav {
   display: flex;
   justify-content: flex-end;
 }
 
-.navbar-expand-lg.navbar-collapse {
-  display: flex;
-  justify-content: flex-end;
-}
-
-#basic-navbar-nav.navbar-collapse.collapse {
-  display: flex;
-  justify-content: flex-end;
-}
-
-a.nav-link {
+.nav-link {
   text-decoration: none;
 }
 
@@ -151,15 +139,16 @@ a.nav-link {
   text-decoration: none;
 }
 
-a.link {
+.link {
   text-decoration: none;
 }
 
-input {
-  margin: .5rem;
+.card_link {
+  text-decoration: none;
+  color:#262322;
 }
 
-button.btn {
+input {
   margin: .5rem;
 }
 
@@ -168,7 +157,6 @@ button.btn {
   background-image: url('images/alfons-morales-PyUXxFrYweY-unsplash.jpg');
   background-color: #262322;
   background-size: 155%;
-  border-radius: 5px;
   background-blend-mode: screen;
   background-position-y: inherit;
   display: flex;
@@ -182,7 +170,7 @@ button.btn {
   align-self: center;
 }
 
-#search-row {
+.search-row {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,6 +179,7 @@ button.btn {
 label {
   margin-top: 10px;
   margin-bottom: 10px;
+  color:#262322;
 }
 
 #user_search_input {
@@ -210,7 +199,7 @@ label {
   font-size: 16px;
 }
 
-div.card {
+.card {
   width: 15rem;
   height: 20rem;
   margin: 1rem;
@@ -225,86 +214,198 @@ div.card {
   margin-bottom: 1rem;
 }
 
-div.card-title {
+.card-title {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-div.card-subtitle {
+.card-subtitle {
   margin-bottom: .5rem;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-p.card-text {
+.card-text {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
 
-div.card-group {
+.card-group {
   display:flex;
   align-items: flex-start;
 }
 
-div.row {
+.row {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
 }
 
-div.toolbar {
-  background-color: #917F71;
-  border-radius: 5px;
+.toolbar {
   border:none;
-  color:#F3EFE0;
-  font-weight:bold;
+  color:#262322;
+  height: auto;
+  background-color: #F3EFE0;
+  border-radius: 5px;
 }
 
-div.toolbar-right-col {
+.current-read {
+  background-color: #F3EFE0;
+  border-radius: 5px;
+}
+
+.border_decor {
+  border-left: 4mm ridge #4e7be3a0;
+}
+
+.toolbar-right-col {
   display: flex;
   justify-content: flex-end;
 }
 
-#select_shelf {
+.details {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.details_right p {
+  font-size: 16px;
+}
+
+.details_right h2 {
+  color: #262322;
+}
+
+.details_left {
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
+}
+
+.book_icon {
+  width: 150px;
+  height: auto;
+  filter: drop-shadow(2px 2px 2px #26232253);
+}
+
+.cover_shadow {
+  filter: drop-shadow(2px 2px 2px #26232253);
+}
+
+.toolbar_button {
   border: none;
   border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: .5rem;
+  background-color: #917F71;
+  color:#F3EFE0;
+}
+
+.toolbar_button:hover {
+  background-color: #75665b;
+}
+
+button.toolbar_button {
+  border: none;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: .5rem;
+  background-color: #917F71;
+  color:#F3EFE0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button.toolbar_button:hover {
+  background-color: #75665b;
+}
+
+#select_shelf {
   margin-left: .5rem;
+  padding-left: .5rem;
+  padding-bottom: 2px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-button#select_shelf {
-  margin-left: 0%;
+option:hover {
+  box-shadow: 0 0 10px 100px #594d45 inset;
 }
 
-div.review-container {
+.review-container {
   overflow-y: auto;
   height: 500px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.review-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.review-container::-webkit-scrollbar-track {
+  background:#ccdfff;
+  border-radius: 20px;
+}
+
+.review-container::-webkit-scrollbar-thumb {
+  background-color: #7C9ACF;
+  border-radius: 20px;
+  border: 2px #ccdfff;
+}
+
+.align-header {
+  display: flex;
+  align-items: center;
+}
+
+.bookshelf-container {
+  height: 24rem;
+  margin-bottom: 1rem;
+}
+
+.bookshelf-container::-webkit-scrollbar {
+  height: 12px;
+}
+
+.bookshelf-container::-webkit-scrollbar-track {
+  background:#ccdfff;
+  border-radius: 20px;
+}
+
+.bookshelf-container::-webkit-scrollbar-thumb {
+  background-color: #7C9ACF;
+  border-radius: 20px;
+  border: 2px #ccdfff;
 }
 
 .bookshelf-container.card-group{
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  height: 24rem;
   overflow-x: auto;
+  overflow-y: hidden;
+  align-items: center;
 }
 
 .bookshelf-card {
   display: inline-block;
+  height: 24rem;
 }
 
-#empty-shelf {
+.empty-shelf {
   display: flex;
   height: 24rem;
   justify-content: center;
   align-items: center;
 }
 
-div#cover-container {
+#cover-container {
   flex-grow:1;
   overflow:hidden;
   background-repeat: no-repeat;
@@ -312,9 +413,21 @@ div#cover-container {
   background-size:contain;
 }
 
-#cover-row {
+.cover-row {
   overflow:hidden;
   display:flex;
   flex-direction: row;
   align-items: flex-start;
+}
+
+#number_input {
+  margin-left: .5rem;
+}
+
+.review {
+  border-bottom-width: thin;
+  border-color: #7C9ACF;
+  border-bottom-style: dotted;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

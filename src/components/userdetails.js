@@ -4,6 +4,7 @@ import '../App.css';
 import { UserBookshelfComp } from './usercomps';
 import { UserReviewComp } from './reviewcomp';
 import { Col, Container, Row } from 'react-bootstrap';
+import book_icon from '../images/book_icon.png';
 
 const UserDetails = ({user, loading, isLoggedIn}) => {
     // Display details for User
@@ -39,7 +40,7 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
     return (
         <React.Fragment>
             <Container>
-                <Row className='toolbar'>
+                <Row className='toolbar, current-read'>
                     <Col md={{ span: 12}}>
                         <p>Currently Reading :  
                             {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
@@ -50,12 +51,12 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
                     </Col>
                 </Row>
             </Container>
-            <Container>
+            <Container className='details'>
                 <Row>
-                    <Col md={{ span: 2 }}>
-                        <p>Placeholder</p>
+                    <Col md={{ span: 2 }} className='details_left'>
+                        <img src={book_icon} className='book_icon' />
                     </Col>
-                    <Col md={{ span: 10 }}>
+                    <Col md={{ span: 10 }} className='details_right'>
                         <h2>{user.email}</h2>
                         <p>{user.personal_description}</p>
                     </Col>
@@ -70,8 +71,8 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
             </Container>
             <Container>
                 <Row>
-                    <Col md={{ span: 12 }}>
-                        <h2>Reviews</h2>
+                    <Col md={{ span: 12 }} className='toolbar'>
+                        <h3>Reviews</h3>
                     </Col>
                 </Row>
             </Container>

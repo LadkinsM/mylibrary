@@ -73,15 +73,16 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <Row className='toolbar'>
+            <Row>
                 <Col md={{ span: 4, offset: 0 }} sm={1}>
-                    {book_id !== `${currentRead.book_id}` ? <button id="select_shelf" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
-                                    : <button id="select_shelf" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
+                    {book_id !== `${currentRead.book_id}` ? <button className="toolbar_button" value="add" onClick={updateCurrentRead}>Set as Current Read</button>
+                                    : <button className="toolbar_button" value="remove" onClick={updateCurrentRead}>Remove as Current Read</button>}
                 </Col>
                 <Col md={{ span: 8 }} sm={1} className='toolbar-right-col'>
                     <form id="add_to_shelf" onSubmit={addToShelf}>
-                        <label for="select_shelf">Add to bookshelf?</label>
+                        <label for="select_shelf" className='select_spacing'>Add to bookshelf?</label>
                         <select
+                            className="toolbar_button"
                             id="select_shelf"
                             value={selectedShelf}
                             onChange={updateShelf}
@@ -90,7 +91,7 @@ export const UserBookComp = ({user, book_id, isLoggedIn}) => {
                                 return <option key={shelf.shelf_id} value={shelf.shelf_id}>{shelf.name}</option>
                             })}
                         </select>
-                        <input type="submit" id="select_shelf"/>
+                        <input type="submit" className="toolbar_button"/>
                     </form>
                 </Col>
             </Row>
@@ -134,7 +135,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                     <h4>Bookshelves</h4>
                 </Col>
                 <Col md={{ span: 6 }} className='toolbar-right-col'>
-                    {isLoggedIn !== false && <Button onClick={handleShow}>Create New Shelf</Button>}
+                    {isLoggedIn !== false && <Button onClick={handleShow} className='toolbar_button'>Create New Shelf</Button>}
                         <Modal
                             show={showCreateShelfModal}
                             onHide={handleClose}
@@ -152,7 +153,8 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                             </Modal.Body>
                         </Modal>
                     <select
-                        id="select_shelf"
+                        className='toolbar_button'
+                        id='select_shelf'
                         value={selectedShelf}
                         onChange={updateShelf}
                         >
@@ -163,13 +165,13 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                     </select>
                 </Col>
             </Row>
-            <Container>
+            <Row className='bookshelf-container'>
                 {books.length==0 && selectedShelf !== "None" ? 
-                    <Link to='/search' id='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> :
+                    <Link to='/search' className='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> :
                     books.length==0 && selectedShelf == "None" ? 
-                    <p id='empty-shelf'>Select a bookshelf to view it's contents!</p> :
+                    <p className='empty-shelf'>Select a bookshelf to view it's contents!</p> :
                     <Bookshelves user={user} books={books} /> }
-            </Container>
+            </Row>
         </React.Fragment>
     )
 }

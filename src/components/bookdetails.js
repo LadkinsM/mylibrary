@@ -39,19 +39,19 @@ const BookDetails = ({user, isLoggedIn}) => {
 
     return (
         <React.Fragment>
-            <Container>
+            <Container className='toolbar'>
                 {isLoggedIn !== false && <UserBookComp user={user} 
                                                         book_id={book_id} 
                                                         isLoggedIn={isLoggedIn} 
                                                         />}
             </Container>
-            <Container>
-                <Row id='cover-row'>
-                    <Col md={{ span:2, offset: 0}} sm={1} id='cover-container'>
-                        {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} /> : 
-                                <img src={NoImageProvided} /> }
+            <Container className='details'>
+                <Row className='cover-row'>
+                    <Col md={{ span:2, offset: 0}} sm={1} className='details_left'>
+                        {bookInfo.cover !== "Not Provided" ? <img src={bookInfo.cover} className='cover_shadow'/> : 
+                                <img src={NoImageProvided} className='cover_shadow'/> }
                     </Col>
-                    <Col md={{ span:10 }} sm={1}>
+                    <Col md={{ span:10 }} sm={1} >
                         <h3>{bookInfo.title}</h3>
                         <p>{bookInfo.authors}</p>
                         <p>{bookInfo.genres}</p>
@@ -61,22 +61,23 @@ const BookDetails = ({user, isLoggedIn}) => {
                 </Row>
             </Container>
             <Container>
-                <Row>
+                <Row className='toolbar'>
                     <Col md={{ span: 6 }}>
                         <h3>Reviews</h3>
                     </Col>
                     <Col md={{ span: 6 }} className='toolbar-right-col'>
-                        {isLoggedIn !== false && <Button onClick={handleShow}>Add a Review</Button>}
+                        {isLoggedIn !== false && <Button onClick={handleShow} className='toolbar_button'>Add a Review</Button>}
                     </Col>
                 </Row>
                     <Modal
+                        className='modal_custom'
                         show={showReviewModal}
                         onHide={handleClose}
                         backdrop="static"
                         keyboard={false}
                     >
                         <Modal.Header closeButton onClick={handleClose}>
-                            <Modal.Title>Enter your review below!</Modal.Title>
+                            <Modal.Title>Add your review below!</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <AddReview user={user} 

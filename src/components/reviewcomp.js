@@ -42,31 +42,41 @@ export const AddReview = ({user, book_id, handleClose}) => {
         return (
             <React.Fragment>
                 <form id="addreview" onSubmit={addReview}>
-                    <div>
-                        <label htmlFor="score">Score:</label>
-                        <input
-                            type="number"
-                            id="number_input"
-                            min="0"
-                            max="5"
-                            value={score}
-                            onChange={updateScore}
-                        />
-                        <label htmlFor="comment">Comment (500 Characters or less):</label>
-                        <textarea
-                            id="text_input"
-                            maxLength="500"
-                            wrap="hard"
-                            rows="10"
-                            cols="50"
-                            spellCheck="true"
-                            value={comment}
-                            onChange={updateComment}
-                        >
-                        Insert Review Here...
-                        </textarea>
-                        <input type="submit" />
-                    </div>
+                    <Row>
+                        <Col md={12}>
+                            <label htmlFor="comment">Comment (500 Characters or less):</label>
+                        </Col>
+                        <Col md={12}>
+                            <textarea
+                                id="text_input"
+                                maxLength="500"
+                                wrap="hard"
+                                rows="10"
+                                cols="50"
+                                spellCheck="true"
+                                value={comment}
+                                onChange={updateComment}
+                            >
+                            Insert Review Here...
+                            </textarea>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={8}>
+                            <label htmlFor="score">Score:</label>
+                            <input
+                                type="number"
+                                id="number_input"
+                                min="0"
+                                max="5"
+                                value={score}
+                                onChange={updateScore}
+                            />
+                        </Col>
+                        <Col md={4}>
+                            <input type="submit" />
+                        </Col>
+                    </Row>
                 </form>
             </React.Fragment>
         )
@@ -114,31 +124,40 @@ export const EditReview = ({user, book_id, review_id, handleClose}) => {
     
     return (
         <React.Fragment>
-            <h3>Edit Review</h3>
             <form id="editreview" onSubmit={editReview}>
-                <div>
-                    <label htmlFor="score">Score:</label>
-                    <input
-                        type="number"
-                        id="number_input"
-                        min="0"
-                        max="5"
-                        defaultValue={originalReview.score}
-                        onChange={updateScore}
-                    />
-                    <label htmlFor="comment">Comment (500 Characters or less):</label>
-                    <textarea
-                        id="text_input"
-                        maxLength="500"
-                        wrap="hard"
-                        rows="10"
-                        cols="50"
-                        spellCheck="true"
-                        defaultValue={originalReview.comment}
-                        onChange={updateComment}
-                    />
-                    <input type="submit" />
-                </div>
+                <Row>
+                    <Col md={12}>
+                        <label htmlFor="comment">Comment (500 Characters or less):</label>
+                    </Col>
+                    <Col md={12}>
+                        <textarea
+                            id="text_input"
+                            maxLength="500"
+                            wrap="hard"
+                            rows="10"
+                            cols="50"
+                            spellCheck="true"
+                            defaultValue={originalReview.comment}
+                            onChange={updateComment}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={8}>
+                        <label htmlFor="score">Score:</label>
+                        <input
+                            type="number"
+                            id="number_input"
+                            min="0"
+                            max="5"
+                            defaultValue={originalReview.score}
+                            onChange={updateScore}
+                        />
+                    </Col>
+                    <Col md={4}>
+                        <input type="submit" />
+                    </Col>
+                </Row>
             </form>
         </React.Fragment>
     ) 
@@ -194,7 +213,7 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
                                     </Col>
                                     <Col md={{ span: 4 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                                    <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
+                                                    <Button onClick={() => handleShow(review.review_id)} className='toolbar_button'>Edit Review</Button>}
                                     </Col>
                                 </Row>
                                 <Row>
@@ -226,6 +245,7 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
     return (
         <React.Fragment>
             <Modal
+                className='modal_custom'
                 show={showReviewModal}
                 onHide={handleClose}
                 backdrop="static"
@@ -251,7 +271,7 @@ export const BookReviewComp = ({user, isLoggedIn, book_id, reviews}) => {
                                     </Col>
                                     <Col md={{ span: 4 }} className='toolbar-right-col'>
                                         {(review.user_id === user.user_id && isLoggedIn !== false) && 
-                                                <Button onClick={() => handleShow(review.review_id)}>Edit Review</Button>}
+                                                <Button onClick={() => handleShow(review.review_id)} className='toolbar_button'>Edit Review</Button>}
                                     </Col>
                                 </Row>
                                 <Row>

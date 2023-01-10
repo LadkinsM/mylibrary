@@ -39,7 +39,7 @@ function Search({user}) {
             <h1 className='search-header'>Search</h1>
           </Row>
             <form id="search" onSubmit={handleSubmit}>
-              <Row id="search-row">
+              <Row className="search-row">
                 <Col md={{ span: 6, offset: 0 }} className='search-selects'>
                     <input 
                       type="text" 

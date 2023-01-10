@@ -72,8 +72,14 @@ function App() {
         body: JSON.stringify(userJson)
       })
         .then((response) => response.json())
-        .then((userData) => {setUser(userData);
-        confirmLogin(user)})
+        .then((userData) => {
+          if (userData==="Incorrect Password" || userData==="Incorrect Email") {
+            alert(userData);
+          } else {
+            setUser(userData);
+            confirmLogin(user);
+          }
+        })
   }};
 
   const handleSignOut = evt => {
