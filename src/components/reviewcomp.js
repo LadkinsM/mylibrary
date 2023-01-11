@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 export const AddReview = ({user, book_id, handleClose}) => {
     //Add a new review, accessed via bookdetails page.
@@ -36,7 +36,7 @@ export const AddReview = ({user, book_id, handleClose}) => {
                 handleClose();
         }};
 
-    if (addSuccess == "Success") {
+    if (addSuccess === "Success") {
         return navigate(`/search/book_details/${book_id}`)
     } else {
         return (
@@ -204,9 +204,9 @@ export const UserReviewComp = ({user, isLoggedIn}) => {
                     />
                 </Modal.Body>
             </Modal>
-            <div className="reviews">
+            <div>
                 {reviews && reviews.map(review => {
-                    return <div className="review">
+                    return <div className='review'>
                                 <Row>
                                     <Col md={{ span: 8 }} className='toolbar-left-col'>
                                         <h4>{review.title}</h4>

@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Bookshelves from './bookshelf';
 import CreateShelf from './createShelf';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 export const UserBookComp = ({user, book_id, isLoggedIn}) => {
     // User toolbar (like book, add to bookshelf) for book details page.
@@ -118,7 +118,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
     }, [selectedShelf]);
 
     const updateShelf = evt => {
-        if (evt.target.value != "None") {
+        if (evt.target.value !== "None") {
             setSelectedShelf(evt.target.value);}
     };
 
@@ -132,7 +132,7 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
         <React.Fragment>
             <Row className='toolbar'>
                 <Col md={{ span: 6 }}>
-                    <h4>Bookshelves</h4>
+                    <h3 className='toolbar_text'>Bookshelves</h3>
                 </Col>
                 <Col md={{ span: 6 }} className='toolbar-right-col'>
                     {isLoggedIn !== false && <Button onClick={handleShow} className='toolbar_button'>Create New Shelf</Button>}
@@ -166,9 +166,9 @@ export const UserBookshelfComp = ({user, shelves, isLoggedIn, updateShelves}) =>
                 </Col>
             </Row>
             <Row className='bookshelf-container'>
-                {books.length==0 && selectedShelf !== "None" ? 
+                {books.length===0 && selectedShelf !== "None" ? 
                     <Link to='/search' className='empty-shelf'>I'm an empty shelf! Head to search to add books!</Link> :
-                    books.length==0 && selectedShelf == "None" ? 
+                    books.length===0 && selectedShelf === "None" ? 
                     <p className='empty-shelf'>Select a bookshelf to view it's contents!</p> :
                     <Bookshelves user={user} books={books} /> }
             </Row>

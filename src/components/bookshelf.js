@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import NoImageProvided from '../images/NoImageProvided.png';
-import { Col, Container, Row, Card, CardGroup } from 'react-bootstrap';
+import { Card, CardGroup } from 'react-bootstrap';
 
 const Bookshelves = ({user, books}) => {
     //Display books for selected bookshelf.

@@ -42,8 +42,8 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
             <Container>
                 <Row className='toolbar, current-read'>
                     <Col md={{ span: 12}}>
-                        <p>Currently Reading :  
-                            {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`}>
+                        <p className='toolbar_text'>Currently Reading :  
+                            {currentRead.book_id !== 'None' ? <Link to={`book_details/${currentRead.book_id}`} className='link'>
                                 {currentRead.title} by {currentRead.author}
                             </Link>
                             : <Link className='link' to='/search'> What are you currently reading?</Link>}
@@ -72,7 +72,7 @@ const UserDetails = ({user, loading, isLoggedIn}) => {
             <Container>
                 <Row>
                     <Col md={{ span: 12 }} className='toolbar'>
-                        <h3>Reviews</h3>
+                        <h3 className='toolbar_text'>Reviews</h3>
                     </Col>
                 </Row>
             </Container>

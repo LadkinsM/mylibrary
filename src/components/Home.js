@@ -1,12 +1,11 @@
 import React from 'react';
 import '../App.css';
 import { useNavigate } from "react-router-dom";
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 
 
 const Home = ({user, isLoggedIn}) => {
     //Not in use. Homepage, navigates to search. 
-    const navigate = useNavigate();
 
     return (
         <React.Fragment>

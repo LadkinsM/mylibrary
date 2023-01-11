@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NoImageProvided from '../images/NoImageProvided.png';
-import { Col, Container, Row, Card, CardGroup } from 'react-bootstrap';
+import { Card, CardGroup } from 'react-bootstrap';
 import '../App.css';
 
 

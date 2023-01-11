@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
+import { Col, Container, Row } from 'react-bootstrap';
 
 const SignUp = () => {
     //User sign up page.
@@ -46,28 +47,34 @@ const SignUp = () => {
     } else {
         return (
             <React.Fragment>
-                <h1>Sign Up</h1>
-                <form id="signup" onSubmit={handleSignUp}>
-                    <div>
-                        <label htmlFor="email">User Email:</label>
-                        <input 
-                            type="text"
-                            name="email"
-                            id="user_email"
-                            value={email}
-                            onChange={updateEmail}
-                        />
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="text"
-                            name="password"
-                            id="user_password"
-                            value={password}
-                            onChange={updatePassword}
-                        />
-                        <input type="submit" />
-                    </div>
-                </form>
+                <Container className='login_container'>
+                    <Row className='login_header'>
+                        <h2>Sign Up</h2>
+                    </Row>
+                    <Row className='login_row'>
+                        <form id="signup" onSubmit={handleSignUp}>
+                            <Col md={{ span: 12 }} className='login_form'>
+                                <label htmlFor="email" className='login_input'>User Email:</label>
+                                <input 
+                                    type="text"
+                                    name="email"
+                                    id="user_email"
+                                    value={email}
+                                    onChange={updateEmail}
+                                />
+                                <label htmlFor="password" className='login_input'>Password:</label>
+                                <input
+                                    type="text"
+                                    name="password"
+                                    id="user_password"
+                                    value={password}
+                                    onChange={updatePassword}
+                                />
+                                <input type="submit" className='login_input toolbar_button'/>
+                            </Col>
+                        </form>
+                    </Row>
+                </Container>
             </React.Fragment>
         )}
 }

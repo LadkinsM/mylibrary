@@ -58,7 +58,7 @@ function Search({user}) {
                     <option value="+inauthor:">Author</option>
                     <option value="+subject:">Genre</option>
                   </select>
-                  <input type="submit" />
+                  <input type="submit" id="search_submit"/>
                 </Col>
               </Row>
             </form>

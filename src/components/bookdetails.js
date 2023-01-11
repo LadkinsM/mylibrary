@@ -63,7 +63,7 @@ const BookDetails = ({user, isLoggedIn}) => {
             <Container>
                 <Row className='toolbar'>
                     <Col md={{ span: 6 }}>
-                        <h3>Reviews</h3>
+                        <h3 className='toolbar_text'>Reviews</h3>
                     </Col>
                     <Col md={{ span: 6 }} className='toolbar-right-col'>
                         {isLoggedIn !== false && <Button onClick={handleShow} className='toolbar_button'>Add a Review</Button>}
