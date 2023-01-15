@@ -361,6 +361,47 @@ button.toolbar_button:hover {
   background-color: #75665b;
 }
 
+button.modal_button {
+  border: none;
+  border-radius: 5px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: .5rem;
+  background-color: #8d7868;
+  color:#FFF6ED;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button.modal_button:hover {
+  background-color: #75665b;
+}
+
+input.modal_input {
+  border-radius: 5px;
+  background-color: #7C9ACF;
+  color: white;
+  border: none;
+  accent-color: #7C9ACF;
+}
+
+.modal_text_input {
+  width: 100%;
+}
+
+input.modal_input:hover {
+  background-color: #586f97;
+}
+
+input#checkbox {
+  margin-left: .5rem;
+  accent-color: #7C9ACF;
+}
+
+.review_text_input {
+  width: 100%;
+}
+
 #select_shelf {
   margin-left: .5rem;
   padding-left: .5rem;

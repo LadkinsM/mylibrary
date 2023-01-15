@@ -48,6 +48,7 @@ export const AddReview = ({user, book_id, handleClose}) => {
                         </Col>
                         <Col md={12}>
                             <textarea
+                                className='review_text_input'
                                 id="text_input"
                                 maxLength="500"
                                 wrap="hard"
@@ -65,6 +66,7 @@ export const AddReview = ({user, book_id, handleClose}) => {
                         <Col md={8}>
                             <label htmlFor="score">Score:</label>
                             <input
+                                className='modal_input'
                                 type="number"
                                 id="number_input"
                                 min="0"
@@ -73,8 +75,8 @@ export const AddReview = ({user, book_id, handleClose}) => {
                                 onChange={updateScore}
                             />
                         </Col>
-                        <Col md={4}>
-                            <input type="submit" />
+                        <Col md={4} className='toolbar-right-col'>
+                            <input type="submit" className='modal_input'/>
                         </Col>
                     </Row>
                 </form>
@@ -131,6 +133,7 @@ export const EditReview = ({user, book_id, review_id, handleClose}) => {
                     </Col>
                     <Col md={12}>
                         <textarea
+                            className='review_text_input'
                             id="text_input"
                             maxLength="500"
                             wrap="hard"
@@ -146,6 +149,7 @@ export const EditReview = ({user, book_id, review_id, handleClose}) => {
                     <Col md={8}>
                         <label htmlFor="score">Score:</label>
                         <input
+                            className='modal_input'
                             type="number"
                             id="number_input"
                             min="0"
@@ -154,8 +158,8 @@ export const EditReview = ({user, book_id, review_id, handleClose}) => {
                             onChange={updateScore}
                         />
                     </Col>
-                    <Col md={4}>
-                        <input type="submit" />
+                    <Col md={4} className='toolbar-right-col'>
+                        <input type="submit" className='modal_input'/>
                     </Col>
                 </Row>
             </form>

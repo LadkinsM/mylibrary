@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import { Col, Row } from 'react-bootstrap';
 
 const CreateShelf = ({user, handleClose, shelves}) => {
     //Create Bookshelf Component
@@ -41,27 +42,37 @@ const CreateShelf = ({user, handleClose, shelves}) => {
 
         return (
             <React.Fragment>
-                <h2>Create New Bookshelf</h2>
                 <form id="createshelf" onSubmit={handleCreateShelf}>
-                    <div>
-                        <label htmlFor="shelf_name">Bookshelf Name:</label>
-                        <input
-                            type="text"
-                            name="shelf_name"
-                            id="text_input"
-                            value={shelfName}
-                            onChange={updateShelfName}
-                        />
-                        <label htmlFor="private">Private Shelf?:</label>
-                        <input
-                            type="checkbox"
-                            name="private"
-                            id="checkbox"
-                            checked={privacy}
-                            onChange={updateShelfPrivacy}
-                        />
-                        <input type="submit" />
-                    </div>
+                    <Row>
+                        <Col md={4}>
+                            <label htmlFor="shelf_name">Bookshelf Name:</label>
+                        </Col>
+                        <Col md={8}>
+                            <input
+                                className='modal_input modal_text_input'
+                                type="text"
+                                name="shelf_name"
+                                id="text_input"
+                                value={shelfName}
+                                onChange={updateShelfName}
+                            />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={6}>
+                            <label htmlFor="private">Private Shelf?:</label>
+                            <input
+                                type="checkbox"
+                                name="private"
+                                id="checkbox"
+                                checked={privacy}
+                                onChange={updateShelfPrivacy}
+                            />
+                        </Col>
+                        <Col md={6} className='toolbar-right-col'>
+                            <input type="submit" className='modal_input'/>
+                        </Col>
+                    </Row>
                 </form>
             </React.Fragment>
         )
