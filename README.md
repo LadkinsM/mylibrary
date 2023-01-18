@@ -77,7 +77,7 @@ Certain features are only available to account holders...
 
 ![Modal Example](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/ModalExample.PNG)
 
-A smaller challenge was that I didn't want to pull the user away from the user details or book details pages just to update one component. As a solution, I implemented modals from the react-bootstrap library. These are used when a user wants to create a new shelf, add a review, or edit an exsisting review. 
+A smaller challenge was that I didn't want to pull the user away from the user details or book details pages just to update one component. As a solution, I implemented modals from the react-bootstrap library. These are used when a user wants to create a new shelf, add a review, or edit an existing review. 
 
 ## <a name="installation"></a>How to locally run MyLibrary
 MyLibrary has not been deployed as of this posting. The below instructions are for running it locally on your maching.
