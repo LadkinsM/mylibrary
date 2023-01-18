@@ -1,4 +1,4 @@
-# ![myLibrary] (./static/readme_images/myLibrarytxt.png "My Library Text")
+# ![myLibrary](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/myLibrarytxt.png "My Library Text")
 
 MyLibrary is a personal library application that assists avid readers with maintaining a record of books via their own curated bookshelves.  Through of the use of a search feature, users have access to the vast library of books within the MyLibrary database. Search results can be further narrowed down through criteria such as title, author, and genre depending on the users needs. The user profile page, available to account holders, allows the user to create and view their custom bookshelves. In addition, it provides a record of all reviews that user has created with the added capability of editing each review from the profile page.
 
@@ -66,6 +66,9 @@ Certain features are only available to account holders...
 * User Details Page
 * Adding Reviews
 * Bookshelves
+
+#### Modals
+A smaller challenge was that I didn't want to pull the user away from the user details or book details pages just to update one component. As a solution, I implemented modals from the react-bootstrap library. These are used when a user wants to create a new shelf, add a review, or edit an exsisting review. 
 
 ## <a name="installation"></a>How to locally run MyLibrary
 MyLibrary has not been deployed as of this posting. The below instructions are for running it locally on your maching.
