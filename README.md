@@ -5,9 +5,9 @@ MyLibrary is a personal library application that assists avid readers with maint
 Learn more about the developer: https://www.linkedin.com/in/mauri-adkins/
 
 ## Table of Contents
-* [Technologies Used] (#technologies)
-* [Features] (#features)
-* [Deploy MyLibrary Locally] (#installation)
+* [Technologies Used](#technologies)
+* [Features](#features)
+* [Deploy MyLibrary Locally](#installation)
 
 ## <a name="technologies"></a>Technologies Used
 * Python (3.8.10)
@@ -24,6 +24,8 @@ Learn more about the developer: https://www.linkedin.com/in/mauri-adkins/
 
 #### Search
 
+![Search](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/SearchFeature.PNG)
+
 The search feature gives the user the ability to search by...
 * All Results
 * Title
@@ -33,6 +35,8 @@ The search feature gives the user the ability to search by...
 In order to create a diverse library for the user to search from and to provide a greater volume of responses, a hybrid method of seeding the database was implemented. If you run myLibrary locally, you are provided a seed_database.py file to setup your initial database. This file paired with the  books_seed.json file will setup your database, provide a base set of users, and provide a base set of 10 books. Once running, the search feature will add book data to the database. When the user submits the search form, the user input and search criteria are used by the server to make an api request to the google books api. This data is then parsed by the server and added to the MyLibrary database. After this occurse, the original user input and search criteria is made against the MyLibrary database and the resulting book data is returned to the user. In addition to slowly growing the database, this also provides a larger response volume per search to the user.
 
 #### Book Details
+
+![Book Details](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/BookDetails.PNG)
 
 Clicking on a Book Card (from search results, bookshelves, or currently reading) will direct the user to that book's book details page. The book details page displays information about the book such as...
 * Cover
@@ -51,6 +55,8 @@ The user toolbar component (UserBookComp) is present on the book details page wh
 
 #### User Details
 
+![User Details](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/UserDetails.PNG)
+
 Each user has access to their user details page, which serves as the hub for their personal library. The User Details page is the holding place for features such as...
 
 ##### Bookshelves
@@ -68,6 +74,9 @@ Certain features are only available to account holders...
 * Bookshelves
 
 #### Modals
+
+![Modal Example](https://github.com/LadkinsM/mylibrary/blob/main/static/readme_images/ModalExample.PNG)
+
 A smaller challenge was that I didn't want to pull the user away from the user details or book details pages just to update one component. As a solution, I implemented modals from the react-bootstrap library. These are used when a user wants to create a new shelf, add a review, or edit an exsisting review. 
 
 ## <a name="installation"></a>How to locally run MyLibrary
