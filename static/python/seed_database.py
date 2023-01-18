@@ -141,25 +141,3 @@ for n in range(10):
 
     model.db.session.add(user)
     model.db.session.commit()
-
-    # bookshelf = crud.create_bookshelf(shelf_name=shelf_name,
-    #                                     user_id=n+1,
-    #                                     private=private)
-
-    # model.db.session.add(bookshelf)
-    # model.db.session.commit()
-
-    # add_to_bookshelf = crud.create_shelf_book_relationship(n, n)
-
-    # model.db.session.add(add_to_bookshelf)
-    # model.db.session.commit()
-
-    # create_current_read = crud.create_current_read(n, n)
-
-    # model.db.session.add(create_current_read)
-    # model.db.session.commit()
-
-    # create_faved_book = crud.create_fav_book(n, n)
-
-    # model.db.session.add(create_faved_book)
-    # model.db.session.commit()

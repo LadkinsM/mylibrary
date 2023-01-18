@@ -1,0 +1,817 @@
+{
+    "kind": "books#volumes",
+    "totalItems": 200,
+    "items": [
+        {
+            "kind": "books#volume",
+            "id": "XXN68uTF4lsC",
+            "etag": "ZIjciRrrfhI",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/XXN68uTF4lsC",
+            "volumeInfo": {
+                "title": "Across the Wall",
+                "subtitle": "A Tale of the Abhorsen and Other Stories",
+                "authors": [
+                    "Garth Nix"
+                ],
+                "publisher": "Harper Collins",
+                "publishedDate": "2009-10-06",
+                "description": "From renowned fantasy author of the Old Kingdom series, Garth Nix, comes an entertaining collection of stories, including one Old Kingdom novella. Across the Wall brings together an electic mix of Garth Nix’s writing spanning several years, beginning with the novella set in the Old Kingdom, “Nicholas Sayre and the Creature in the Case,” winner of two Aurealis Awards. The collection also includes two tales inspired by Arthurian legend, a war story, a western, a traditional tale with a twist and a hilarious choose-your-own-adventure spoof. The volume is introduced by the author himself and, even better, so is each story—giving context, anecdotes and a glimpse into the exceptional mind of Garth Nix.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9780061975110"
+                    },
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "0061975117"
+                    }
+                ],
+                "readingModes": {
+                    "text": true,
+                    "image": false
+                },
+                "pageCount": 432,
+                "printType": "BOOK",
+                "categories": [
+                    "Fiction"
+                ],
+                "averageRating": 3.5,
+                "ratingsCount": 23,
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": true,
+                "contentVersion": "1.9.7.0.preview.2",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=XXN68uTF4lsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=XXN68uTF4lsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=XXN68uTF4lsC&printsec=frontcover&dq=inauthor:Nix&hl=&cd=1&source=gbs_api",
+                "infoLink": "https://play.google.com/store/books/details?id=XXN68uTF4lsC&source=gbs_api",
+                "canonicalVolumeLink": "https://play.google.com/store/books/details?id=XXN68uTF4lsC"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "FOR_SALE",
+                "isEbook": true,
+                "listPrice": {
+                    "amount": 10.99,
+                    "currencyCode": "USD"
+                },
+                "retailPrice": {
+                    "amount": 10.99,
+                    "currencyCode": "USD"
+                },
+                "buyLink": "https://play.google.com/store/books/details?id=XXN68uTF4lsC&rdid=book-XXN68uTF4lsC&rdot=1&source=gbs_api",
+                "offers": [
+                    {
+                        "finskyOfferType": 1,
+                        "listPrice": {
+                            "amountInMicros": 10990000,
+                            "currencyCode": "USD"
+                        },
+                        "retailPrice": {
+                            "amountInMicros": 10990000,
+                            "currencyCode": "USD"
+                        },
+                        "giftable": true
+                    }
+                ]
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "PARTIAL",
+                "embeddable": true,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/Across_the_Wall-sample-epub.acsm?id=XXN68uTF4lsC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=XXN68uTF4lsC&hl=&source=gbs_api",
+                "accessViewStatus": "SAMPLE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "The volume is introduced by the author himself and, even better, so is each story—giving context, anecdotes and a glimpse into the exceptional mind of Garth Nix."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "vxJwBAAAQBAJ",
+            "etag": "wEl41gIXu2k",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/vxJwBAAAQBAJ",
+            "volumeInfo": {
+                "title": "Looking Good . . . Every Day",
+                "subtitle": "Style Solutions for Real Women",
+                "authors": [
+                    "Nancy Nix-Rice"
+                ],
+                "publisher": "Palmer/Pletsch Publishing",
+                "publishedDate": "2014-09-01",
+                "description": "Any woman can look and feel lovely, regardless of her age, bank balance, or pant size, and Looking Good . . . Every Day defines a simple yet sophisticated standard for women to determine exactly which clothes and accessories will showcase their unique beauty. The “points of connection” method explains that the more characteristics that exist in common between a woman and her outfit, the more lovely she will look. It shifts emphasis from hiding her perceived figure challenges and focuses on spotlighting her personal assets. By choosing wardrobe additions in this way, everything in her closet will work together. She has more outfits from fewer garments, allowing her to buy higher-quality garments without increasing her budget. Photography of real women—ranging from 22 to 80 years old and from size 4 to 24—illustrates the universal impact “points of connection” make in their appearance.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9781618470409"
+                    },
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "161847040X"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": true
+                },
+                "pageCount": 210,
+                "printType": "BOOK",
+                "categories": [
+                    "Self-Help"
+                ],
+                "maturityRating": "MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "0.1.0.0.preview.1",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=vxJwBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=vxJwBAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=vxJwBAAAQBAJ&printsec=frontcover&dq=inauthor:Nix&hl=&cd=2&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=vxJwBAAAQBAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/Looking_Good_Every_Day.html?hl=&id=vxJwBAAAQBAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "PARTIAL",
+                "embeddable": true,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/Looking_Good_Every_Day-sample-pdf.acsm?id=vxJwBAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=vxJwBAAAQBAJ&hl=&source=gbs_api",
+                "accessViewStatus": "SAMPLE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "Any woman can look and feel lovely, regardless of her age, bank balance, or pant size, and Looking Good ."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "ZJQ9QgAACAAJ",
+            "etag": "iu5Yq9t8nko",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/ZJQ9QgAACAAJ",
+            "volumeInfo": {
+                "title": "A General Introduction to the Bible",
+                "authors": [
+                    "Norman L. Geisler",
+                    "William E. Nix"
+                ],
+                "publisher": "Moody Pub",
+                "publishedDate": "1986",
+                "description": "A General Introduction to the Bible, presents a comprehensive introduction to the Bible. It gives special emphasis to conservative scholarship and provides clearly defined resonses to negative criticism that undermines the authority of the Bible.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "0802429165"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9780802429162"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 724,
+                "printType": "BOOK",
+                "categories": [
+                    "Religion"
+                ],
+                "averageRating": 3.5,
+                "ratingsCount": 10,
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=ZJQ9QgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=ZJQ9QgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=ZJQ9QgAACAAJ&dq=inauthor:Nix&hl=&cd=3&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=ZJQ9QgAACAAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/A_General_Introduction_to_the_Bible.html?hl=&id=ZJQ9QgAACAAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=ZJQ9QgAACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "An updated version of the popular original, it satisfies the exacting demands placed on any good Bible introduction: Excellent scholarship and clear writing."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "3kwQEAAAQBAJ",
+            "etag": "KFWWHASA4a8",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/3kwQEAAAQBAJ",
+            "volumeInfo": {
+                "title": "Terciel & Elinor",
+                "authors": [
+                    "Garth Nix"
+                ],
+                "publisher": "HarperCollins",
+                "publishedDate": "2021-11-02",
+                "description": "Bestselling novelist Garth Nix returns to the Old Kingdom for the never-before-told love story of Sabriel’s parents, Terciel and Elinor, and the charter magic that brought them together—and threatened to tear them apart. A long-awaited prequel to a classic fantasy series. In the Old Kingdom, a land of ancient and often terrible magics, eighteen year-old orphan Terciel learns the art of necromancy from his great-aunt Tizanael. But not to raise the Dead, rather to lay them to rest. He is the Abhorsen-in-Waiting, and Tizanael is the Abhorsen, the latest in a long line of people whose task it is to make sure the Dead do not return to Life. Across the Wall in Ancelstierre, a steam-age country where magic usually does not work, nineteen year-old Elinor lives a secluded life. Her only friends an old governess and an even older groom who was once a famous circus performer. Her mother is a tyrant, who is feared by all despite her sickness and impending death . . . but perhaps there is even more to fear from that. Elinor does not know she is deeply connected to the Old Kingdom, nor that magic can sometimes come across the Wall, until a plot by an ancient enemy of the Abhorsens brings Terciel and Tizanael to Ancelstierre. In a single day of fire and death and loss, Elinor finds herself set on a path which will take her into the Old Kingdom, into Terciel’s life, and will embroil her in the struggle of the Abhorsens against the Dead who will not stay dead. *USA Today Bestseller* “One of the greatest living fantasy writers. I will never get enough of the Old Kingdom.” —Sarah J. Maas, #1 New York Times bestselling author",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9780063049345"
+                    },
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "0063049341"
+                    }
+                ],
+                "readingModes": {
+                    "text": true,
+                    "image": false
+                },
+                "pageCount": 367,
+                "printType": "BOOK",
+                "categories": [
+                    "Young Adult Fiction"
+                ],
+                "averageRating": 4,
+                "ratingsCount": 5,
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": true,
+                "contentVersion": "1.2.2.0.preview.2",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=3kwQEAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=3kwQEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=3kwQEAAAQBAJ&printsec=frontcover&dq=inauthor:Nix&hl=&cd=4&source=gbs_api",
+                "infoLink": "https://play.google.com/store/books/details?id=3kwQEAAAQBAJ&source=gbs_api",
+                "canonicalVolumeLink": "https://play.google.com/store/books/details?id=3kwQEAAAQBAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "FOR_SALE",
+                "isEbook": true,
+                "listPrice": {
+                    "amount": 11.49,
+                    "currencyCode": "USD"
+                },
+                "retailPrice": {
+                    "amount": 11.49,
+                    "currencyCode": "USD"
+                },
+                "buyLink": "https://play.google.com/store/books/details?id=3kwQEAAAQBAJ&rdid=book-3kwQEAAAQBAJ&rdot=1&source=gbs_api",
+                "offers": [
+                    {
+                        "finskyOfferType": 1,
+                        "listPrice": {
+                            "amountInMicros": 11490000,
+                            "currencyCode": "USD"
+                        },
+                        "retailPrice": {
+                            "amountInMicros": 11490000,
+                            "currencyCode": "USD"
+                        },
+                        "giftable": true
+                    }
+                ]
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "PARTIAL",
+                "embeddable": true,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/Terciel_Elinor-sample-epub.acsm?id=3kwQEAAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=3kwQEAAAQBAJ&hl=&source=gbs_api",
+                "accessViewStatus": "SAMPLE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "Bestselling novelist Garth Nix returns to the Old Kingdom for the never-before-told love story of Sabriel’s parents, Terciel and Elinor, and the charter magic that brought them together—and threatened to tear them apart."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "GWJNjwEACAAJ",
+            "etag": "U+3ibdg5Ako",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/GWJNjwEACAAJ",
+            "volumeInfo": {
+                "title": "Williams' Basic Nutrition and Diet Therapy",
+                "authors": [
+                    "Staci Nix"
+                ],
+                "publisher": "Mosby",
+                "publishedDate": "2016-08-19",
+                "description": "Williams' Basic Nutrition & Diet Therapy",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "0323377319"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9780323377317"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 560,
+                "printType": "BOOK",
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=GWJNjwEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=GWJNjwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=GWJNjwEACAAJ&dq=inauthor:Nix&hl=&cd=5&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=GWJNjwEACAAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/Williams_Basic_Nutrition_and_Diet_Therap.html?hl=&id=GWJNjwEACAAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=GWJNjwEACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "Table of Contents: Food, nutrition, and health Carbohydrates Fats Proteins Digestion, absorption, and metabolism Energy balance Vitamins Minerals Water balance Nutrition during pregnancy and lactation Nutrition in infancy, childhood, and ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "iWHLzAEACAAJ",
+            "etag": "6YKU1IffGk8",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/iWHLzAEACAAJ",
+            "volumeInfo": {
+                "title": "The Left-Handed Booksellers of London",
+                "authors": [
+                    "Garth Nix"
+                ],
+                "publisher": "Katherine Tegen Books",
+                "publishedDate": "2020-09-22",
+                "description": "A girl's quest to find her father leads her to an extended family of magical fighting booksellers who police the mythical Old World of England when it intrudes on the modern world. From the bestselling master of teen fantasy, Garth Nix. In a slightly alternate London in 1983, Susan Arkshaw is looking for her father, a man she has never met. Crime boss Frank Thringley might be able to help her, but Susan doesn't get time to ask Frank any questions before he is turned to dust by the prick of a silver hatpin in the hands of the outrageously attractive Merlin. Merlin is a young left-handed bookseller (one of the fighting ones), who with the right-handed booksellers (the intellectual ones), are an extended family of magical beings who police the mythic and legendary Old World when it intrudes on the modern world, in addition to running several bookshops. Susan's search for her father begins with her mother's possibly misremembered or misspelt surnames, a reading room ticket, and a silver cigarette case engraved with something that might be a coat of arms. Merlin has a quest of his own, to find the Old World entity who used ordinary criminals to kill his mother. As he and his sister, the right-handed bookseller Vivien, tread in the path of a botched or covered-up police investigation from years past, they find this quest strangely overlaps with Susan's. Who or what was her father? Susan, Merlin, and Vivien must find out, as the Old World erupts dangerously into the New.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "006268325X"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9780062683250"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 416,
+                "printType": "BOOK",
+                "categories": [
+                    "Young Adult Fiction"
+                ],
+                "averageRating": 4,
+                "ratingsCount": 19,
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=iWHLzAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=iWHLzAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=iWHLzAEACAAJ&dq=inauthor:Nix&hl=&cd=6&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=iWHLzAEACAAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/The_Left_Handed_Booksellers_of_London.html?hl=&id=iWHLzAEACAAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=iWHLzAEACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "From the bestselling author of Angel Mage, this new fantasy adventure set in 1980s London follows one girl&#39;s quest to find her father, leading her to a secret society of magical fighting booksellers who police the mythical Old World when it ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "2julzQEACAAJ",
+            "etag": "E/5aPzlRjW8",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/2julzQEACAAJ",
+            "volumeInfo": {
+                "title": "Grundlagen der Lesedidaktik",
+                "subtitle": "und der systematischen schulischen Leseförderung",
+                "authors": [
+                    "Cornelia Rosebrock",
+                    "Daniel Nix"
+                ],
+                "publishedDate": "2020-08",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "3834020362"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9783834020369"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 176,
+                "printType": "BOOK",
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "language": "de",
+                "previewLink": "http://books.google.com/books?id=2julzQEACAAJ&dq=inauthor:Nix&hl=&cd=7&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=2julzQEACAAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/Grundlagen_der_Lesedidaktik.html?hl=&id=2julzQEACAAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=2julzQEACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "CYb0wAEACAAJ",
+            "etag": "M6cBHZUV/L4",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/CYb0wAEACAAJ",
+            "volumeInfo": {
+                "title": "Förderung der Leseflüssigkeit",
+                "subtitle": "theoretische Fundierung und empirische Überprüfung eines kooperativen Lautlese-Verfahrens im Deutschunterricht",
+                "authors": [
+                    "Daniel Nix"
+                ],
+                "publisher": "Beltz Juventa",
+                "publishedDate": "2011",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "3779913356"
+                    },
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9783779913351"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": false
+                },
+                "pageCount": 304,
+                "printType": "BOOK",
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=CYb0wAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=CYb0wAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+                },
+                "language": "de",
+                "previewLink": "http://books.google.com/books?id=CYb0wAEACAAJ&dq=inauthor:Nix&hl=&cd=8&source=gbs_api",
+                "infoLink": "http://books.google.com/books?id=CYb0wAEACAAJ&dq=inauthor:Nix&hl=&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/F%C3%B6rderung_der_Lesefl%C3%BCssigkeit.html?hl=&id=CYb0wAEACAAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "NOT_FOR_SALE",
+                "isEbook": false
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "NO_PAGES",
+                "embeddable": false,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": false
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=CYb0wAEACAAJ&hl=&source=gbs_api",
+                "accessViewStatus": "NONE",
+                "quoteSharingAllowed": false
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "HVMybbMIKM0C",
+            "etag": "vp//LbhugiE",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/HVMybbMIKM0C",
+            "volumeInfo": {
+                "title": "Letters to Leigh",
+                "authors": [
+                    "Demonmocker",
+                    "Demonmocker/a.k.a Robert Sherman Nix III"
+                ],
+                "publisher": "Chipmunkapublishing ltd",
+                "publishedDate": "2011-06-01",
+                "description": "DescriptionLeigh Earle once told me that I should write a book, a comment on my lengthy letters. Yes, yes well someone must suffer. How well would everyone like to read ''Letters To Leigh'' which may soothe in a world that is tearing you apart. What is the state of your heart which once may have been so large? Robert Nix has through consequence of chance and circumstance beyond his control lived a life of treasure and desolation and is as of now offering solace to other persons who just cannot figure their life out but cannot let those thoughts from their minds; whatsoever they may be, they are real. Robert Nix offers his soothing poetic experience to you. About the Author It may be considered a curious attribute of men and women to express and share their pain. There may be those who do not translate their pain well into modes that others could be accustomed to among the observing public. Pain may be considered to be private and once a person entrust their pain to another persons care there will invariably be mistranslation. I was happily born on July 21, 1964 from the womb of a woman named Emily Sue Medlock who was married to Robert Sherman Nix, Jr.; I was a child knight. Luna to some is a light.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9781847475022"
+                    },
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "1847475027"
+                    }
+                ],
+                "readingModes": {
+                    "text": false,
+                    "image": true
+                },
+                "pageCount": 388,
+                "printType": "BOOK",
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "1.0.0.0.preview.1",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=HVMybbMIKM0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=HVMybbMIKM0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=HVMybbMIKM0C&printsec=frontcover&dq=inauthor:Nix&hl=&cd=9&source=gbs_api",
+                "infoLink": "https://play.google.com/store/books/details?id=HVMybbMIKM0C&source=gbs_api",
+                "canonicalVolumeLink": "https://play.google.com/store/books/details?id=HVMybbMIKM0C"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "FOR_SALE",
+                "isEbook": true,
+                "listPrice": {
+                    "amount": 9,
+                    "currencyCode": "USD"
+                },
+                "retailPrice": {
+                    "amount": 9,
+                    "currencyCode": "USD"
+                },
+                "buyLink": "https://play.google.com/store/books/details?id=HVMybbMIKM0C&rdid=book-HVMybbMIKM0C&rdot=1&source=gbs_api",
+                "offers": [
+                    {
+                        "finskyOfferType": 1,
+                        "listPrice": {
+                            "amountInMicros": 9000000,
+                            "currencyCode": "USD"
+                        },
+                        "retailPrice": {
+                            "amountInMicros": 9000000,
+                            "currencyCode": "USD"
+                        },
+                        "giftable": true
+                    }
+                ]
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "PARTIAL",
+                "embeddable": true,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": false
+                },
+                "pdf": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/Letters_to_Leigh-sample-pdf.acsm?id=HVMybbMIKM0C&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=HVMybbMIKM0C&hl=&source=gbs_api",
+                "accessViewStatus": "SAMPLE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "Yes, yes well someone must suffer. How well would everyone like to read &#39;&#39;Letters To Leigh&#39;&#39; which may soothe in a world that is tearing you apart. What is the state of your heart which once may have been so large?"
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "zEJ1EAAAQBAJ",
+            "etag": "x6tbUKxF7SM",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/zEJ1EAAAQBAJ",
+            "volumeInfo": {
+                "title": "The Missing JFK Assassination Film",
+                "subtitle": "The Mystery Surrounding the Orville Nix Home Movie of November 22, 1963",
+                "authors": [
+                    "Gayle Nix Jackson"
+                ],
+                "publisher": "Skyhorse + ORM",
+                "publishedDate": "2016-07-12",
+                "description": "A granddaughter’s quest for answers sheds new light on one of history’s most enduring questions: Was there a conspiracy to kill President John F. Kennedy? Abraham Zapruder’s film gets all the attention, but there was another eyewitness to history whose tale has yet to be told. In this eye-opening account, Gayle Nix Jackson tells the story of her grandfather, Orville Nix, a man with a camera who happened to be on the ground for a life-changing—world-changing, and in some ways world-ending—event: the murder of President Kennedy in Dallas in 1963. The Missing JFK Assassination Film is not a typical JFK assassination book. This book does not attempt to answer the question of who killed John F. Kennedy; instead, it addresses why we should question the actions of those involved and why the truth was withheld from the people. Though copies of Orville’s film exist, the original film is missing. Why? The FBI confiscated the photographer’s camera for several months, then returned it in pieces. Were these actions sinister or were they just examples of governmental incompetence? The Missing JFK Assassination Film exposes information about the House Select Committee staff’s involvement in the missing film. The author’s interviews with people who were close to Orville shed light on the government’s involvement with the filmmaker. And her memories of growing up with her beloved grandfather—and on how his views changed after that fateful day—fuel a quest Jackson is still on to find the film.",
+                "industryIdentifiers": [
+                    {
+                        "type": "ISBN_13",
+                        "identifier": "9781510706637"
+                    },
+                    {
+                        "type": "ISBN_10",
+                        "identifier": "1510706631"
+                    }
+                ],
+                "readingModes": {
+                    "text": true,
+                    "image": true
+                },
+                "pageCount": 264,
+                "printType": "BOOK",
+                "categories": [
+                    "Social Science"
+                ],
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "preview-1.0.0",
+                "panelizationSummary": {
+                    "containsEpubBubbles": false,
+                    "containsImageBubbles": false
+                },
+                "imageLinks": {
+                    "smallThumbnail": "http://books.google.com/books/content?id=zEJ1EAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                    "thumbnail": "http://books.google.com/books/content?id=zEJ1EAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+                },
+                "language": "en",
+                "previewLink": "http://books.google.com/books?id=zEJ1EAAAQBAJ&printsec=frontcover&dq=inauthor:Nix&hl=&cd=10&source=gbs_api",
+                "infoLink": "https://play.google.com/store/books/details?id=zEJ1EAAAQBAJ&source=gbs_api",
+                "canonicalVolumeLink": "https://play.google.com/store/books/details?id=zEJ1EAAAQBAJ"
+            },
+            "saleInfo": {
+                "country": "US",
+                "saleability": "FOR_SALE",
+                "isEbook": true,
+                "listPrice": {
+                    "amount": 17.99,
+                    "currencyCode": "USD"
+                },
+                "retailPrice": {
+                    "amount": 17.99,
+                    "currencyCode": "USD"
+                },
+                "buyLink": "https://play.google.com/store/books/details?id=zEJ1EAAAQBAJ&rdid=book-zEJ1EAAAQBAJ&rdot=1&source=gbs_api",
+                "offers": [
+                    {
+                        "finskyOfferType": 1,
+                        "listPrice": {
+                            "amountInMicros": 17990000,
+                            "currencyCode": "USD"
+                        },
+                        "retailPrice": {
+                            "amountInMicros": 17990000,
+                            "currencyCode": "USD"
+                        },
+                        "giftable": true
+                    }
+                ]
+            },
+            "accessInfo": {
+                "country": "US",
+                "viewability": "PARTIAL",
+                "embeddable": true,
+                "publicDomain": false,
+                "textToSpeechPermission": "ALLOWED",
+                "epub": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/The_Missing_JFK_Assassination_Film-sample-epub.acsm?id=zEJ1EAAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "pdf": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.com/books/download/The_Missing_JFK_Assassination_Film-sample-pdf.acsm?id=zEJ1EAAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=zEJ1EAAAQBAJ&hl=&source=gbs_api",
+                "accessViewStatus": "SAMPLE",
+                "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+                "textSnippet": "This book does not attempt to answer the question of who killed John F. Kennedy; instead, it addresses why we should question the actions of those involved and why the truth was withheld from the people."
+            }
+        }
+    ]
+}
