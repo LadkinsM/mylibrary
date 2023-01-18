@@ -84,6 +84,6 @@ MyLibrary has not been deployed as of this posting. The below instructions are f
 
 1. If you have not already, you will need to install PostgreSQL. 
 2. Once you've cloned (or forked) the MyLibrary repository, create a virtual environment, activate it, and install the depencies located in the requirements.txt file.
-3. Setup your database by running the seed_database.py file located in the static/python folder. This file will reference a books_seed.json file. You have the option of downloading an initial volume response from the google books api and saving it under that name and foler. Or you may comment out lines 16-102 on the seed_database.py file to omit the initial book data.
+3. Setup your database by running the seed_database.py file located in the static/python folder. This file will reference a books_seed.json file. You have the option of downloading an initial volume response from the google books api and saving it under that name and folder. Or you may comment out lines 16-102 on the seed_database.py file to omit the initial book data.
 4. From the python folder, start your flask server by running 'python3 server.py'. 
 5. You will need to run the react front-end from a separate terminal window. Once you have created your new terminal window, reached the main mylibraryapp directory, and activated your virtual environment, start the MyLibrary app by running 'npm start' to run the app in development mode.
