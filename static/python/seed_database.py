@@ -100,44 +100,44 @@ model.db.create_all()
 #         model.db.session.add(crud.create_genre_book_relationship(genre_id, book_id))
 #         model.db.session.commit()
 
-"""USERS"""
+# """USERS"""
 
-username_list = [
-                'whatafireads@test.com',
-                'abibliophobia@test.com',
-                'foreverbooked@test.com',
-                'bookishbrain@test.com',
-                'tea.and.tomes@test.com',
-                'boundbybooks@test.com',
-                'literaryaura@test.com',
-                'thelostbookmark@test.com',
-                'mydiverseshelf@test.com',
-                'the_write_stuff@test.com'
-                ]
+# username_list = [
+#                 'whatafireads@test.com',
+#                 'abibliophobia@test.com',
+#                 'foreverbooked@test.com',
+#                 'bookishbrain@test.com',
+#                 'tea.and.tomes@test.com',
+#                 'boundbybooks@test.com',
+#                 'literaryaura@test.com',
+#                 'thelostbookmark@test.com',
+#                 'mydiverseshelf@test.com',
+#                 'the_write_stuff@test.com'
+#                 ]
 
-personal_description_list = [
-                        "I'm a sucker for a good book and a even better love story. I'm passionate about everything I do, whether it's work, hobby, or love.",
-                        "I love books and horror! I'm always looking for new stories to read and frighten myself with.",
-                        "Books, craft, and fantasy are my life. I love to read and explore new worlds, and I love to make things by hand. I'm always looking for new adventures, both in books and in real life.",
-                        "Lover of books, especially period-dramas. You can usually find me with my nose in a book, or watching a movie adaptation.",
-                        "I'm a bookworm who loves tea and yarn. I love curling up with a good book, and I'm also an avid knitter. I love spending my free time reading, knitting, and exploring new teas.",
-                        "Libraries, books, and sci-fi are my passion. I can often be found with my nose in a book, or lost in a library. I love to explore new worlds, both real and imaginary.",
-                        "Shelf after shelf of novels, histories, biographies, and more. This is my haven, my escape, my happy place. Books are my passion and I love nothing more than spending a lazy afternoon with a new story.",
-                        "I'm a bookworm and I love nothing more than getting lost in a good story. I'm always up for a new adventure, whether it's in the pages of a book or in real life.",
-                        "Author and avid reader. I spend most of my free time with my nose in a book. Whether I'm curled up on the couch with a cup of tea or sitting in the sun at the park, you'll usually find me reading.",
-                        "I like books. A lot. If I'm not reading, I'm probably writing them. Or thinking about them. Or talking about them."
-                        ]
+# personal_description_list = [
+#                         "I'm a sucker for a good book and a even better love story. I'm passionate about everything I do, whether it's work, hobby, or love.",
+#                         "I love books and horror! I'm always looking for new stories to read and frighten myself with.",
+#                         "Books, craft, and fantasy are my life. I love to read and explore new worlds, and I love to make things by hand. I'm always looking for new adventures, both in books and in real life.",
+#                         "Lover of books, especially period-dramas. You can usually find me with my nose in a book, or watching a movie adaptation.",
+#                         "I'm a bookworm who loves tea and yarn. I love curling up with a good book, and I'm also an avid knitter. I love spending my free time reading, knitting, and exploring new teas.",
+#                         "Libraries, books, and sci-fi are my passion. I can often be found with my nose in a book, or lost in a library. I love to explore new worlds, both real and imaginary.",
+#                         "Shelf after shelf of novels, histories, biographies, and more. This is my haven, my escape, my happy place. Books are my passion and I love nothing more than spending a lazy afternoon with a new story.",
+#                         "I'm a bookworm and I love nothing more than getting lost in a good story. I'm always up for a new adventure, whether it's in the pages of a book or in real life.",
+#                         "Author and avid reader. I spend most of my free time with my nose in a book. Whether I'm curled up on the couch with a cup of tea or sitting in the sun at the park, you'll usually find me reading.",
+#                         "I like books. A lot. If I'm not reading, I'm probably writing them. Or thinking about them. Or talking about them."
+#                         ]
 
-for n in range(10):
-    email = username_list[n]
-    password = 'test'
-    personal_description = personal_description_list[n]
-    # shelf_name = "Liked Books"
-    # private = True
+# for n in range(10):
+#     email = username_list[n]
+#     password = 'test'
+#     personal_description = personal_description_list[n]
+#     # shelf_name = "Liked Books"
+#     # private = True
 
-    user = crud.create_user(email=email, 
-                            password=password, 
-                            personal_description=personal_description)
+#     user = crud.create_user(email=email, 
+#                             password=password, 
+#                             personal_description=personal_description)
 
-    model.db.session.add(user)
-    model.db.session.commit()
+#     model.db.session.add(user)
+#     model.db.session.commit()
